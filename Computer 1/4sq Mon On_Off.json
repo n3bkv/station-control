@@ -1,0 +1,236 @@
+[
+    {
+        "id": "819c8c9703518144",
+        "type": "tab",
+        "label": "4 square mon on-off",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7a9003fc6a398d98",
+        "type": "ui_switch",
+        "z": "819c8c9703518144",
+        "name": "4 Square Monitor Display",
+        "label": "4 Square Monitor Display",
+        "tooltip": "",
+        "group": "7acc588e0777f53b",
+        "order": 3,
+        "width": "6",
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 366,
+        "y": 310,
+        "wires": [
+            [
+                "de4a3e713ffb4205"
+            ]
+        ]
+    },
+    {
+        "id": "91ee8798413a5e8b",
+        "type": "link in",
+        "z": "819c8c9703518144",
+        "name": "Turn off 4 square",
+        "links": [],
+        "x": 194,
+        "y": 116,
+        "wires": [
+            [
+                "d11ae8f5619f72a2"
+            ]
+        ]
+    },
+    {
+        "id": "d11ae8f5619f72a2",
+        "type": "change",
+        "z": "819c8c9703518144",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 229,
+        "y": 218,
+        "wires": [
+            [
+                "7a9003fc6a398d98"
+            ]
+        ]
+    },
+    {
+        "id": "7731bae9f84f29c8",
+        "type": "link in",
+        "z": "819c8c9703518144",
+        "name": "Turn On 4 square",
+        "links": [],
+        "x": 159,
+        "y": 301,
+        "wires": [
+            [
+                "7a9003fc6a398d98"
+            ]
+        ]
+    },
+    {
+        "id": "de4a3e713ffb4205",
+        "type": "switch",
+        "z": "819c8c9703518144",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 620,
+        "y": 307,
+        "wires": [
+            [
+                "3f4257ebc282da14"
+            ],
+            [
+                "3f4257ebc282da14",
+                "1e79662cabb10c4e"
+            ]
+        ]
+    },
+    {
+        "id": "3f4257ebc282da14",
+        "type": "link out",
+        "z": "819c8c9703518144",
+        "name": "4 sq monitor switch out",
+        "mode": "link",
+        "links": [],
+        "x": 818,
+        "y": 310,
+        "wires": []
+    },
+    {
+        "id": "1e79662cabb10c4e",
+        "type": "change",
+        "z": "819c8c9703518144",
+        "name": "Modbus Arduino Off Change",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"value\":false, \"fc\":5, \"unitid\":35, \"address\":0, \"quantity\":1}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 645,
+        "y": 595,
+        "wires": [
+            [
+                "a4a4b4470dde3b13"
+            ]
+        ]
+    },
+    {
+        "id": "a4a4b4470dde3b13",
+        "type": "modbus-flex-write",
+        "z": "819c8c9703518144",
+        "name": "Modbus Arduino  Off Flexwrite",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "server": "2b878579a2e15d39",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 936,
+        "y": 601,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7acc588e0777f53b",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "d3fd3a03eeca216a",
+        "order": 7,
+        "disp": false,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2b878579a2e15d39",
+        "type": "modbus-client",
+        "name": "Arduino - Modbus 35",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.50.35",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 35,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "d3fd3a03eeca216a",
+        "type": "ui_tab",
+        "name": "HF Station Control",
+        "icon": "radio",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

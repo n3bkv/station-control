@@ -1,0 +1,251 @@
+[
+    {
+        "id": "4d26b4381d8eeac1",
+        "type": "tab",
+        "label": "WX - Sat Pic",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "237236193e9844d0",
+        "type": "ui_iframe",
+        "z": "4d26b4381d8eeac1",
+        "group": "e3554de161933477",
+        "name": "West Color Comp",
+        "order": 1,
+        "width": 12,
+        "height": 8,
+        "url": "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/CONUS/GEOCOLOR/GOES18-CONUS-GEOCOLOR-625x375.gif",
+        "origin": "*",
+        "scale": "100",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "19b9fda60992c90c",
+        "type": "ui_iframe",
+        "z": "4d26b4381d8eeac1",
+        "group": "bae17fe4ccf6f5ec",
+        "name": "Color Comp West US",
+        "order": 1,
+        "width": 10,
+        "height": 10,
+        "url": "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/wus/GEOCOLOR/GOES18-WUS-GEOCOLOR-1000x1000.gif",
+        "origin": "*",
+        "scale": "50",
+        "x": 200,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "750735e5bb82169d",
+        "type": "ui_iframe",
+        "z": "4d26b4381d8eeac1",
+        "group": "1fb8f1aca7a3fcaa",
+        "name": "DayNightCloudMicroCombo",
+        "order": 1,
+        "width": 12,
+        "height": 8,
+        "url": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/DayNightCloudMicroCombo/GOES16-CONUS-DayNightCloudMicroCombo-625x375.gif",
+        "origin": "*",
+        "scale": "100",
+        "x": 220,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c377894585e12301",
+        "type": "ui_iframe",
+        "z": "4d26b4381d8eeac1",
+        "group": "918236957b186622",
+        "name": "CONUS-DMW",
+        "order": 9,
+        "width": "12",
+        "height": 8,
+        "url": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/DMW/GOES16-ABI-CONUS-DMW.gif",
+        "origin": "*",
+        "scale": "50",
+        "x": 900,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b36966290f2aa5fe",
+        "type": "ui_iframe",
+        "z": "4d26b4381d8eeac1",
+        "group": "3399fe75ef26df5a",
+        "name": "CONUS-AirMass",
+        "order": 1,
+        "width": "11",
+        "height": "8",
+        "url": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/AirMass/GOES16-CONUS-AirMass-625x375.gif",
+        "origin": "*",
+        "scale": "100",
+        "x": 1020,
+        "y": 210,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5cdd08399d83fc91",
+        "type": "ui_iframe",
+        "z": "4d26b4381d8eeac1",
+        "group": "3b5e3320585d2f2f",
+        "name": "West Coast Globe",
+        "order": 3,
+        "width": 10,
+        "height": 11,
+        "url": "https://cdn.star.nesdis.noaa.gov/GOES18/GLM/FD/EXTENT3/678x678.jpg",
+        "origin": "*",
+        "scale": "80",
+        "x": 1030,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c665ea2d595eda0",
+        "type": "ui_iframe",
+        "z": "4d26b4381d8eeac1",
+        "group": "450f337132d812f7",
+        "name": "East Coast Globe",
+        "order": 1,
+        "width": 10,
+        "height": 11,
+        "url": "https://cdn.star.nesdis.noaa.gov/GOES16/GLM/FD/EXTENT3/678x678.jpg",
+        "origin": "*",
+        "scale": "80",
+        "x": 890,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7f7c8b9462f56319",
+        "type": "ui_iframe",
+        "z": "4d26b4381d8eeac1",
+        "group": "85ea407fafdc8a60",
+        "name": "East Color Comp",
+        "order": 1,
+        "width": 12,
+        "height": 8,
+        "url": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/GOES16-CONUS-GEOCOLOR-625x375.gif",
+        "origin": "*",
+        "scale": "100",
+        "x": 450,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e3554de161933477",
+        "type": "ui_group",
+        "name": "West Color Comp",
+        "tab": "a213ec8665a88391",
+        "order": 7,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bae17fe4ccf6f5ec",
+        "type": "ui_group",
+        "name": "Color Comp West US",
+        "tab": "a213ec8665a88391",
+        "order": 8,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1fb8f1aca7a3fcaa",
+        "type": "ui_group",
+        "name": "DayNightCloudMicroCombo",
+        "tab": "a213ec8665a88391",
+        "order": 5,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "918236957b186622",
+        "type": "ui_group",
+        "name": "Conus Wind Vectors",
+        "tab": "a213ec8665a88391",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3399fe75ef26df5a",
+        "type": "ui_group",
+        "name": "Conus Air Mass",
+        "tab": "a213ec8665a88391",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3b5e3320585d2f2f",
+        "type": "ui_group",
+        "name": "West Coast Globe",
+        "tab": "a213ec8665a88391",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "450f337132d812f7",
+        "type": "ui_group",
+        "name": "East Coast Globe",
+        "tab": "a213ec8665a88391",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "85ea407fafdc8a60",
+        "type": "ui_group",
+        "name": "East Color Comp",
+        "tab": "a213ec8665a88391",
+        "order": 6,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a213ec8665a88391",
+        "type": "ui_tab",
+        "name": "WX - Sat Pics",
+        "icon": "dashboard",
+        "order": 20,
+        "disabled": false,
+        "hidden": false
+    }
+]

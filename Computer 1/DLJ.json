@@ -1,0 +1,1550 @@
+[
+    {
+        "id": "329b84022c14d022",
+        "type": "tab",
+        "label": "DLJ Power Switch",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "80f854e7421b8bd4",
+        "type": "http request",
+        "z": "329b84022c14d022",
+        "name": "getOutlets",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 650,
+        "y": 120,
+        "wires": [
+            [
+                "4313bd0af1ce87c3",
+                "47ba9708cdf43121",
+                "8a07cc8b920df6ac",
+                "3d8f4398215070e7",
+                "019dfcbd3637ed2b",
+                "255260dd07ec4cba",
+                "8da01bbc9a7534b7",
+                "305f797af1afd501"
+            ]
+        ]
+    },
+    {
+        "id": "835a9d28f27d0a51",
+        "type": "inject",
+        "z": "329b84022c14d022",
+        "name": "10sec",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 74.0000114440918,
+        "y": 122.9999771118164,
+        "wires": [
+            [
+                "a315de2682751417"
+            ]
+        ]
+    },
+    {
+        "id": "4313bd0af1ce87c3",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "switch 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[0].name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].transient_state",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "name1",
+                "pt": "msg",
+                "to": "payload[0].name",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 871.0000114440918,
+        "y": 234.6666555404663,
+        "wires": [
+            [
+                "20bed19778358704",
+                "fba5585631c75535"
+            ]
+        ]
+    },
+    {
+        "id": "7e887139468dbddb",
+        "type": "http request",
+        "z": "329b84022c14d022",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1612.3333168029785,
+        "y": 225.99997520446777,
+        "wires": [
+            [
+                "4b0fb4bbb78da509"
+            ]
+        ]
+    },
+    {
+        "id": "47ba9708cdf43121",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "switch 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[1].name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[1].transient_state",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 871.3333320617676,
+        "y": 301.999981880188,
+        "wires": [
+            [
+                "fa3e98771e83035c",
+                "1e9d9773663125e9"
+            ]
+        ]
+    },
+    {
+        "id": "0e6f7c476f8d3afe",
+        "type": "function",
+        "z": "329b84022c14d022",
+        "name": "SetContent 2",
+        "func": "var val = msg.payload;\nmsg.method = \"PUT\";\nmsg.url = flow.get(\"url\") + \"/restapi/relay/outlets/\" + msg.topic + \"/state/\";\nmsg.headers = {};\nmsg.headers['content-type'] = 'application/x-www-form-urlencoded';\nmsg.headers['accept'] = 'application/json';\nmsg.payload = \"value=\" + val;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1712.3333168029785,
+        "y": 325.9999752044678,
+        "wires": [
+            [
+                "7e887139468dbddb"
+            ]
+        ]
+    },
+    {
+        "id": "8a07cc8b920df6ac",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "switch 3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[2].name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[2].transient_state",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 873.3332862854004,
+        "y": 366.999981880188,
+        "wires": [
+            [
+                "ec92ede21f8f3204",
+                "482d8ae54775d939"
+            ]
+        ]
+    },
+    {
+        "id": "3d8f4398215070e7",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "switch 4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[3].name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[3].transient_state",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 874.3332862854004,
+        "y": 432.999981880188,
+        "wires": [
+            [
+                "798ce0d161cc27d0"
+            ]
+        ]
+    },
+    {
+        "id": "019dfcbd3637ed2b",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "switch 5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[4].name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[4].transient_state",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 873.3332862854004,
+        "y": 498.999981880188,
+        "wires": [
+            [
+                "c04f13b069016f8f",
+                "5ee976ced9fe6e62"
+            ]
+        ]
+    },
+    {
+        "id": "255260dd07ec4cba",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "switch 6",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[5].name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[5].transient_state",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 620,
+        "wires": [
+            [
+                "7aea025e77a1f94d",
+                "fa09185ad6d89adc",
+                "225d95e67a6c7be9"
+            ]
+        ]
+    },
+    {
+        "id": "8da01bbc9a7534b7",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "switch 7",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[6].name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[6].transient_state",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 800,
+        "wires": [
+            [
+                "014b91d41da1ded0"
+            ]
+        ]
+    },
+    {
+        "id": "305f797af1afd501",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "switch 8",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload[7].name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[7].transient_state",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 920,
+        "wires": [
+            [
+                "bac8061dae6c990f",
+                "024bdbbc6d1c85d0"
+            ]
+        ]
+    },
+    {
+        "id": "a315de2682751417",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "Set Parameters Here",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "flow",
+                "to": "http://admin:webrelay@192.168.50.5:80",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "modbus",
+                "pt": "flow",
+                "to": "192.168.50.5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 261.0000114440918,
+        "y": 122.66664791107178,
+        "wires": [
+            [
+                "4b0fb4bbb78da509"
+            ]
+        ]
+    },
+    {
+        "id": "4b0fb4bbb78da509",
+        "type": "function",
+        "z": "329b84022c14d022",
+        "name": "GetContent",
+        "func": "msg.method = \"GET\";\nmsg.url =  flow.get(\"url\") + \"/restapi/relay/outlets\";\nmsg.headers = {};\nmsg.headers['accept'] = 'application/json';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490.3334083557129,
+        "y": 122.00001049041748,
+        "wires": [
+            [
+                "80f854e7421b8bd4"
+            ]
+        ]
+    },
+    {
+        "id": "20bed19778358704",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 1 New",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "527251741cd69618",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "0",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1200,
+        "y": 260,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "fa3e98771e83035c",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 2 New",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "527251741cd69618",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "1",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1200,
+        "y": 340,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "ec92ede21f8f3204",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 3 New",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "527251741cd69618",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "2",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1200,
+        "y": 420,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "798ce0d161cc27d0",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 4 New",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "527251741cd69618",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "3",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1200,
+        "y": 480,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "c04f13b069016f8f",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 5 New",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "527251741cd69618",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "4",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1200,
+        "y": 560,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "7aea025e77a1f94d",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 6 New",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "527251741cd69618",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "5",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1200,
+        "y": 620,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "014b91d41da1ded0",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 7 New",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "527251741cd69618",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "6",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1220,
+        "y": 800,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "bac8061dae6c990f",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 8 New",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "527251741cd69618",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "7",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1220,
+        "y": 920,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "092856155bfc2845",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "DLJ Power Switch",
+        "info": "",
+        "x": 210,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "5ee976ced9fe6e62",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Switch 5 9700 VHF/UHF Tab",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "e199e4609517db05",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "4",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1220,
+        "y": 520,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "709c83e2e35a1e14",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "Open",
+        "info": "",
+        "x": 1010,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "0faa44a9d6f190ad",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "WX",
+        "info": "",
+        "x": 1010,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0d5f24cfa3a8a5fe",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "Comp 5",
+        "info": "",
+        "x": 1010,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ba59a214d619a848",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "RPI 5",
+        "info": "",
+        "x": 1010,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3133b4d36b23e17d",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "Open",
+        "info": "",
+        "x": 1010,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "6afa96d5db07971b",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "Sat Rotor",
+        "info": "",
+        "x": 1020,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "b3953b06391c2152",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "CSN Sat",
+        "info": "",
+        "x": 1040,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "0ef75a74512a9613",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "Comp 6",
+        "info": "",
+        "x": 1030,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "fa09185ad6d89adc",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Sat Rotor",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "e199e4609517db05",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "5",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1200,
+        "y": 680,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "e3a981945275179a",
+        "type": "link in",
+        "z": "329b84022c14d022",
+        "name": "Sat Rotor Switch ",
+        "links": [],
+        "x": 625,
+        "y": 600,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "fba5585631c75535",
+        "type": "link out",
+        "z": "329b84022c14d022",
+        "name": "Rpi 4 On Status",
+        "mode": "link",
+        "links": [],
+        "x": 1265,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "1e9d9773663125e9",
+        "type": "link out",
+        "z": "329b84022c14d022",
+        "name": "WX On Status",
+        "mode": "link",
+        "links": [],
+        "x": 1305,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "482d8ae54775d939",
+        "type": "link out",
+        "z": "329b84022c14d022",
+        "name": "Boron 5 On Status",
+        "mode": "link",
+        "links": [],
+        "x": 1305,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "225d95e67a6c7be9",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "Sat Rotor",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "546ab70dc0c713ca",
+        "order": 6,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "5",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1200,
+        "y": 740,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "024bdbbc6d1c85d0",
+        "type": "ui_switch",
+        "z": "329b84022c14d022",
+        "name": "CSN SAT",
+        "label": "<font size = 3> {{msg.name}}",
+        "tooltip": "",
+        "group": "546ab70dc0c713ca",
+        "order": 9,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "7",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 1220,
+        "y": 980,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "db37dd6eb8dcd8d8",
+        "type": "link in",
+        "z": "329b84022c14d022",
+        "name": "turn on PC",
+        "links": [],
+        "x": 625,
+        "y": 660,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe"
+            ]
+        ]
+    },
+    {
+        "id": "dd28aa4d2fa123c7",
+        "type": "websocket in",
+        "z": "329b84022c14d022",
+        "d": true,
+        "name": "",
+        "server": "a0e09bc72becb587",
+        "client": "",
+        "x": 945,
+        "y": 128,
+        "wires": [
+            [
+                "1de63b6be1b814c2"
+            ]
+        ]
+    },
+    {
+        "id": "276a39b7d18d2aae",
+        "type": "switch",
+        "z": "329b84022c14d022",
+        "name": "",
+        "property": "payload.event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "keyDown",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1367,
+        "y": 34,
+        "wires": [
+            [
+                "1d693852fe503982"
+            ]
+        ]
+    },
+    {
+        "id": "1d693852fe503982",
+        "type": "switch",
+        "z": "329b84022c14d022",
+        "name": "",
+        "property": "payload.payload.settings.id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "DLI1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DLI2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DLI3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DLI4",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DLI5",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DLI6",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DLI7",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "DLI8",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 8,
+        "x": 1643,
+        "y": 97,
+        "wires": [
+            [
+                "ebf371bb472501e0"
+            ],
+            [],
+            [],
+            [
+                "f5643ffb6f81d9c7"
+            ],
+            [],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "ebf371bb472501e0",
+        "type": "function",
+        "z": "329b84022c14d022",
+        "name": "Toggle State",
+        "func": "// Get the current state from flow context (default to false)\nlet currentState = flow.get(\"streamdeck_toggle0\") || false;\n\n// Toggle the state\ncurrentState = !currentState;\n\n// Store the new state\nflow.set(\"streamdeck_toggle0\", currentState);\n\n// Output the new state\nreturn { payload: currentState };",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1812,
+        "y": 54,
+        "wires": [
+            [
+                "4a7e9bd2153342b4"
+            ]
+        ]
+    },
+    {
+        "id": "4a7e9bd2153342b4",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2002,
+        "y": 53,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe",
+                "4ae3415f71c983be"
+            ]
+        ]
+    },
+    {
+        "id": "f5643ffb6f81d9c7",
+        "type": "function",
+        "z": "329b84022c14d022",
+        "name": "Toggle State",
+        "func": "// Get the current state from flow context (default to false)\nlet currentState = flow.get(\"streamdeck_toggle4\") || false;\n\n// Toggle the state\ncurrentState = !currentState;\n\n// Store the new state\nflow.set(\"streamdeck_toggle4\", currentState);\n\n// Output the new state\nreturn { payload: currentState };",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1817,
+        "y": 91,
+        "wires": [
+            [
+                "abc61e4e6f7d2e5c"
+            ]
+        ]
+    },
+    {
+        "id": "abc61e4e6f7d2e5c",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "3",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1994,
+        "y": 89,
+        "wires": [
+            [
+                "0e6f7c476f8d3afe",
+                "70157c8fb3a0315c"
+            ]
+        ]
+    },
+    {
+        "id": "4ae3415f71c983be",
+        "type": "function",
+        "z": "329b84022c14d022",
+        "name": "",
+        "func": "if (msg.payload == true) {\n    msg.image = \"data:image/png;base64,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\";\n} else if (msg.payload == false) {\n    msg.image = \"data:image/png;base64,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\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2274,
+        "y": 64,
+        "wires": [
+            [
+                "7cf31ad0941b0c3d"
+            ]
+        ]
+    },
+    {
+        "id": "8832320a5570f3db",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"event\":\"setImage\",\t   \"context\":context,\t   \"payload\":{\t       \"image\":image\t   }\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2647,
+        "y": 61,
+        "wires": [
+            [
+                "dc8cdac37dc02147"
+            ]
+        ]
+    },
+    {
+        "id": "b2456c58ac276875",
+        "type": "websocket out",
+        "z": "329b84022c14d022",
+        "d": true,
+        "name": "",
+        "server": "a0e09bc72becb587",
+        "client": "",
+        "x": 3040,
+        "y": 64,
+        "wires": []
+    },
+    {
+        "id": "25b19c833e0629f0",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "Send switch state to streamdeck",
+        "info": "",
+        "x": 2605,
+        "y": 14,
+        "wires": []
+    },
+    {
+        "id": "a5fba246a04604cb",
+        "type": "comment",
+        "z": "329b84022c14d022",
+        "name": "Future - toggle switch state from streamdeck",
+        "info": "",
+        "x": 1661,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "70157c8fb3a0315c",
+        "type": "function",
+        "z": "329b84022c14d022",
+        "name": "",
+        "func": "if (msg.payload == true) {\n    msg.image = \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAYAAAAUg66AAAAAAXNSR0IArs4c6QAAGnFJREFUeF7tnQnQZUV1x//92Hdm2LcCAYliKSEoLlExGqIiJCoGSEABlRgEMZVUxSSVSmWppDRlUnHDqAmiRI1JEEiUqIiFQKJBFAMRI7JLZBGGfRkGXqfOvf0Nwyzf9253v9d97/t1FaVVc08vv3O+/+vbt/u0k+RFgQAEIFCAgEOAClCnSQhAoCGAABEIEIBAMQIIUDH0NAwBCCBAxAAEIFCMAAJUDD0NQwACCBAxAAEIFCOAABVDT8MQgAACRAxAAALFCCBAxdDTMAQggAARAxCAQDECCFAx9DQMAQggQMQABCBQjAACVAw9DUMAAggQMQABCBQjgAAVQ0/DEIAAAkQMQAACxQggQMXQ0zAEIIAAEQMQgEAxAghQMfQ0DAEIIEDEAAQgUIwAAlQMPQ1DAAIIEDEAAQgUI4AAFUNPwxCAAAJEDEAAAsUIIEDF0NMwBCCAABEDEIBAMQIIUDH0NAwBCCBAxAAEIFCMAAJUDD0NQwACCBAxAAEIFCOAABVDT8MQgAACRAxAAALFCCBAxdDTMAQggAARAxCAQDECCFAx9DQMAQggQMQABCBQjAACVAw9DUMAAggQMQABCBQjgAAVQ0/DEIAAAkQMQAACxQggQMXQ0zAEIIAAEQMQgEAxAghQMfQ0DAEIIEDEAAQgUIwAAlQMPQ1DAAIIEDEAAQgUI4AAFUNPwxCAAAJEDEAAAsUIIEDF0NMwBCCAABEDEIBAMQIIUDH0NAwBCCBAxAAEIFCMAAJUDD0NQwACCBAxAAEIFCOAABVDT8MQgAACRAxAAALFCCBAxdDTMAQggAARAxCAQDECCFAx9DQMAQggQMQABCBQjAACVAw9DUMAAggQMQABCBQjgAAVQ0/DEIAAAkQMQAACxQggQMXQ0zAEIIAAEQMQgEAxAghQMfQ0DAEIIEDEAAQgUIwAAlQMPQ1DAAIIEDEAAQgUI4AAFUNPwxCAAAJEDEAAAsUIIEDF0NMwBCCAABEDEIBAMQIIUDH0NAwBCCBAxAAEIFCMAAJUDD0NQwACCBAxAAEIFCOAABVDT8MQgAACRAxAAALFCCBAxdDTMAQggAARAxCAQDECCFAx9DQMAQggQMQABCBQjAACVAw9DUMAAggQMQABCBQjgAAVQ0/DEIAAAkQMQAACxQggQMXQ0zAEIIAAEQMQgEAxAghQMfQ0DAEIIEDEAAQgUIwAAlQMPQ1DAAIIEDEAAQgUI4AAFUNPwxCAAAJEDEAAAsUIIEDF0NMwBCCAABEDEIBAMQIIUDH0NAwBCCBAxAAEIFCMAAJUDD0NQwACCBAxAAEIFCOAABVDT8MQgAACRAxAAALFCCBAxdDTMAQggAARAxCAQDECCFAx9DQMAQggQMQABCBQjAACVAw9DUMAAggQMQABCBQjgAAVQ0/DEIAAAkQMQAACxQggQMXQ0zAEIIAAEQMQgEAxAghQMfQ0DAEIIEDEAAQgUIwAAlQMPQ1DAAIIEDEAAQgUI4AAFUNPwxCAAAJEDEAAAsUIIEDF0NMwBCCAABEDixMYSdokEtIqSeNIW8zmggACNBduThjkLpI7JkKEVkn+nyTdmdA2poMngAAN3sWJA9xTGp0uabOO9ayUxh+WdFtHOx6fKwII0Fy5O2KwCFAENEwmJYAATUpqXp9DgObV8zMZNwI0E8w9bgQB6rHz6u86AlS/j8r2EAEqy3/grSNAA3dw8vAQoGSEVLBhAggQ0bE4AQSICJkiAQRoinAHUTUCNAg31joIBKhWz9TSLwSoFk8Msh8I0CDdmnFQCFBGmFS1NgEEiJhgDYgYKEYAASqGvicNMwPqiaP62U0EqGa/2Un03ST9VNLjhTqKABUCPx/NIkC1+nljyR0muV+Q/NXhZHmJviJAJajPTZsIUI2u3kxyh0vuFZI2ajvovyn58wvMhPouQBbh+4e0IA/U6Oz57hMCVJv/t5DcsZI7aK2OPSn5KwrMhPouQPtJo+Mlf5/kPy3pvtocPt/9QYBq8v8yyb1JcgduuFMznwn1VYAssveRRidK2i7MIm+V/KckrajJ6fPdFwSoFv/vKLm3Ss4WnRcrs54J9VWA9pZGb5a0w9Nh+tsl//eS7qnF8fPdDwSoBv8vl9wpktt18s7MbCbUNwGyiN5LcidKbvn6efq7Jf8xSXdPzpsnp0MAAZoO18lr3V5yb5PcnpObNE/OaibUNwHaU3JvkdxOi/P0d0j+E7yOdYy67I8jQNmRdqhwm/DHYl9pIsvUZ0J9ESCL5N0kd9LS4rOA2v8wrAk9Ggkfs2QCCFAywsgKtgric0Ck/YLZtGdCfRGgXYP47NKNZ7PH6rOSVnaz4+k8BBCgPBy71bJp+Nr1gm5miz3tL5X8BVO4h6sPArSz5E7utoa2Jkt/seS/LOmJfP6gpskIIECTccr3lJPcqyR3hCSjn6E0i6qfk3TzHArQpF8PF+Nss8gLJX/JFPhl8O+Qq0CAZu1d2xh3sqSt8jTcrGOY+Nyfp751aql5BmSbNk+T3B4Zxv6YNLaNij/IUBdVTEwAAZoYVYYHt5dGp0raOUNddjzjq+FXe5qLqLUL0JGSe3Gm2eSDkv+oZHuFKLMhgADNhnNzv3pzxOKQDA2uDK8Ml2aoa6kqahYg67txPUpyL3nq3NxSQ1r036+VxudIeiypFownJIAATQgq9TH38vYPRRsn1mRXHn9e0lWJ9UxqXrsA2ThGkjtUckdn4PuE5L8UZpaTMuK5aAIIUDS6DoZ2Juk3I+5XX7sJm/l8UfKXd2g79dE+CFAYo3uZ5I6UtGnioE3kbaf0TYn1YL4kAQRoSUSJD2wezng9M7GeWc98FrrbIwGyLrvnS+6Y9tUspfhbwpmxB1NqwXYpAgjQUoRS//3Z0uikxF/lseTPm/HMp6cCZFsbbIuDe2X7apZS/L+3C/2U6RFAgKbHVtpCGp0hqcMh0/V1x/+b5L8+zY4uUnfPZkDNSCyb5GvbbJJJe60ekcYfkHRXIfZz0CwCNC0n28Loa9rMhinF/0jyZ0t6JKWWBNs+CpAN115937x4bqVJqDRn7c5tD/9S8hNAgPIzbWvcURqd/lQyrJhm/J2S/9vCWfz6KkAGfGvJvSMi08CaznpIGn9E0h0xHsRmKQII0FKEIv/dFkKbDXKxxQLf0kXcGltBJrs+C5Ah2FcavTVt57m/MhxY9ZmYUs1qAgjQFILBjga4d6d9iWnWfWo4m9R3AdqoXZBuzt7FllXtFzE79kLJSwABysuz3RR3dNiZG1v3DdL4zEoORvZdgIIPmvWggxMWpa+TxpbKtdT9bLGxVLkdApTbQcul0WmSNpAOdMnmHpXGZ0m6fsknZ/PAQATIvkQ2m0FDgvrO8B4Ma0F3drbEYBECCFDm8HA/H44ERKba8N8P18fU8ks7FAGy/UGva1OhxJZmF/rFsdbYrY8AApQzLjaSRr8TrlOOqfdhafzByvadDEWAzB9btmtzLjYbwR3S+C8tDUGMc7FBgKYcA80xgOMjG7Hdzrbz9muR9tMyG5IA2RLQi9pslAs3znbF5s+S/DVdrXh+QwSYAeWKDbtO2a7W2S+ywnvDwnNtV8UMTIBsb1CzRhe5O91fK/lPkr41MsrXMUOAcpHcOQT2tnEV+v8MO27HcfZTsxqaANksyE7NvzGS2H1hMbq2H4rI4ZQ2Q4ByeeBgaXRC5AHIx6XxX1W29rPAZYACZMc0Rr8raVmE88chYdn3ImwxYQY0rRhwvy65yFsu/H9I/l+m1bPEeocoQDYLssOqdk4v4mtlszP6M4lcMW8IMAPKEQibSaM/bg9Adi725cuSX/24s+VsDAYqQNo95OfeOgKj7dUyf9eyVSJiCLWYIEAZPOGe2yYdiyq3SGM7cFprDuKhCpDdzfZ2yUUmirOFaLvUkJJGAAFK49dOI+0uctvmH1H8V8KleBG2MzEZqgCZ32zTqH2Sjyi8hkVAW48JApTKMeWzrpf8+yX/k9ROTNF+wALUpEz5vcg9QbeHr2EPT5H9HFSNAKU62c4YWd6fiIsG/W2S/+vKd9YOWYBsFvTbktsrIggsW6LlCar5xyNiWLM2QYBSie8fFjMj8g/34mzR0AXIsla+OiIIfFi7uy7CFpPVBBCg1GB4qTSy+6i6Frvl4qOSbulqOOPnBy5Asquy7ZR8xH1t4y9IumzG/hhYcwhQokPdr7WX4nUuK8IUfkVny9kaDF2ALH2KvUJHbEr035K8XRJJiSaAAEWjaw1H74k8V3RbEKBaP78vcBm6ANmuaBOgPboHgv9xWMPrbopFIIAApYTCJtLI0jNEFP8/4eK7CNuZmgxdgGwh2hLXPyuCqh2h+f1KMldGdL8GEwQowQtuX8m9K66CXixA29DmQYCOjE9UNn6vJLIkxv0RcBQjmltjaLdeNNcARxR/pmR3flVf5kGADpKc3V4bUfynJM/B1AhyrQkzoGh07a+mOzKugrGdxl4VZztTqzkQIO0gjf4wjqo/X/LfiLPFCgFKigF3VLiDvGst9gneduD2ocyDANnHhPfH7Yj2F0n+wj44ss4+MgNK8Is7TnIvjKjAklr9SYRdCZN5EaA/a29S7VqaRHL/3NWK5xcIIEAJsWAn4O0kfOdiyc3f19mqjMG8CJB9zYpIVu//W/Jnl3HNEFpFgGK9aNe8vFNy+3evwN8s+Q90tytiMScC5H5Lcnt3J2wfEuyDAiWOAAIUx63Zuu9Ok9w+3SvwP5D8x7vbFbGYFwGK3AvU/Jh8WNKTRbzT+0YRoFgX2i0YJkARJ6n9dyV/TmzDM7abFwGKzOnU7Ia2U/ErZ+yXgTSHAMU6cvMgQHt2r8B/R/L/0N0Oi+kRcCdI7pDu9TcpVUyAaj9S031oM7FAgGIxbxIEKGbd4Opwt1Rs29hlJ+BOltzzulfrbwkC1Ic9Xd2HN3ULBCgW8Uhyp0vuGd0r6NUaUPfh9dLC/Ybknt296/6msAZU231u3YdSxAIBSsDuTpXcAd0r8DeEoO1uisWUCDQ/JhG32vrrJG95nShRBBCgKGytUew+oGba/jcJDWOanUD0Z/hrJLsvnhJHAAGK49YKUOxlhHYP/J8mNIxpdgKjP4pMSvZtyX82e3fmpkIEKMHV7vWSOyyugvEfSHo0zharzAS2kEZ/EVenHUS1A6mUOAIIUBy3dgaUcq/URyR/fULjmGYjYLvZbU9XTLErte1qbUocAQQojlsrQCkJyc6T/KUJjWOajYB7ueTeEFed/5Dkb4yzxYp0HGkxkDJ1v0Lyn0trHus8BKIvFrBsrLxKJzmBGVASPil28VI3h6T0TyR2APM0AhuHpPQRG0rFx4Q09mRETOYnd4rkDoyo554gQPdG2GKSj4Bdy2PrP8u7V+mvlfwnutth8RQBZkCJ0eBeJ7lfjKikLxcTRgytVyb7hJttN+3ea/81yX+pux0WCFC+GDhQGr09zCU71jo+V9LlHY14PCuB6AVou5r57yRdm7U7c1cZM6BUl+8SpvDbdK/IblOwWxUo5QjEHkLVQ+EV+o5yfR9CywhQqhftS5itIUTcrGkpHMa2Ae7B1E5gH0VgG2lkX7E2j7C+XRpbIrJHImwxWU0AAcoQDCmfcS2huSU2p8yegHuJ5H41rl1/peQ/E2eLFWtAWWPAHSy5t8RVabuhmy8pj8fZYxVJYFO1XzAjcnpbi3b+y387sm3MmAFljYFtw8V2m0TU+kBYS7grwhaTeAI7h1fnbSOqeEIa/7mk+yJsMXkaAV7BMgVEbEIrjSV/Lq9hmdwwcTXN69fRdiPhxCarH/T/K/mPdbfDYl0CCFCuqHiBNDouMqDvCNf0kFc4lzcWr8fyeb9bcrtGNDeWxv8oidevCHgIUBZo663E7he3r2HL4prwF0j+kjhbrLoRcK+Q3K90s1n9tB2/sCT090TaY8Yr2FRiwO4Js8TmMccyrEM/DZ91H5hK76h0gYCt150uaac4JM3xi09K4gxfHMC1rHgFy4KxrcQdJLmTIit8MqwFfTPSHrOJCLgXh7WfjSZ6fJ2H7Bpmu46ZkocAApSHY1uLnax+j6Qd4yr1d0n+g5IejrPHagkCW0nuDMlF3AHf1Hy3NH4fs5+ccYYA5aRps6DDJXdEfKW2KdF/gat+4wluwHIjyb1Rsq9fscVfKPmLYq2xWx8BBCh3XOwYFqO3j6z4YWlsGxNvibTHbP0E9pZGp0jaKhLQfWHx+e5Ie8zWSwAByh0YdmHh0Ym/tOSZye2V+LxNoSfNzNSyF3ABYVbfIEBZcbaVud3afSbaLL5y/8XwWf7J+DqwlGSvXvbZ/cgEGivbfVr+9oQ6MGUGNMsYcG9qb82ILo9IY0vVcV10DRgagQOk0YmStozHYbde2O0XlPwEmAHlZ9rWuGvYbxK75mAHHu8M1/7eP61ODrze7aTm+uxdEsZpa3KWdoO8PwkQN2yKAE0Fa5j6vyFxFmQi9KOQtIxP8908ZZ/cT5TcM7uZrf10M/s5j6+SaRQRoGnxW7ze7aTRGXEJz9esuPkjuEDSqjLD6F2rtu5zlGTpVmU/sbFlhTS2fVnMQGMJLmnHDGhJRIkPWM5oW4OISHq+umU7Mf91EqBP6gn3yrAXK3K3c9PO42ENjpzPk2KPeg4BisLWwchOXturwLM62Kzv0VXtRYb+qsR6hm7+HGl0QmSa1TXYNCk37CMAGQqmGjEI0FTxhsotcf27EjbBLfTxsfaPwv44KOsSMJF3Jj4JC/9Nrbbw/CFJd0J52gQQoGkTDvW7l0nul9vzYknF/jjsSufvJ9UyOOMmLe4x6TMfO+Xu/1Xylw0OUZUDQoBm5RbLQXys5H4uQ4M2E7pI8t/g64w2kdwvSe4wyf5/avHflfznydGdynFSewRoUlI5nlsmjd4Zf1r+aV2w9B2Xh8OR8/qJ3j61v1ayFBsxqVXXcamddj9TsjvfKbMhgADNhvNTrewvjSxnUOo6hdXopeZWDbseZt4+Fdsmw+PT9/msdoy92p4t6fpZB8R8t4cAzdr/dlj1NW3ajlyl2TFtKTxumINXMvu0vl9IrZGyw3kt+M0r7Zc5bJorJietBwGalFTO5zaT3HGS+9mMlT4S9gpdnLHOCqtyr5Jsn0/K2a61h+W/I9kFkVpZ4YAH3iUEqJSDtwk5pJ+RtwNNzuKvSrptQLMhm/XsGRabY3NubwCz/6HkzyELZd4onLw2BGhyVvmf3F5y74i8Hmax3jzc5i22DH69T+9qC81HtPm2s6ybrcGtOWf3aUkP5XctNU5GAAGajNP0ntpJGp0af53PYh2zHNO6RPK2Z6hvt21sK7nnSLJcPrE5nBeDY7eQ2OWCXK8zvdieoGYEaAJIU3/EUndYMvtpFEtotqK9edV/qwdHC+zoyotCRsnlbVaBaZTxe9npPA2uXetEgLoSm9bzdlzjbfH3VU3SLW85bS5rP90395o/PonVDJ6xg7r2Orq/JNsxHnNj6aTdtIsFP05+n0lxTfs5BGjahLvUv0PYLZ2Yw2bRJi2n8UNS83p2leSvkfRgl05mfNYW4p8ryY5R2GvW1pk2FG6giybA/qz2EkhKHQQQoDr88FQvtm4PVLqfmVHH7FiHpX29QfK3hrUiWy/KffOnnYHbRtK2kvaSnO3lsQwBm89mnP6msOBsMz9KNQQQoGpcsUZH7MuPZVM8ZMads1cy+yL0YJsOVv8n6SeSt/99tGNftpDcHpJ2l7RHmOGYANksJyFZf8deNI/774WNmqVmejGdnhMbBKhWR9tmRdt0Zxfp5Ti2kTrOeyW/MDMyobLsjAsZGu0QqP1nazkbS85mOctSG8xgb9sRbPHdNmeyyTAD0PxVIED5mearcSRpX2l0bKYDrPl6Vn9NdrDUTrXfyPGKmp2FANXsnYW+LWvvtXLPy5BPqA/jTemj5fO5WrJ71TjVngJyNrYI0Gw4p7di+YReKLlXV/JKlj6i/DXYK9dXJP9fFW0xyD/KQdWIAPXNnbtI7vWS2zcx0X3fxr1Yfx+X/I2SP5/NhX1zKwLUN49Zf+3Tta0NHZ1+5U8fh/+0PtvVOXZnu631kEC+d+5EgHrnsjU6bEm5Dg9pPWr4UjZLlva6ZZ/XL5rDZGyz5DzlthCgKQOeevV2Vmonyb1Ucs+f/R6bqY9v7QZWSv7KNh1ts6PZzrpReksAAeqt69btuNtNkgmR5czZfkADs6HcJ1muI1ke7NsHNrY5Hg4CNDTn296h5VJzTc2hA9g/dLfkrwgXMq5gT8/QwhUBGppH1xyP7Uq2nDqHSs3saLvpHvbMgtIOy94fZjkmPJbLKPe5tCwdpZIcBBCgHBRrr8MOgpr47NveS9akvUi9IDH3mO3qabvhw66eti9adssHwpObcnX1IUDVuWQGHbLcO5by44BwYNQOidpXNIuGWRQfDr0+EA662j3sdqNH37I2zoLVwNtAgAbu4CWHt2VIkWHrRpYgf/fwupb7MKkdZrXFYztdf1NIhWqC0/WU/ZID4oE+EUCA+uStWfbV0mnYupH9t1O4Bsc2QFoqDTv5bovdC+lS7VO4rd3Y6Xg7dW4bAh8Jn8lvD8KD0MzSe71pCwHqjasq6uiC+KwpQAsiVFE36Ur9BBCg+n1EDyEwWAII0GBdy8AgUD8BBKh+H9FDCAyWAAI0WNcyMAjUTwABqt9H9BACgyWAAA3WtQwMAvUTQIDq9xE9hMBgCSBAg3UtA4NA/QQQoPp9RA8hMFgCCNBgXcvAIFA/AQSofh/RQwgMlgACNFjXMjAI1E8AAarfR/QQAoMlgAAN1rUMDAL1E0CA6vcRPYTAYAkgQIN1LQODQP0EEKD6fUQPITBYAgjQYF3LwCBQPwEEqH4f0UMIDJYAAjRY1zIwCNRPAAGq30f0EAKDJYAADda1DAwC9RNAgOr3ET2EwGAJIECDdS0Dg0D9BBCg+n1EDyEwWAII0GBdy8AgUD8BBKh+H9FDCAyWAAI0WNcyMAjUTwABqt9H9BACgyWAAA3WtQwMAvUTQIDq9xE9hMBgCSBAg3UtA4NA/QQQoPp9RA8hMFgCCNBgXcvAIFA/gf8HetkeW6dxKecAAAAASUVORK5CYII=\";\n} else if (msg.payload == false) {\n    msg.image = \"data:image/png;base64,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\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2269,
+        "y": 117,
+        "wires": [
+            [
+                "25d597a85dd2e1b1"
+            ]
+        ]
+    },
+    {
+        "id": "26071484835d975b",
+        "type": "change",
+        "z": "329b84022c14d022",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"event\":\"setImage\",\t   \"context\":context,\t   \"payload\":{\t       \"image\":image\t   }\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2642,
+        "y": 114,
+        "wires": [
+            [
+                "27c742d5990ee1c8"
+            ]
+        ]
+    },
+    {
+        "id": "f7c30d866654eefb",
+        "type": "websocket out",
+        "z": "329b84022c14d022",
+        "d": true,
+        "name": "",
+        "server": "a0e09bc72becb587",
+        "client": "",
+        "x": 3035,
+        "y": 117,
+        "wires": []
+    },
+    {
+        "id": "7cf31ad0941b0c3d",
+        "type": "jimp-image",
+        "z": "329b84022c14d022",
+        "name": "",
+        "data": "image",
+        "dataType": "msg",
+        "ret": "b64",
+        "parameter1": "",
+        "parameter1Type": "msg",
+        "parameter2": "",
+        "parameter2Type": "msg",
+        "parameter3": "",
+        "parameter3Type": "msg",
+        "parameter4": "",
+        "parameter4Type": "msg",
+        "parameter5": "",
+        "parameter5Type": "msg",
+        "parameter6": "",
+        "parameter6Type": "msg",
+        "parameter7": "",
+        "parameter7Type": "msg",
+        "parameter8": "",
+        "parameter8Type": "msg",
+        "sendProperty": "image",
+        "sendPropertyType": "msg",
+        "parameterCount": 0,
+        "jimpFunction": "none",
+        "selectedJimpFunction": {
+            "name": "none",
+            "fn": "none",
+            "description": "Just loads the image.",
+            "parameters": []
+        },
+        "x": 2472,
+        "y": 63,
+        "wires": [
+            [
+                "8832320a5570f3db"
+            ]
+        ]
+    },
+    {
+        "id": "25d597a85dd2e1b1",
+        "type": "jimp-image",
+        "z": "329b84022c14d022",
+        "name": "",
+        "data": "image",
+        "dataType": "msg",
+        "ret": "b64",
+        "parameter1": "",
+        "parameter1Type": "msg",
+        "parameter2": "",
+        "parameter2Type": "msg",
+        "parameter3": "",
+        "parameter3Type": "msg",
+        "parameter4": "",
+        "parameter4Type": "msg",
+        "parameter5": "",
+        "parameter5Type": "msg",
+        "parameter6": "",
+        "parameter6Type": "msg",
+        "parameter7": "",
+        "parameter7Type": "msg",
+        "parameter8": "",
+        "parameter8Type": "msg",
+        "sendProperty": "image",
+        "sendPropertyType": "msg",
+        "parameterCount": 0,
+        "jimpFunction": "none",
+        "selectedJimpFunction": {
+            "name": "none",
+            "fn": "none",
+            "description": "Just loads the image.",
+            "parameters": []
+        },
+        "x": 2467,
+        "y": 116,
+        "wires": [
+            [
+                "26071484835d975b"
+            ]
+        ]
+    },
+    {
+        "id": "1de63b6be1b814c2",
+        "type": "sd-input",
+        "z": "329b84022c14d022",
+        "name": "Stream Deck In",
+        "x": 1316,
+        "y": 128,
+        "wires": [
+            [
+                "276a39b7d18d2aae"
+            ]
+        ]
+    },
+    {
+        "id": "dc8cdac37dc02147",
+        "type": "sd-output",
+        "z": "329b84022c14d022",
+        "name": "Stream Deck",
+        "streamdeckID": "DLI1",
+        "title": "",
+        "title-type": "str",
+        "image": "image",
+        "image-type": "msg",
+        "state": "",
+        "state-type": "msg",
+        "x": 2851,
+        "y": 63,
+        "wires": [
+            [
+                "b2456c58ac276875"
+            ]
+        ]
+    },
+    {
+        "id": "27c742d5990ee1c8",
+        "type": "sd-output",
+        "z": "329b84022c14d022",
+        "name": "Stream Deck",
+        "streamdeckID": "DLI4",
+        "title": "",
+        "title-type": "str",
+        "image": "image",
+        "image-type": "msg",
+        "state": "",
+        "state-type": "msg",
+        "x": 2846,
+        "y": 116,
+        "wires": [
+            [
+                "f7c30d866654eefb"
+            ]
+        ]
+    },
+    {
+        "id": "527251741cd69618",
+        "type": "ui_group",
+        "name": "Power State",
+        "tab": "c9a4abdcaf26851c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e199e4609517db05",
+        "type": "ui_group",
+        "name": "Radio",
+        "tab": "b35a51ba4e1dee85",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "546ab70dc0c713ca",
+        "type": "ui_group",
+        "name": "Radio Control",
+        "tab": "6d6f25e436f987a2",
+        "order": 1,
+        "disp": false,
+        "width": "32",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a0e09bc72becb587",
+        "type": "websocket-listener",
+        "path": "/streamdeck",
+        "wholemsg": "false"
+    },
+    {
+        "id": "c9a4abdcaf26851c",
+        "type": "ui_tab",
+        "name": "Power Switch",
+        "icon": "dashboard",
+        "order": 14,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b35a51ba4e1dee85",
+        "type": "ui_tab",
+        "d": true,
+        "name": "VHF/UHF Station Control",
+        "icon": "radio",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6d6f25e436f987a2",
+        "type": "ui_tab",
+        "name": "Sat Control",
+        "icon": "dashboard",
+        "order": 15,
+        "disabled": false,
+        "hidden": false
+    }
+]

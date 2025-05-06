@@ -1,0 +1,122 @@
+[
+    {
+        "id": "3a8845402e04fddf",
+        "type": "tab",
+        "label": "Email Log Attachment Test Send",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "14fa60ec953c6c31",
+        "type": "file in",
+        "z": "3a8845402e04fddf",
+        "name": "get file",
+        "filename": "\\Users\\Remote\\.node-red\\logs\\flexuser.txt",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "d802cdb5cac4c61a"
+            ]
+        ]
+    },
+    {
+        "id": "d802cdb5cac4c61a",
+        "type": "function",
+        "z": "3a8845402e04fddf",
+        "name": "write email",
+        "func": "// Create local file variable for convenient reference\nvar file = msg.filename;\n\n// Create current date object for the time string\nvar d = new Date();\nvar tstring = d.toString().substring(0, 15);  // Use first 15 characters for a human-readable date\n\n// Ensure file exists and is properly handled\nif (!file || typeof file !== \"string\") {\n        throw new Error(\"Invalid file name provided\");\n}\n\n// Attachments object with filename and content\nmsg.attachments = {\n        filename: file.substring(file.lastIndexOf('/') + 1),  // Extract only the file name\n        content: msg.payload  // Ensure this is the binary buffer of the file\n};\n\n// Construct email subject\nmsg.topic = \"Your Weekly Radio Log \" + tstring;\n\n// Construct email body\nmsg.payload = \"See attached text file: `\" + msg.attachments.filename + \"`\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 320,
+        "wires": [
+            [
+                "d68c9d7e90844039",
+                "990d52ec544f8a02"
+            ]
+        ]
+    },
+    {
+        "id": "990d52ec544f8a02",
+        "type": "e-mail",
+        "z": "3a8845402e04fddf",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": false,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "Your Email",
+        "dname": "",
+        "x": 850,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b426ef9a3e27488f",
+        "type": "inject",
+        "z": "3a8845402e04fddf",
+        "name": "Trigger Sundays at 12A",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 12 * * 0",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "14fa60ec953c6c31"
+            ]
+        ]
+    },
+    {
+        "id": "d68c9d7e90844039",
+        "type": "debug",
+        "z": "3a8845402e04fddf",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 810,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "686b2a6338a97d57",
+        "type": "comment",
+        "z": "3a8845402e04fddf",
+        "name": "Email Weekly User Action Log",
+        "info": "",
+        "x": 497,
+        "y": 137,
+        "wires": []
+    }
+]

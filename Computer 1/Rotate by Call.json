@@ -1,0 +1,384 @@
+[
+    {
+        "id": "79cdeb5976851f0d",
+        "type": "tab",
+        "label": "Rotate by Call",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e840733b889ce6fc",
+        "type": "function",
+        "z": "79cdeb5976851f0d",
+        "name": "Format for map",
+        "func": "var call = msg.call;\nvar lat = parseFloat(msg.lat);\nvar lon = parseFloat(msg.lon);\nvar time = flow.get('time')||\"00:00\";\nvar heading = flow.get('heading')||90;\nvar freq = flow.get('freq')||14000;\nvar freq = freq / 1000\nvar freq = freq.toFixed(3)\nurl = {\"name\":\"QRZ Lookup\", \"url\":\"http://qrz.com/db/\" + call, \"target\":\"_new\"},\n//url = {\"name\":\"Goto Freq\", \"url\":\"http://10.0.1.20:1880/freq/\" + freq, \"target\":\"_none\"}\nmsg.payload = {\n    \"layer\": \"spots\",\n    \"name\": call + \"-\" + freq + \"->\" + heading,\n    \"lat\": lat, \n    \"lon\": lon , \n    \"icon\":\"fa-circle fa-sm\",  // change font-awsome icon here\n    \"weblink\": url,\n    \"contextmenu\": freq, \n    \"tooltip\": \"<br>\" + call + \" \" + freq + \" >\" + heading + \"&#730; \" + time + \"hrs\",\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 3,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1170,
+        "y": 520,
+        "wires": [
+            [
+                "71c4c5e4206e1b27",
+                "7a26812a77665e62"
+            ]
+        ]
+    },
+    {
+        "id": "57f252ead1260721",
+        "type": "function",
+        "z": "79cdeb5976851f0d",
+        "name": "format lookup",
+        "func": "callsign = msg.payload\nsession_id = flow.get('session_id');\nmsg.url = \"http://xmldata.qrz.com/xml/current/?s=\" + session_id + \";callsign=\" + callsign\nmsg.color = \"dodgerblue\";\nmsg.degree = \"<font size=3>Searching...\";\nflow.set('call',callsign);\nreturn [msg];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 410,
+        "y": 520,
+        "wires": [
+            [
+                "1258198b5b5694dd"
+            ]
+        ]
+    },
+    {
+        "id": "1258198b5b5694dd",
+        "type": "http request",
+        "z": "79cdeb5976851f0d",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "authType": "",
+        "x": 600,
+        "y": 520,
+        "wires": [
+            [
+                "3c0b4e0e3c255770"
+            ]
+        ]
+    },
+    {
+        "id": "3c0b4e0e3c255770",
+        "type": "xml",
+        "z": "79cdeb5976851f0d",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 760,
+        "y": 520,
+        "wires": [
+            [
+                "139f1f760851992d"
+            ]
+        ]
+    },
+    {
+        "id": "71c4c5e4206e1b27",
+        "type": "debug",
+        "z": "79cdeb5976851f0d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1440,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "139f1f760851992d",
+        "type": "function",
+        "z": "79cdeb5976851f0d",
+        "name": "Calc Heading",
+        "func": "if(msg.topic == \"Manual\"){  // if manual entered heading, just send it out.\n    msg.color = \"#27ae60\";\n    msg.degree =  \"<font color=#FFFFFF size=4>\" + msg.payload + \"&#176;\"\n    flow.set('heading',msg.payload);\n    return msg;\n}\ndata = msg.payload.QRZDatabase;\nmsg1 = {}\nif(data.Session[0].Error){          // error returned\n    msg.degree = data.Session[0].Error[0];\n    if(msg.degree == \"Invalid session key\"){  // if invalid key, trigger resend\n        msg.degree = \"<font color=#ffffff size=2>Bad Key\";\n        msg.color = \"dodgerblue\";\n        msg.payload = \"\"\n        msg1.payload = true;\n        return [msg,msg1]\n    }else if(msg.degree ==  \"Session Timeout\"){  // if timeout trigger resend\n        msg.degree = \"<font color=#ffffff size=2>Please Wait\";\n        msg.color = \"dodgerblue\";\n        msg.payload = \"\"\n        msg1.payload = true;\n        return [msg,msg1]    \n        \n    }else{                           //if no known error, get and send error\n        pos = msg.degree.indexOf(\":\")\n        msg.degree = \"<font color=#ffffff size=2>\" + msg.degree.slice(0,pos)\n        msg.payload = \"\"\n        msg.color = \"#ff0000\"\n        return [msg,null];\n    }    \n}\n\ncall = data.Callsign[0].call[0];\nmsg.call = call;\n\n//get lat/lon from data\nlat2 = parseFloat(data.Callsign[0].lat[0]);\nlat2 = lat2.toFixed(3);\nmsg.lat = lat2\n\nlng2 = parseFloat(data.Callsign[0].lon[0]);\nlng2 = lng2.toFixed(3);\nmsg.lon = lng2\n\n//get grid square from data\ngridsq = data.Callsign[0].grid[0];\ngridsq = gridsq.slice(0,4);\nflow.set('gridsq',gridsq);\nmsg.gridsq = gridsq;\n\n// calc bearing from lat/Lon\nmsg.payload = bear(lat2,lng2);\nmsg.payload = msg.payload.toFixed(0);\nif(msg.payload < 0){\n    msg.payload = 360 + parseFloat(msg.payload);\n}\nmsg.color = \"#27ae60\";\nmsg.degree =  \"<font color=#FFFFFF size=4>\" + msg.payload + \"&#176;\"\n\nflow.set('heading',msg.payload);\n\nreturn [msg,null];\n\nfunction bear(lat1,lng2){\n    lat1 = 37.589;\n    lng1 = -122.483;\n\n    dLon = (lng2-lng1);\n    \n    x = Math.sin(deg_rad(dLon)) * Math.cos(deg_rad(lat2));\n    y = (Math.cos(deg_rad(lat1)) * Math.sin(deg_rad(lat2))) - (Math.sin(deg_rad(lat1)) * Math.cos(deg_rad(lat2)) * Math.cos(deg_rad(dLon)));\n    bearing = rad_deg((Math.atan2(x, y)));\n    return bearing;\n}\nfunction deg_rad(deg){\n    rad = 0\n    rad = (deg * 3.14159) / 180\n    return rad\n}\n\nfunction rad_deg(radns){\n    Degr = 0\n    Degr = (radns * 180) / 3.14159\n    return Degr;\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 950,
+        "y": 520,
+        "wires": [
+            [
+                "e840733b889ce6fc",
+                "71c4c5e4206e1b27"
+            ],
+            [
+                "bae257e6860e0231"
+            ]
+        ]
+    },
+    {
+        "id": "bae257e6860e0231",
+        "type": "function",
+        "z": "79cdeb5976851f0d",
+        "name": "request session key",
+        "func": "var username = 'user'||\"?\"; \nvar password = 'password'||\"?\"; \nmsg.url = \"http://xmldata.qrz.com/xml/current/?username=\" + username + \";password=\" + password + \";agent=k6hn-spots\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 640,
+        "wires": [
+            [
+                "5d98d0cecc3c7d0d"
+            ]
+        ]
+    },
+    {
+        "id": "5d98d0cecc3c7d0d",
+        "type": "http request",
+        "z": "79cdeb5976851f0d",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "authType": "",
+        "x": 1430,
+        "y": 640,
+        "wires": [
+            [
+                "5a55372e3c9b5d88"
+            ]
+        ]
+    },
+    {
+        "id": "5a55372e3c9b5d88",
+        "type": "xml",
+        "z": "79cdeb5976851f0d",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 1570,
+        "y": 640,
+        "wires": [
+            [
+                "bc56bf6e2eecc246"
+            ]
+        ]
+    },
+    {
+        "id": "bc56bf6e2eecc246",
+        "type": "function",
+        "z": "79cdeb5976851f0d",
+        "name": "decode & save session id",
+        "func": "session_id = msg.payload.QRZDatabase.Session[0].Key[0]\nflow.set('session_id',session_id);\nmsg.payload = session_id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1770,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a26812a77665e62",
+        "type": "function",
+        "z": "79cdeb5976851f0d",
+        "name": "",
+        "func": "freq = msg.payload.name\nloc = freq.indexOf(\"-\");\nfreq = freq.slice(loc + 1,99)\nfreq = parseFloat(freq);\nmsg.freq = freq\n\nheading = msg.payload.name\nloc = heading.indexOf(\">\");\nheading = heading.slice(loc + 1,99)\nheading = parseFloat(heading);\nmsg.heading = heading\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1650,
+        "y": 820,
+        "wires": [
+            [
+                "cf359704e7cf218a"
+            ]
+        ]
+    },
+    {
+        "id": "cf359704e7cf218a",
+        "type": "change",
+        "z": "79cdeb5976851f0d",
+        "name": "Heading",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "heading",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1870,
+        "y": 820,
+        "wires": [
+            [
+                "fd741d5e68cbfc2a",
+                "37920b1bdab2d395"
+            ]
+        ]
+    },
+    {
+        "id": "fd741d5e68cbfc2a",
+        "type": "function",
+        "z": "79cdeb5976851f0d",
+        "name": "",
+        "func": "msg.payload = \"HEADING:\" + msg.payload + \"\\n\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2030,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79769849b9d32d16",
+        "type": "comment",
+        "z": "79cdeb5976851f0d",
+        "name": "To Rotor Control Flow",
+        "info": "",
+        "x": 2290,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "22234d1038f0c52f",
+        "type": "comment",
+        "z": "79cdeb5976851f0d",
+        "name": "Chaneg Icon here",
+        "info": "",
+        "x": 1160,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "37920b1bdab2d395",
+        "type": "link out",
+        "z": "79cdeb5976851f0d",
+        "name": "Rotor Heading",
+        "mode": "link",
+        "links": [],
+        "x": 2145,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "2da2192e6e2037df",
+        "type": "comment",
+        "z": "79cdeb5976851f0d",
+        "name": "Call Lookup and Rotor Heading Computation",
+        "info": "",
+        "x": 570,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d8bf21d71f036165",
+        "type": "start-up-trigger",
+        "z": "79cdeb5976851f0d",
+        "x": 960,
+        "y": 640,
+        "wires": [
+            [
+                "bae257e6860e0231"
+            ]
+        ]
+    },
+    {
+        "id": "b22b718a7f57cb6a",
+        "type": "ui_text_input",
+        "z": "79cdeb5976851f0d",
+        "name": "Call Input",
+        "label": "Enter Call to Point Rotor",
+        "tooltip": "",
+        "group": "f7e10380880b681f",
+        "order": 23,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": "0",
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 180,
+        "y": 520,
+        "wires": [
+            [
+                "57f252ead1260721"
+            ]
+        ]
+    },
+    {
+        "id": "585b2e807fb221af",
+        "type": "comment",
+        "z": "79cdeb5976851f0d",
+        "name": "Flow to rotor antenna after callsign entered in box on HF control tab - requires QRZ active subscription",
+        "info": "",
+        "x": 374,
+        "y": 51,
+        "wires": []
+    },
+    {
+        "id": "e5f9c21d5a0ba9d8",
+        "type": "comment",
+        "z": "79cdeb5976851f0d",
+        "name": "Enter QRZ username",
+        "info": "",
+        "x": 1240,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "c400d3dc7a3a828e",
+        "type": "comment",
+        "z": "79cdeb5976851f0d",
+        "name": "Enter QRZ password",
+        "info": "",
+        "x": 1240,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "f7e10380880b681f",
+        "type": "ui_group",
+        "name": "Rotor2",
+        "tab": "d3fd3a03eeca216a",
+        "order": 4,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d3fd3a03eeca216a",
+        "type": "ui_tab",
+        "name": "HF Station Control",
+        "icon": "radio",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

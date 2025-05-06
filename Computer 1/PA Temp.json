@@ -1,0 +1,489 @@
+[
+    {
+        "id": "a68d495f05056aee",
+        "type": "tab",
+        "label": "PA Temp",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3afeca0568a57404",
+        "type": "flexradio-meter",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "radio": "7ff99fa3402dfbed",
+        "topic": "",
+        "topic_type": "mqtt",
+        "output_mode": "value",
+        "x": 220,
+        "y": 480,
+        "wires": [
+            [
+                "9954b6ce1b33df5b",
+                "d6874a4eb8938d39"
+            ]
+        ]
+    },
+    {
+        "id": "9a92dee6098229cb",
+        "type": "inject",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sub meter TX-/4/PATEMP",
+        "payloadType": "str",
+        "x": 160,
+        "y": 320,
+        "wires": [
+            [
+                "3137da78c082b963"
+            ]
+        ]
+    },
+    {
+        "id": "a8b725d5991b111d",
+        "type": "flexradio-request",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "radio": "7ff99fa3402dfbed",
+        "x": 1077,
+        "y": 370,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e6a8ae7d81339124",
+        "type": "comment",
+        "z": "a68d495f05056aee",
+        "name": "To see all meters",
+        "info": "",
+        "x": 290,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "7433a4f249212f5a",
+        "type": "flexradio-request",
+        "z": "a68d495f05056aee",
+        "d": true,
+        "name": "",
+        "radio": "7ff99fa3402dfbed",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "02a2350deb715e9a",
+        "type": "function",
+        "z": "a68d495f05056aee",
+        "name": "Temperature Convert to F",
+        "func": "var tempf = msg.payload\n\ntempf = Math.round(((tempf * 9)/5) + 32)\n    msg.payload = tempf\n    return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 620,
+        "wires": [
+            [
+                "fb2a6b2fc216d9fe"
+            ]
+        ]
+    },
+    {
+        "id": "9954b6ce1b33df5b",
+        "type": "switch",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "TX-/4/PATEMP",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 510,
+        "y": 560,
+        "wires": [
+            [
+                "02a2350deb715e9a"
+            ]
+        ]
+    },
+    {
+        "id": "52672c57bae7eee5",
+        "type": "smooth",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "property": "payload",
+        "action": "mean",
+        "count": "50",
+        "round": "1",
+        "mult": "multi",
+        "reduce": true,
+        "x": 400,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "39c2f2cf42696eb1",
+        "type": "inject",
+        "z": "a68d495f05056aee",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sub meter all",
+        "payloadType": "str",
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "7433a4f249212f5a"
+            ]
+        ]
+    },
+    {
+        "id": "fb2a6b2fc216d9fe",
+        "type": "ui_text",
+        "z": "a68d495f05056aee",
+        "group": "e01b097f943953f0",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "name": "Radio PA Temp",
+        "label": "<font size = 5>PA Temp",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 940,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "0750a681c609c9be",
+        "type": "inject",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sub meter RAD/3/MAINFAN",
+        "payloadType": "str",
+        "x": 160,
+        "y": 380,
+        "wires": [
+            [
+                "3137da78c082b963"
+            ]
+        ]
+    },
+    {
+        "id": "d6874a4eb8938d39",
+        "type": "switch",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "RAD/3/MAINFAN",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 510,
+        "y": 680,
+        "wires": [
+            [
+                "1eff041d890f43ef"
+            ]
+        ]
+    },
+    {
+        "id": "1eff041d890f43ef",
+        "type": "ui_text",
+        "z": "a68d495f05056aee",
+        "group": "e01b097f943953f0",
+        "order": 6,
+        "width": "0",
+        "height": "0",
+        "name": "Radio Fan",
+        "label": "<font size = 5>Radio Fan",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 930,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "ff699fb959ae17ae",
+        "type": "link in",
+        "z": "a68d495f05056aee",
+        "name": "Radio Input Pwr",
+        "links": [
+            "e3df1a212f0ec267"
+        ],
+        "x": 785,
+        "y": 780,
+        "wires": [
+            [
+                "fb2a6b2fc216d9fe",
+                "1eff041d890f43ef"
+            ]
+        ]
+    },
+    {
+        "id": "2c9561649dd8b7d5",
+        "type": "comment",
+        "z": "a68d495f05056aee",
+        "name": "Flow to monitor 6600 PA temperature",
+        "info": "",
+        "x": 150,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "3137da78c082b963",
+        "type": "gate",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "controlTopic": "radio-on",
+        "defaultState": "closed",
+        "openCmd": "true",
+        "closeCmd": "false",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 884,
+        "y": 312,
+        "wires": [
+            [
+                "a8b725d5991b111d"
+            ]
+        ]
+    },
+    {
+        "id": "65dff639180fedc7",
+        "type": "link in",
+        "z": "a68d495f05056aee",
+        "name": "Radio On?",
+        "links": [],
+        "x": 520,
+        "y": 137,
+        "wires": [
+            [
+                "44229816ee717522"
+            ]
+        ]
+    },
+    {
+        "id": "44229816ee717522",
+        "type": "switch",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "property": "payload[0]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 209,
+        "wires": [
+            [
+                "b88c6057c13909c9"
+            ],
+            [
+                "044ed42f4996daa1"
+            ]
+        ]
+    },
+    {
+        "id": "b88c6057c13909c9",
+        "type": "change",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "radio-on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 783,
+        "y": 226,
+        "wires": [
+            [
+                "3137da78c082b963"
+            ]
+        ]
+    },
+    {
+        "id": "9b65a6c6d9361db2",
+        "type": "inject",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "props": [
+            {
+                "p": "payload[0]",
+                "v": "true",
+                "vt": "bool"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "radio-on",
+        "x": 437,
+        "y": 162,
+        "wires": [
+            [
+                "44229816ee717522"
+            ]
+        ]
+    },
+    {
+        "id": "044ed42f4996daa1",
+        "type": "change",
+        "z": "a68d495f05056aee",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "radio-on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 723,
+        "y": 278,
+        "wires": [
+            [
+                "3137da78c082b963"
+            ]
+        ]
+    },
+    {
+        "id": "7ff99fa3402dfbed",
+        "type": "flexradio-radio",
+        "name": "Test Discovery",
+        "host_mode": "automatic",
+        "nickname": "",
+        "host": "",
+        "port": "",
+        "station_name": "NodeRed",
+        "slice_mode": "headless",
+        "slice_name": "A",
+        "timeout": "15"
+    },
+    {
+        "id": "e01b097f943953f0",
+        "type": "ui_group",
+        "name": "6600 Group 3",
+        "tab": "549c889b2dd69333",
+        "order": 3,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "549c889b2dd69333",
+        "type": "ui_tab",
+        "name": "Flex Info",
+        "icon": "info",
+        "order": 8,
+        "disabled": false,
+        "hidden": false
+    }
+]

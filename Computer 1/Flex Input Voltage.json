@@ -1,0 +1,453 @@
+[
+    {
+        "id": "7eec051f6a3fa58e",
+        "type": "tab",
+        "label": "Flex Input Voltage",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "305acba9d951e216",
+        "type": "flexradio-request",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "radio": "c3844c787b1b0f62",
+        "x": 1115,
+        "y": 296,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dccfb101f1f8a20a",
+        "type": "inject",
+        "z": "7eec051f6a3fa58e",
+        "name": "sub meter RAD/0/+13.8B",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sub meter RAD/0/+13.8B",
+        "payloadType": "str",
+        "x": 190,
+        "y": 420,
+        "wires": [
+            [
+                "8f74095ebce3e341"
+            ]
+        ]
+    },
+    {
+        "id": "57cf5d43fa2006d0",
+        "type": "flexradio-meter",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "radio": "c3844c787b1b0f62",
+        "topic": "",
+        "topic_type": "mqtt",
+        "output_mode": "value",
+        "x": 260,
+        "y": 500,
+        "wires": [
+            [
+                "9cbe0b8d9b50904f",
+                "786f5fcc3d937a54"
+            ]
+        ]
+    },
+    {
+        "id": "0f9ca10a81f4fda8",
+        "type": "ui_text",
+        "z": "7eec051f6a3fa58e",
+        "group": "e01b097f943953f0",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "name": "Radio Input Power B",
+        "label": "<font size = 5>Radio Input Power B",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 760,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "9951a3b86e7369ea",
+        "type": "link in",
+        "z": "7eec051f6a3fa58e",
+        "name": "Radio Input Pwr",
+        "links": [
+            "e3df1a212f0ec267"
+        ],
+        "x": 615,
+        "y": 700,
+        "wires": [
+            [
+                "0f9ca10a81f4fda8",
+                "096b665f926949a6"
+            ]
+        ]
+    },
+    {
+        "id": "4025745b292ca55c",
+        "type": "inject",
+        "z": "7eec051f6a3fa58e",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sub meter all",
+        "payloadType": "str",
+        "x": 160,
+        "y": 240,
+        "wires": [
+            [
+                "3240056736b49710"
+            ]
+        ]
+    },
+    {
+        "id": "067cdc75fcb62403",
+        "type": "comment",
+        "z": "7eec051f6a3fa58e",
+        "name": "To see all meters",
+        "info": "",
+        "x": 330,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3240056736b49710",
+        "type": "flexradio-request",
+        "z": "7eec051f6a3fa58e",
+        "d": true,
+        "name": "",
+        "radio": "c3844c787b1b0f62",
+        "x": 410,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cbe0b8d9b50904f",
+        "type": "switch",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "RAD/0/+13.8B",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 530,
+        "y": 540,
+        "wires": [
+            [
+                "0f9ca10a81f4fda8"
+            ]
+        ]
+    },
+    {
+        "id": "b3c43a045c3281dd",
+        "type": "inject",
+        "z": "7eec051f6a3fa58e",
+        "name": "sub meter RAD/334/+13.8A",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "sub meter RAD/334/+13.8A",
+        "payloadType": "str",
+        "x": 200,
+        "y": 380,
+        "wires": [
+            [
+                "8f74095ebce3e341"
+            ]
+        ]
+    },
+    {
+        "id": "096b665f926949a6",
+        "type": "ui_text",
+        "z": "7eec051f6a3fa58e",
+        "group": "e01b097f943953f0",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "Radio Input PowerA",
+        "label": "<font size = 5>Radio Input Power A",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 760,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "786f5fcc3d937a54",
+        "type": "switch",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "RAD/334/+13.8A",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 530,
+        "y": 600,
+        "wires": [
+            [
+                "096b665f926949a6"
+            ]
+        ]
+    },
+    {
+        "id": "84ea9e98df930b7f",
+        "type": "comment",
+        "z": "7eec051f6a3fa58e",
+        "name": "Flow to monitor 6600 input voltage",
+        "info": "",
+        "x": 160,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "8f74095ebce3e341",
+        "type": "gate",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "controlTopic": "radio-on",
+        "defaultState": "closed",
+        "openCmd": "true",
+        "closeCmd": "false",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 919,
+        "y": 262,
+        "wires": [
+            [
+                "305acba9d951e216"
+            ]
+        ]
+    },
+    {
+        "id": "04ffe43bc31d5727",
+        "type": "link in",
+        "z": "7eec051f6a3fa58e",
+        "name": "Radio On?",
+        "links": [],
+        "x": 555,
+        "y": 87,
+        "wires": [
+            [
+                "e8621e2dbf5f2ed0"
+            ]
+        ]
+    },
+    {
+        "id": "e8621e2dbf5f2ed0",
+        "type": "switch",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "property": "payload[0]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 645,
+        "y": 159,
+        "wires": [
+            [
+                "1844a1b19f75af26"
+            ],
+            [
+                "94c356687d63a051"
+            ]
+        ]
+    },
+    {
+        "id": "1844a1b19f75af26",
+        "type": "change",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "radio-on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 818,
+        "y": 176,
+        "wires": [
+            [
+                "8f74095ebce3e341"
+            ]
+        ]
+    },
+    {
+        "id": "13385b9dd3a145ca",
+        "type": "inject",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload[0]",
+                "v": "true",
+                "vt": "bool"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "radio-on",
+        "x": 472,
+        "y": 112,
+        "wires": [
+            [
+                "e8621e2dbf5f2ed0"
+            ]
+        ]
+    },
+    {
+        "id": "94c356687d63a051",
+        "type": "change",
+        "z": "7eec051f6a3fa58e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "radio-on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 758,
+        "y": 228,
+        "wires": [
+            [
+                "8f74095ebce3e341"
+            ]
+        ]
+    },
+    {
+        "id": "c3844c787b1b0f62",
+        "type": "flexradio-radio",
+        "name": "Test Discovery",
+        "host_mode": "automatic",
+        "nickname": "",
+        "host": "",
+        "port": "",
+        "station_name": "NodeRed",
+        "slice_mode": "headless",
+        "slice_name": "A",
+        "timeout": "15"
+    },
+    {
+        "id": "e01b097f943953f0",
+        "type": "ui_group",
+        "name": "6600 Group 3",
+        "tab": "549c889b2dd69333",
+        "order": 3,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "549c889b2dd69333",
+        "type": "ui_tab",
+        "name": "Flex Info",
+        "icon": "info",
+        "order": 8,
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -1,0 +1,359 @@
+[
+    {
+        "id": "fb5fb4ed7a69eaa5",
+        "type": "tab",
+        "label": "Cameras",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "92120ff48809c9e8",
+        "type": "ui_template",
+        "z": "fb5fb4ed7a69eaa5",
+        "group": "515128efdca524a9",
+        "name": "Four Square2-2",
+        "order": 5,
+        "width": "11",
+        "height": 7,
+        "format": "<iframe id=\"myIframe2\" width=\"640\" height=\"370\" src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=2&u=admin&p=\">\n</iframe>\n<script>\n    window.setInterval(\"reloadIFrame2();\",1200000);\nfunction reloadIFrame2() {\n document.getElementById(\"myIframe2\").src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=2&u=admin&p=\";\n}\n</script>\n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 700,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c0770bd0b4cbebb",
+        "type": "ui_template",
+        "z": "fb5fb4ed7a69eaa5",
+        "group": "515128efdca524a9",
+        "name": "Tower8-2",
+        "order": 3,
+        "width": 11,
+        "height": 7,
+        "format": "<iframe id=\"myIframe8\" width=\"640\" height=\"370\" src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=8&u=admin&p=\">\n</iframe>\n<script>\n    window.setInterval(\"reloadIFrame8();\",1200000);\nfunction reloadIFrame8() {\n document.getElementById(\"myIframe8\").src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=8&u=admin&p=\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 680,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d6470467084ea152",
+        "type": "comment",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "Camera tab ",
+        "info": "",
+        "x": 110,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "672b7197e8672ad7",
+        "type": "ui_template",
+        "z": "fb5fb4ed7a69eaa5",
+        "group": "515128efdca524a9",
+        "name": "Vault4-2-bkup-orig-speed",
+        "order": 2,
+        "width": 11,
+        "height": 7,
+        "format": "<iframe id=\"myIframe4\" width=\"640\" height=\"370\" src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=4&u=admin&p=\">\n</iframe>\n<script>\n    window.setInterval(\"reloadIFrame4();\",30000);\nfunction reloadIFrame4() {\n document.getElementById(\"myIframe4\").src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=4&u=admin&p=\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 813,
+        "y": 451,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c01cede538dd9ad4",
+        "type": "ui_template",
+        "z": "fb5fb4ed7a69eaa5",
+        "group": "bf4b03a04a63688f",
+        "name": "Satellite3-2",
+        "order": 6,
+        "width": 11,
+        "height": 7,
+        "format": "<iframe id=\"myIframe3\" width=\"640\" height=\"370\" src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=3&u=admin&p=\">\n</iframe>\n<script>\n    window.setInterval(\"reloadIFrame3();\",30000);\nfunction reloadIFrame3() {\n document.getElementById(\"myIframe3\").src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=3&u=admin&p=\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 910,
+        "y": 363,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f9883760f7739445",
+        "type": "ui_template",
+        "z": "fb5fb4ed7a69eaa5",
+        "group": "bf4b03a04a63688f",
+        "name": "Beam1-2",
+        "order": 4,
+        "width": 11,
+        "height": 7,
+        "format": "<iframe id=\"myIframe1\" width=\"640\" height=\"370\" src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=1&u=admin&p=\">\n</iframe>\n<script>\n    window.setInterval(\"reloadIFrame1();\",30000);\nfunction reloadIFrame1() {\n document.getElementById(\"myIframe1\").src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=1&u=admin&p=\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 870,
+        "y": 844,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c6d85a9025e369b5",
+        "type": "ui_template",
+        "z": "fb5fb4ed7a69eaa5",
+        "group": "515128efdca524a9",
+        "name": "Cont Front",
+        "order": 4,
+        "width": 11,
+        "height": 7,
+        "format": "<iframe id=\"myIframe8\" width=\"640\" height=\"370\" src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=5&u=admin&p=\">\n</iframe>\n<script>\n    window.setInterval(\"reloadIFrame8();\",1200000);\nfunction reloadIFrame8() {\n document.getElementById(\"myIframe8\").src=\"http://192.168.50.222/cgi-bin/snapshot.cgi?chn=8&u=admin&p=\";\n}\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 447,
+        "y": 164,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0fa3e08b0f5af289",
+        "type": "comment",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "This flow grabs single camera frames from the NVR - camera channel, user and password needs to be updated in the function code in each nnode",
+        "info": "",
+        "x": 530,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1c24362bb70feadf",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "f5466ef6816749b3",
+        "order": 15,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "15745af8b7b3105f",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "bf4b03a04a63688f",
+        "order": 7,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "c87e1a37763cf9c0",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "bf4b03a04a63688f",
+        "order": 8,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "ca5ff528e72389aa",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "bf4b03a04a63688f",
+        "order": 9,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "bc18aa1c587d5d07",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "bf4b03a04a63688f",
+        "order": 10,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "a65469431e29b077",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "bf4b03a04a63688f",
+        "order": 11,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "b4df8af8f12b4eef",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "bf4b03a04a63688f",
+        "order": 12,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "5dab446103454b21",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "bf4b03a04a63688f",
+        "order": 13,
+        "width": 11,
+        "height": 1
+    },
+    {
+        "id": "f5ca0cbc487bbdfa",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "523bf51a2d021096",
+        "order": 3,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "60faa984e4e44181",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "523bf51a2d021096",
+        "order": 4,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "5bddf33f3d6f57ce",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "523bf51a2d021096",
+        "order": 5,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "7e7370ad5bc983a2",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "523bf51a2d021096",
+        "order": 7,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "1c247eb27e33e329",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "523bf51a2d021096",
+        "order": 8,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "4bcd1ba9fc65aa7c",
+        "type": "ui_spacer",
+        "z": "fb5fb4ed7a69eaa5",
+        "name": "spacer",
+        "group": "523bf51a2d021096",
+        "order": 9,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "515128efdca524a9",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "292cb6c20af9f800",
+        "order": 2,
+        "disp": false,
+        "width": 22,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bf4b03a04a63688f",
+        "type": "ui_group",
+        "name": "Antennas",
+        "tab": "292cb6c20af9f800",
+        "order": 1,
+        "disp": false,
+        "width": "33",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f5466ef6816749b3",
+        "type": "ui_group",
+        "name": "RPi 4B",
+        "tab": "",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "523bf51a2d021096",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "b35a51ba4e1dee85",
+        "order": 4,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "292cb6c20af9f800",
+        "type": "ui_tab",
+        "name": "Cameras",
+        "icon": "info",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b35a51ba4e1dee85",
+        "type": "ui_tab",
+        "d": true,
+        "name": "VHF/UHF Station Control",
+        "icon": "radio",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    }
+]

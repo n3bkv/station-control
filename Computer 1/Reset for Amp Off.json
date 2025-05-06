@@ -1,0 +1,203 @@
+[
+    {
+        "id": "4d1ee414e829069b",
+        "type": "tab",
+        "label": "Reset for Amp Off",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "78354d38eacd1aee",
+        "type": "comment",
+        "z": "4d1ee414e829069b",
+        "name": "Flex to 100 watts - Amp Off",
+        "info": "",
+        "x": 220,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e1a63b4ac5098009",
+        "type": "function",
+        "z": "4d1ee414e829069b",
+        "name": "Initial C1|sub client all",
+        "func": "        var msg1,msg2\n        global.set(\"ClientConnected\",0)\n        msg.c1 = \"sub client all\";   \n        msg.c2 = \"sub slice all\";\n        msg.c3 = \"sub meter all\";\n        msg.c4 = \"sub tx all\";\n        msg1 = {payload:msg.c1};\n        msg2 = {payload:msg.c2};\n        msg3 = {payload:msg.c3};\n        msg4 = {payload:msg.c4};\n        node.send(msg1);\n        node.send(msg2);\n        node.send(msg3);\n        node.send(msg4);\n        node.done();\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 400,
+        "wires": [
+            [
+                "2bf9e8db8fd5cf10",
+                "d681786f5d0d594a"
+            ]
+        ]
+    },
+    {
+        "id": "2bf9e8db8fd5cf10",
+        "type": "function",
+        "z": "4d1ee414e829069b",
+        "name": "Tune Power",
+        "func": "\n\n\nmsg.payload = \"transmit s tunepower=15\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 110,
+        "y": 540,
+        "wires": [
+            [
+                "a361bd523ae4baf3",
+                "d681786f5d0d594a"
+            ]
+        ]
+    },
+    {
+        "id": "eec9a21d4b07b987",
+        "type": "function",
+        "z": "4d1ee414e829069b",
+        "name": "ATU On",
+        "func": "\n\n\nmsg.payload = \"atu start\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 540,
+        "wires": [
+            [
+                "d681786f5d0d594a"
+            ]
+        ]
+    },
+    {
+        "id": "6f4e55c9be72f12e",
+        "type": "delay",
+        "z": "4d1ee414e829069b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 540,
+        "wires": [
+            [
+                "eec9a21d4b07b987"
+            ]
+        ]
+    },
+    {
+        "id": "0cb1bc3c3ec13ace",
+        "type": "inject",
+        "z": "4d1ee414e829069b",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 60,
+        "y": 400,
+        "wires": [
+            [
+                "e1a63b4ac5098009"
+            ]
+        ]
+    },
+    {
+        "id": "a361bd523ae4baf3",
+        "type": "function",
+        "z": "4d1ee414e829069b",
+        "name": "RF Power",
+        "func": "\n\n\nmsg.payload = \"transmit s rfpower=100\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 540,
+        "wires": [
+            [
+                "6f4e55c9be72f12e",
+                "d681786f5d0d594a"
+            ]
+        ]
+    },
+    {
+        "id": "d681786f5d0d594a",
+        "type": "flexradio-request",
+        "z": "4d1ee414e829069b",
+        "name": "",
+        "radio": "cc7930ab90601f69",
+        "x": 630,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c567c2d2a37b04f",
+        "type": "link in",
+        "z": "4d1ee414e829069b",
+        "name": "link in 854",
+        "links": [],
+        "x": 85,
+        "y": 360,
+        "wires": [
+            [
+                "e1a63b4ac5098009"
+            ]
+        ]
+    },
+    {
+        "id": "4c3fb4cff7e3ac07",
+        "type": "comment",
+        "z": "4d1ee414e829069b",
+        "name": "Reset Flex parameters when HF amp is turned off",
+        "info": "",
+        "x": 190,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "cc7930ab90601f69",
+        "type": "flexradio-radio",
+        "name": "",
+        "host_mode": "automatic",
+        "nickname": "",
+        "host": "",
+        "port": "",
+        "station_name": "NodeRed",
+        "slice_mode": "headless",
+        "slice_name": "A",
+        "timeout": ""
+    }
+]

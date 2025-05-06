@@ -1,0 +1,295 @@
+[
+    {
+        "id": "78cb30b67e5daab9",
+        "type": "tab",
+        "label": "Host Monitor",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "12e9ef250936d00a",
+        "type": "ping",
+        "z": "78cb30b67e5daab9",
+        "mode": "timed",
+        "name": "Internet",
+        "host": "1.1.1.1",
+        "timer": "60",
+        "inputs": 0,
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "a14d3950c03dd056"
+            ]
+        ]
+    },
+    {
+        "id": "a14d3950c03dd056",
+        "type": "smooth",
+        "z": "78cb30b67e5daab9",
+        "name": "",
+        "property": "payload",
+        "action": "mean",
+        "count": "1",
+        "round": "1",
+        "mult": "single",
+        "x": 280,
+        "y": 320,
+        "wires": [
+            [
+                "6b903a6f977021af",
+                "f41eb815dc61df7d"
+            ]
+        ]
+    },
+    {
+        "id": "8e6d2f6877daa097",
+        "type": "comment",
+        "z": "78cb30b67e5daab9",
+        "name": "Flow to monitor 6600 and Internet status",
+        "info": "",
+        "x": 240,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6b903a6f977021af",
+        "type": "delay",
+        "z": "78cb30b67e5daab9",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "6913b65a0d4d034e"
+            ]
+        ]
+    },
+    {
+        "id": "401b0601a5dd37ee",
+        "type": "file",
+        "z": "78cb30b67e5daab9",
+        "name": "",
+        "filename": "\\Users\\Remote\\.node-red\\logs\\inet_grph_24.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1000,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "33c1187f9370b3eb",
+        "type": "json",
+        "z": "78cb30b67e5daab9",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 835.0000114440918,
+        "y": 501.25000762939453,
+        "wires": [
+            [
+                "6913b65a0d4d034e"
+            ]
+        ]
+    },
+    {
+        "id": "c6acd411c76f3568",
+        "type": "file in",
+        "z": "78cb30b67e5daab9",
+        "name": "",
+        "filename": "\\Users\\Remote\\.node-red\\logs\\inet_grph_24.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 500,
+        "y": 500,
+        "wires": [
+            [
+                "33c1187f9370b3eb"
+            ]
+        ]
+    },
+    {
+        "id": "20f356d7bd971d43",
+        "type": "inject",
+        "z": "78cb30b67e5daab9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 500,
+        "wires": [
+            [
+                "c6acd411c76f3568"
+            ]
+        ]
+    },
+    {
+        "id": "6913b65a0d4d034e",
+        "type": "ui_chart",
+        "z": "78cb30b67e5daab9",
+        "name": "",
+        "group": "3eaa688bb6e4c063",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "label": "Internet",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 640,
+        "y": 340,
+        "wires": [
+            [
+                "401b0601a5dd37ee"
+            ]
+        ]
+    },
+    {
+        "id": "f41eb815dc61df7d",
+        "type": "influxdb out",
+        "z": "78cb30b67e5daab9",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Internet Ping",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 540,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5fb2ce55125630e0",
+        "type": "comment",
+        "z": "78cb30b67e5daab9",
+        "name": "Example",
+        "info": "",
+        "x": 500,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4f9a57c03ba40434",
+        "type": "ui_spacer",
+        "z": "78cb30b67e5daab9",
+        "name": "spacer",
+        "group": "848b625bba258cc5",
+        "order": 1,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "3eaa688bb6e4c063",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "6f2586bb65b2193a",
+        "order": 2,
+        "disp": false,
+        "width": 4,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "88b69e91096da659",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "Org",
+        "name": "InfluxDB Server",
+        "usetls": false,
+        "tls": "c1307d285c9ead74",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "6f2586bb65b2193a",
+        "type": "ui_tab",
+        "name": "Master Status Graphs",
+        "icon": "show_chart",
+        "order": 12,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c1307d285c9ead74",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    }
+]

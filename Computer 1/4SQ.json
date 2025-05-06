@@ -1,0 +1,274 @@
+[
+    {
+        "id": "9625a4f1cc121c22",
+        "type": "tab",
+        "label": "4square",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0b6027842e0d3df9",
+        "type": "delay",
+        "z": "9625a4f1cc121c22",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 880,
+        "y": 340,
+        "wires": [
+            [
+                "6ea4fbb6348ccb8c"
+            ]
+        ]
+    },
+    {
+        "id": "ca6e3d887bfa7c48",
+        "type": "ui_iframe",
+        "z": "9625a4f1cc121c22",
+        "group": "7acc588e0777f53b",
+        "name": "Four Square",
+        "order": 7,
+        "width": 6,
+        "height": "11",
+        "url": "http://192.168.50.32",
+        "origin": "*",
+        "scale": "80",
+        "x": 230,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ea4fbb6348ccb8c",
+        "type": "change",
+        "z": "9625a4f1cc121c22",
+        "name": "Modbus Arduino  On Change",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"value\":true, \"fc\":5, \"unitid\":35, \"address\":0, \"quantity\":1}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 420,
+        "wires": [
+            [
+                "209ef67371eb331b"
+            ]
+        ]
+    },
+    {
+        "id": "209ef67371eb331b",
+        "type": "modbus-flex-write",
+        "z": "9625a4f1cc121c22",
+        "name": "Modbus Arduino  On Flexwrite",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "server": "98127314061510b9",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1410,
+        "y": 420,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "83e1aba0c94b326c",
+        "type": "change",
+        "z": "9625a4f1cc121c22",
+        "name": "Modbus Arduino Off Change",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"value\":false, \"fc\":5, \"unitid\":35, \"address\":0, \"quantity\":1}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 480,
+        "wires": [
+            [
+                "2e6ffacbc1d1aa07"
+            ]
+        ]
+    },
+    {
+        "id": "2e6ffacbc1d1aa07",
+        "type": "modbus-flex-write",
+        "z": "9625a4f1cc121c22",
+        "name": "Modbus Arduino  Off Flexwrite",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "server": "98127314061510b9",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 770,
+        "y": 480,
+        "wires": [
+            [
+                "0b6027842e0d3df9"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f6a8f523a2551403",
+        "type": "change",
+        "z": "9625a4f1cc121c22",
+        "name": "Modbus Arduino  On Change",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"value\":true, \"fc\":5, \"unitid\":35, \"address\":0, \"quantity\":1}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 463,
+        "y": 157,
+        "wires": [
+            [
+                "6960b78657a19803"
+            ]
+        ]
+    },
+    {
+        "id": "6960b78657a19803",
+        "type": "modbus-flex-write",
+        "z": "9625a4f1cc121c22",
+        "name": "Modbus Arduino  On Flexwrite",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "server": "98127314061510b9",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": true,
+        "startDelayTime": "2",
+        "x": 930,
+        "y": 154,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "df6fd76a102822bc",
+        "type": "inject",
+        "z": "9625a4f1cc121c22",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 232,
+        "y": 161,
+        "wires": [
+            [
+                "f6a8f523a2551403"
+            ]
+        ]
+    },
+    {
+        "id": "7acc588e0777f53b",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "d3fd3a03eeca216a",
+        "order": 7,
+        "disp": false,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "98127314061510b9",
+        "type": "modbus-client",
+        "name": "Arduino - Modbus 35",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.50.35",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 35,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "d3fd3a03eeca216a",
+        "type": "ui_tab",
+        "name": "HF Station Control",
+        "icon": "radio",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -1,0 +1,369 @@
+[
+    {
+        "id": "5bac2846939de96b",
+        "type": "tab",
+        "label": "4 Square Monitor Activate",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7f8a554ba4e2db28",
+        "type": "switch",
+        "z": "5bac2846939de96b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 259,
+        "y": 482,
+        "wires": [
+            [
+                "c685cb345071cd97"
+            ],
+            [
+                "c9902bc007dbfdaa"
+            ]
+        ]
+    },
+    {
+        "id": "c685cb345071cd97",
+        "type": "change",
+        "z": "5bac2846939de96b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "flowStatus",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "4square",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 481,
+        "wires": [
+            [
+                "6b722e49ea207f41"
+            ]
+        ]
+    },
+    {
+        "id": "6b722e49ea207f41",
+        "type": "http request",
+        "z": "5bac2846939de96b",
+        "name": "Get flows",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flows",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 773,
+        "y": 482,
+        "wires": [
+            [
+                "7f28ec3214a4da41"
+            ]
+        ]
+    },
+    {
+        "id": "7f28ec3214a4da41",
+        "type": "change",
+        "z": "5bac2846939de96b",
+        "name": "get flowId by name",
+        "rules": [
+            {
+                "t": "set",
+                "p": "flowId",
+                "pt": "msg",
+                "to": "*[type = 'tab' and label = $$.topic].id",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1001,
+        "y": 480,
+        "wires": [
+            [
+                "67f78ad6dc254b0e"
+            ]
+        ]
+    },
+    {
+        "id": "67f78ad6dc254b0e",
+        "type": "http request",
+        "z": "5bac2846939de96b",
+        "name": "Get single flow",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flow/{{flowId}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1209,
+        "y": 482,
+        "wires": [
+            [
+                "3758a479b29d0bd3"
+            ]
+        ]
+    },
+    {
+        "id": "3758a479b29d0bd3",
+        "type": "change",
+        "z": "5bac2846939de96b",
+        "name": "Enable_4_Square_Start",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.disabled",
+                "pt": "msg",
+                "to": "flowStatus",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1439,
+        "y": 482,
+        "wires": [
+            [
+                "8b5da87465292cd0"
+            ]
+        ]
+    },
+    {
+        "id": "8b5da87465292cd0",
+        "type": "http request",
+        "z": "5bac2846939de96b",
+        "name": "Update flow",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flow/{{payload.id}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1679,
+        "y": 482,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9902bc007dbfdaa",
+        "type": "change",
+        "z": "5bac2846939de96b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "flowStatus",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "4square",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 267,
+        "y": 643,
+        "wires": [
+            [
+                "1968208bc750aeb5"
+            ]
+        ]
+    },
+    {
+        "id": "1968208bc750aeb5",
+        "type": "http request",
+        "z": "5bac2846939de96b",
+        "name": "Get flows",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flows",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 489,
+        "y": 582,
+        "wires": [
+            [
+                "479bede0da20f923"
+            ]
+        ]
+    },
+    {
+        "id": "479bede0da20f923",
+        "type": "change",
+        "z": "5bac2846939de96b",
+        "name": "get flowId by name",
+        "rules": [
+            {
+                "t": "set",
+                "p": "flowId",
+                "pt": "msg",
+                "to": "*[type = 'tab' and label = $$.topic].id",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 759,
+        "y": 582,
+        "wires": [
+            [
+                "c1e41d496c5946ab"
+            ]
+        ]
+    },
+    {
+        "id": "c1e41d496c5946ab",
+        "type": "http request",
+        "z": "5bac2846939de96b",
+        "name": "Get single flow",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flow/{{flowId}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1069,
+        "y": 582,
+        "wires": [
+            [
+                "3938dd6c874840d4"
+            ]
+        ]
+    },
+    {
+        "id": "3938dd6c874840d4",
+        "type": "change",
+        "z": "5bac2846939de96b",
+        "name": "Disable 4 Square",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.disabled",
+                "pt": "msg",
+                "to": "flowStatus",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1359,
+        "y": 582,
+        "wires": [
+            [
+                "e87e9e2813b0428c"
+            ]
+        ]
+    },
+    {
+        "id": "e87e9e2813b0428c",
+        "type": "http request",
+        "z": "5bac2846939de96b",
+        "name": "Update flow",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flow/{{payload.id}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1659,
+        "y": 582,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53d3f02e453890e3",
+        "type": "link in",
+        "z": "5bac2846939de96b",
+        "name": "4 sq monitor switch out",
+        "links": [],
+        "x": 694,
+        "y": 185,
+        "wires": [
+            [
+                "7f8a554ba4e2db28"
+            ]
+        ]
+    }
+]

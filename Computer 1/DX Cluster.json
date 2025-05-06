@@ -1,0 +1,3972 @@
+[
+    {
+        "id": "b396cf1d960f03d3",
+        "type": "tab",
+        "label": "DX Cluster & Map",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "385bba3fbdf53001",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1800",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 270,
+        "y": 560,
+        "wires": [
+            [
+                "6ff53cd7ac972251"
+            ]
+        ]
+    },
+    {
+        "id": "e0ee09013056143d",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "send login",
+        "func": "var call = \"Your Call\";\nmsg.payload = call + \"\\r\\n\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 400,
+        "wires": [
+            [
+                "fda93cfa6411b7b3",
+                "547511e3c4ee87b9"
+            ]
+        ]
+    },
+    {
+        "id": "5f4fdf5e46c293dc",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "UTF8",
+        "func": "msg.payload=msg.payload.toString('UTF8');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1550,
+        "y": 440,
+        "wires": [
+            [
+                "2c57384b760c25d9",
+                "d42f8899c9b2bc4d",
+                "af2ed0be9243a15c",
+                "7bae39faa10a485f"
+            ]
+        ]
+    },
+    {
+        "id": "80be13bcb3f55272",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Parse Fields for Table",
+        "func": "let spot = msg.payload\nlet freq = spot.substr(17,8);\nlet call = spot.substr(26,12);\ncall_raw = call\ncall = \"<a target = '_new' href='http://www.qrz.com/lookup/\" + call + \"'>\" + call\nlet comment = spot.substr(39,30);\nlet time = spot.substr(70,5);\nlet end = spot.indexOf(\":\");\nlet from = spot.slice(6,end);\n\nmsg = {\"payload\":{\n    \"command\":\"addData\",\n    \"arguments\":[\n        {\n            freq:freq,call:call,comment:comment,from:from,time:time\n        },\n        true\n    ],\n    \"returnPromise\":true\n    }\n};\n\nmsg1 = {}\nmsg1.freq = freq.trim()\nmsg1.call = call_raw.trim()\nmsg1.time = time.trim()\nmsg1.comment = comment\nmsg1.spotter = from\n\nmsg3={}\nmsg3.payload = call;\n\n\nreturn [msg,msg1,msg3]\n// Check if the message contains the necessary data\nif (msg.hasOwnProperty('payload') &&\n    msg.payload.hasOwnProperty('freq') &&\n    msg.payload.hasOwnProperty('call') &&\n    msg.payload.hasOwnProperty('time') &&\n    msg.payload.hasOwnProperty('comment') &&\n    msg.payload.hasOwnProperty('spotter')) {\n\n    // Initialize the global array if it doesn't exist\n    if (!global.get('dataArray')) {\n        global.set('dataArray', []);\n    }\n\n    // Create a new object from the message payload\n    let newData = {\n        freq: msg.payload.freq,\n        call: msg.payload.call,\n        time: msg.payload.time,\n        comment: msg.payload.comment,\n        spotter: msg.payload.spotter\n    };\n}\n\n",
+        "outputs": 3,
+        "noerr": 6,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2080,
+        "y": 320,
+        "wires": [
+            [
+                "f56d7f3e2472b160",
+                "a87433e6a1e9e49b"
+            ],
+            [
+                "4e748b3d42a5393d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2c57384b760c25d9",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "DX de ",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "valid",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1690,
+        "y": 340,
+        "wires": [
+            [
+                "80be13bcb3f55272"
+            ],
+            [
+                "330adc9c2a9972d5"
+            ]
+        ]
+    },
+    {
+        "id": "f8da7eb50199a63a",
+        "type": "delay",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 660,
+        "y": 400,
+        "wires": [
+            [
+                "e0ee09013056143d"
+            ]
+        ]
+    },
+    {
+        "id": "6ff53cd7ac972251",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "send cr lf",
+        "func": "msg.payload=\"test\\r\\n\"; // to keep telnet node happy?\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 540,
+        "wires": [
+            [
+                "fda93cfa6411b7b3",
+                "f8da7eb50199a63a"
+            ]
+        ]
+    },
+    {
+        "id": "d42f8899c9b2bc4d",
+        "type": "ui_text",
+        "z": "b396cf1d960f03d3",
+        "group": "9a203307d35be521",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Last Cluster Message Received",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1970,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a2dec89c196c1983",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "func": "msg.payload = \"Set Dx Filter Cont= [AF,AS,EU,OC,SA] and SpotterState=[CA,OR,WA,NV,ID,UT,AZ,NM,CO]  and Freq < 30000 and not skimmer\\n\"\nmsg.color1 = \"grey\"\nmsg.color2 = \"grey\"\nmsg.color3 = \"green\"\nmsg.color4 = \"grey\"\nmsg.color5 = \"grey\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 880,
+        "y": 180,
+        "wires": [
+            [
+                "27fc33e8f4085c46",
+                "fda93cfa6411b7b3"
+            ]
+        ]
+    },
+    {
+        "id": "f5f0b92483f42369",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "func": "msg.payload = \"Set Dx Filter Cont= [AF,AS,EU,OC,SA] and Freq < 30000 and spottercty=k and not skimmer\\n\"\nmsg.color1 = \"grey\"\nmsg.color2 = \"green\"\nmsg.color3 = \"grey\"\nmsg.color4 = \"grey\"\nmsg.color5 = \"grey\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 880,
+        "y": 140,
+        "wires": [
+            [
+                "fda93cfa6411b7b3",
+                "27fc33e8f4085c46"
+            ]
+        ]
+    },
+    {
+        "id": "37e6c3db0908699e",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "func": "msg.payload = \"Set Dx Filter Cont= [AF,AS,EU,OC,SA] and spottercty=k and Freq < 30000\\n\"\nmsg.color1 = \"green\"\nmsg.color2 = \"grey\"\nmsg.color3 = \"grey\"\nmsg.color4 = \"grey\"\nmsg.color5 = \"grey\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 880,
+        "y": 100,
+        "wires": [
+            [
+                "27fc33e8f4085c46",
+                "fda93cfa6411b7b3"
+            ]
+        ]
+    },
+    {
+        "id": "27fc33e8f4085c46",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Set Color",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 380,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "91b872485979a08c",
+        "type": "ui_toast",
+        "z": "b396cf1d960f03d3",
+        "position": "bottom left",
+        "displayTime": "5",
+        "highlight": "red",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Display Msg",
+        "x": 2210,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "330adc9c2a9972d5",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Display No Activiity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "s_time",
+                "pt": "msg",
+                "to": "s_time",
+                "tot": "global"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "\"No Activity for 4hrs @ \" & $.s_time",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1970,
+        "y": 380,
+        "wires": [
+            [
+                "91b872485979a08c"
+            ]
+        ]
+    },
+    {
+        "id": "a657626b44cd014f",
+        "type": "ui_template",
+        "z": "b396cf1d960f03d3",
+        "d": true,
+        "group": "",
+        "name": "css",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n/* unvisited link */\na:link {\n  color: white;\n    text-decoration: none;\n    vertical-align: bottom;\n}\n\n/* visited link */\na:visited {\n  color: white;\n    text-decoration: none;\n    vertical-align: bottom;    \n}\n\n/* mouse over link */\na:hover {\n  color: white;\n    text-decoration: none;\n        vertical-align: bottom;\n}\n\n/* selected link */\na:active {\n  color: white;\n    text-decoration: none;\n        vertical-align: bottom;\n}\n\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "global",
+        "className": "",
+        "x": 1570,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d5240f72153c21e",
+        "type": "ui_text",
+        "z": "b396cf1d960f03d3",
+        "d": true,
+        "group": "9a203307d35be521",
+        "order": 7,
+        "width": 3,
+        "height": 1,
+        "name": "Time",
+        "label": "UTC: ",
+        "format": "<font color=#66ff66\">{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1730,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "240b7e6ad87f9aa7",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1390,
+        "y": 180,
+        "wires": [
+            [
+                "cc545d5980a710dc"
+            ]
+        ]
+    },
+    {
+        "id": "cc545d5980a710dc",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Time",
+        "func": "// save time for general use\n// save EVSE time format\n\nvar d = new Date();\nvar t = d.getTime();\nvar h = d.getUTCHours();\nvar m = d.getUTCMinutes();\nvar s = d.getUTCSeconds();\nvar dow = d.getUTCDay();   //0-6\nvar mth = d.getUTCMonth(); //0-11\n\nvar tm = {}\nvar time = global.get('time')||\"\";\nif (h <= 9) {\n    h = \"0\" + h;\n}\nif (m <= 9) {\n    m = \"0\" + m;\n}\nif (s <= 9) {\n    s = \"0\" + s;\n}\ntm = h + \":\" + m + \":\" + s;\n//global.set('time',tm);\nmsg.payload = h + \":\" + m + \":\" + s;\n\n//s_time = h + \":\" + m;\n//global.set('s_time',s_time);\n\n//global.set('hour',h);   // save hour for TOD filtering in functions\n//global.set('minutes',m);\n//global.set('seconds',s);\n//global.set('month',mth);\n\n//var EVSE_time = {}\n//EVSE_time = \"19 01 01 \" + h + \" \" + m + \" \" + s; \n//global.set('EVSE_time',EVSE_time);\n\nreturn [msg];\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1570,
+        "y": 180,
+        "wires": [
+            [
+                "8d5240f72153c21e"
+            ]
+        ]
+    },
+    {
+        "id": "7c140fa434bc65ed",
+        "type": "ui_button",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "group": "9a203307d35be521",
+        "order": 4,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "label": "CLR",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "x": 1630,
+        "y": 260,
+        "wires": [
+            [
+                "fa3c3d78e8533294",
+                "b05b544a9ea50106",
+                "949cf00a18674b93",
+                "e14b7d6aaa62fbec"
+            ]
+        ]
+    },
+    {
+        "id": "fa3c3d78e8533294",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Clear Display",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1960,
+        "y": 260,
+        "wires": [
+            [
+                "f56d7f3e2472b160"
+            ]
+        ]
+    },
+    {
+        "id": "af2ed0be9243a15c",
+        "type": "trigger",
+        "z": "b396cf1d960f03d3",
+        "name": "No Activity Alert",
+        "op1": "",
+        "op2": "true",
+        "op1type": "nul",
+        "op2type": "bool",
+        "duration": "4",
+        "extend": true,
+        "units": "hr",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1720,
+        "y": 380,
+        "wires": [
+            [
+                "330adc9c2a9972d5"
+            ]
+        ]
+    },
+    {
+        "id": "547511e3c4ee87b9",
+        "type": "debug",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1490,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "fda93cfa6411b7b3",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "host",
+                "pt": "msg",
+                "to": "w6cua.no-ip.org",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "port",
+                "pt": "msg",
+                "to": "7300",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 420,
+        "wires": [
+            [
+                "b86dc4cc4041fca1",
+                "547511e3c4ee87b9"
+            ]
+        ]
+    },
+    {
+        "id": "1e3b0b683e2ef385",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "func": "msg.payload = \"Set Dx Filter Cont= [AF,AS,EU,OC,SA] and SpotterState=[CA,OR,WA,NV,ID,UT,AZ,NM,CO] and Freq < 30000\\n\"\nmsg.color1 = \"grey\"\nmsg.color2 = \"grey\"\nmsg.color3 = \"grey\"\nmsg.color4 = \"green\"\nmsg.color5 = \"grey\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 880,
+        "y": 220,
+        "wires": [
+            [
+                "27fc33e8f4085c46",
+                "fda93cfa6411b7b3"
+            ]
+        ]
+    },
+    {
+        "id": "9b1cbc70fd167750",
+        "type": "link out",
+        "z": "b396cf1d960f03d3",
+        "name": "spot data",
+        "links": [
+            "2a90c108635d6642"
+        ],
+        "x": 2465,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b05b544a9ea50106",
+        "type": "link out",
+        "z": "b396cf1d960f03d3",
+        "d": true,
+        "name": "clear spots",
+        "mode": "link",
+        "links": [],
+        "x": 1745,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "29150537f6279553",
+        "type": "ui_template",
+        "z": "b396cf1d960f03d3",
+        "d": true,
+        "group": "369184bc4925de6f",
+        "name": "Master style override",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\nbody.nr-dashboard-theme {\n background-color: #333333;\n font-family: Calibri;\n}\nbutton { \n  width: 50px; \n  color: #d0d0d0;\n  /*box-shadow: 2px 2px 2px rgba(0,0, 0, 0.4);*/\n  /*border-radius: 1px;*/\n  /*transform: scale(1.0);*/\n  background-color: #707070;\n  background-image: linear-gradient(to bottom right, #8a8a8a6e, #00000070);\n\n}\nbutton, html, input, select, textarea {\n font-family: Calibri;\n}\nbody.nr-dashboard-theme md-content md-card {\n /*background-color: #33333300;*/\n color: #d0d0d0;\n}\n\n/* Set header background style */\nbody.remove.nr-dashboard-theme md-toolbar {\n background-image: linear-gradient(to right,#8a8a8a6e, #00000070);\n box-shadow: 0px 1px 20px #0000008a;\n}\n/* Set groups background style */\n.remove.nr-dashboard-theme ui-card-panel {\n background-image: linear-gradient(to bottom right, #8a8a8a6e, #00000070);\n border: 1px solid #555555;\n box-shadow: 0 0 20px #00000066;\n}\n\n/* Set group titles text */\n.nr-dashboard-theme ui-card-panel p.nr-dashboard-cardtitle {\n color: #2eb82e;\n text-shadow: 0 0 2px black;\n}\n\n.nr-dashboard-theme .nr-dashboard-form-button {\n background-image: linear-gradient(to bottom right,  #8a8a8a6e, #00000070);\n background-color: #00ad03;\n color: #d0d0d0;\n text-shadow: 0 0 2px #525252;\n border-radius:6px;\n}\n\n.nr-dashboard-theme .nr-dashboard-button .md-button {\n background-image: linear-gradient(to bottom right,  #8a8a8a6e, #00000070);\n background-color: #707070;\n color: #d0d0d0;\n text-shadow: 0 0 2px #525252;\n border-radius:6px;\n}\n.nr-dashboard-theme .nr-dashboard-button .md-button:hover {\n background-color: #00de00;\n}\n\n.nr-dashboard-theme .nr-dashboard-switch md-switch .md-thumb {\n background-image: linear-gradient(to bottom right, #8a8a8a6e, #00000070);\n}\n.nr-dashboard-button .md-button {\n box-shadow: 0 1px 3px 0 rgba(0,0,0,.26)!important;\n width: 100%!important;\n height: 100%!important;\n margin: 0!important;\n min-width: 0!important;\n min-height: 0!important;\n}\n.nr-dashboard-theme .nr-dashboard-slider .md-thumb:after {\n background-image: linear-gradient(to bottom right, #8a8a8a6e, #00000070);\n border-style: none;\n}\n.nr-dashboard-theme .nr-dashboard-numeric .value {\n background-color: #33333300;\n color:#d0d0d0;\n}\n\n.nr-dashboard-numeric .value {\n font-weight: 700;\n text-align: center;\n border: 0;\n}\n\n\n.nr-dashboard-form {\n display: inline-block;\n width: 100%;\n overflow-y: visible;\n}\n#SETTINGS_TEATED_cards {\n min-height: 260px;\n}\n\n\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "global",
+        "className": "",
+        "x": 1180,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cdf145a375f63332",
+        "type": "ui_template",
+        "z": "b396cf1d960f03d3",
+        "d": true,
+        "group": "",
+        "name": "button template",
+        "order": 10,
+        "width": 8,
+        "height": 6,
+        "format": "<style>\n  .filled { \n      height: 100% !important;\n\n      padding: 0 !important;\n      margin: 0 !important;\n\n  }\n  .nr-dashboard-template {\n      padding: 0;\n      margin: 0;\n\n  }\n  \n  .rounded {\n  border-radius: 12px 12px 12px 12px;\n\n}\n \n   .bigfont {\n  font-size: 18px;\n  color: white;\n}\n\n   .smallfont {\n  font-size: 12px;\n  color: white;\n}\n  \n</style>\n\n<script>\n$('.vibrate').on('click', function() {\n  navigator.vibrate(100);\n});\n\nfunction restore_bg(x) {\n            $(this).css(\"background-color\", x);\n    };\n\n$('.touched').on('mousedown', function() {\n    \n    var x= $(this).css(\"background-color\");\n    $(this).css(\"background-color\", \"yellow\");\n    \n    setTimeout(restore_bg.bind(this,x),100);\n    navigator.vibrate(80);\n    });\n    \n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "global",
+        "className": "",
+        "x": 1400,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3bed88dd9ffe6a18",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Time",
+        "func": "// save time for general use\n// save EVSE time format\n\nvar d = new Date();\nvar h = d.getUTCHours();\nvar m = d.getUTCMinutes();\nvar s = d.getUTCSeconds();\n\nvar tm = {}\nvar time = global.get('time')||\"\";\nif (h <= 9) {\n    h = \"0\" + h;\n}\nif (m <= 9) {\n    m = \"0\" + m;\n}\nif (s <= 9) {\n    s = \"0\" + s;\n}\ntm = h + \":\" + m + \":\" + s;\nglobal.set('time',tm);\n\ns_time = h + \":\" + m;\nglobal.set('s_time',s_time);\n\nreturn;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 900,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7f53ab6388da1ae6",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "1 minute",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 730,
+        "y": 580,
+        "wires": [
+            [
+                "3bed88dd9ffe6a18"
+            ]
+        ]
+    },
+    {
+        "id": "53e17b5ac21a46ec",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Format for map",
+        "func": "call = msg.call;\nlat = parseFloat(msg.lat);\nlon = parseFloat(msg.lon);\ntime = flow.get('time')||\"00:00\";\nheading = flow.get('heading')||90;\nfreq = flow.get('freq')||14000;\nfreq = freq / 1000\nfreq = freq.toFixed(3)\nurl = {\"name\":\"QRZ Lookup\", \"url\":\"http://qrz.com/db/\" + call, \"target\":\"_new\"},\n//url = {\"name\":\"Goto Freq\", \"url\":\"http://10.0.1.20:1880/freq/\" + freq, \"target\":\"_none\"}\nmsg.payload = {\n    \"layer\": \"spots\",\n    \"name\": call + \"-\" + freq + \"->\" + heading,\n    \"lat\": lat, \n    \"lon\": lon , \n    \"icon\":\"fa-circle fa-sm\",  // change font-awsome icon here\n    \"weblink\": url,\n    \"contextmenu\": freq, \n    \"tooltip\": \"<br>\" + call + \" \" + freq + \" >\" + heading + \"&#730; \" + time + \"hrs\",\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 1060,
+        "wires": [
+            [
+                "31ed572ba7468a56"
+            ]
+        ]
+    },
+    {
+        "id": "e93186f5e28c083a",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "format lookup",
+        "func": "callsign = msg.payload\nsession_id = flow.get('session_id');\nmsg.url = \"http://xmldata.qrz.com/xml/current/?s=\" + session_id + \";callsign=\" + callsign\nmsg.color = \"dodgerblue\";\nmsg.degree = \"<font size=3>Searching...\";\nflow.set('call',callsign);\nreturn [msg];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 560,
+        "y": 1060,
+        "wires": [
+            [
+                "af56d46b1c4bbd75"
+            ]
+        ]
+    },
+    {
+        "id": "af56d46b1c4bbd75",
+        "type": "http request",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "authType": "",
+        "x": 750,
+        "y": 1060,
+        "wires": [
+            [
+                "457c38d6f4f9f3dc",
+                "4b4c9a05b2071239"
+            ]
+        ]
+    },
+    {
+        "id": "457c38d6f4f9f3dc",
+        "type": "xml",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 910,
+        "y": 1060,
+        "wires": [
+            [
+                "4d3c7aaa3d77c891",
+                "fbcef7439ebad33f"
+            ]
+        ]
+    },
+    {
+        "id": "fbcef7439ebad33f",
+        "type": "debug",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "4d3c7aaa3d77c891",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Calc Heading",
+        "func": "if(msg.topic == \"Manual\"){  // if manual entered heading, just send it out.\n    msg.color = \"#27ae60\";\n    msg.degree =  \"<font color=#FFFFFF size=4>\" + msg.payload + \"&#176;\"\n    flow.set('heading',msg.payload);\n    return msg;\n}\ndata = msg.payload.QRZDatabase;\nmsg1 = {}\nif(data.Session[0].Error){          // error returned\n    msg.degree = data.Session[0].Error[0];\n    if(msg.degree == \"Invalid session key\"){  // if invalid key, trigger resend\n        msg.degree = \"<font color=#ffffff size=2>Bad Key\";\n        msg.color = \"dodgerblue\";\n        msg.payload = \"\"\n        msg1.payload = true;\n        return [msg,msg1]\n    }else if(msg.degree ==  \"Session Timeout\"){  // if timeout trigger resend\n        msg.degree = \"<font color=#ffffff size=2>Please Wait\";\n        msg.color = \"dodgerblue\";\n        msg.payload = \"\"\n        msg1.payload = true;\n        return [msg,msg1]    \n        \n    }else{                           //if no known error, get and send error\n        pos = msg.degree.indexOf(\":\")\n        msg.degree = \"<font color=#ffffff size=2>\" + msg.degree.slice(0,pos)\n        msg.payload = \"\"\n        msg.color = \"#ff0000\"\n        return [msg,null];\n    }    \n}\n\ncall = data.Callsign[0].call[0];\nmsg.call = call;\n\n//get lat/lon from data\nlat2 = parseFloat(data.Callsign[0].lat[0]);\nlat2 = lat2.toFixed(3);\nmsg.lat = lat2\n\nlng2 = parseFloat(data.Callsign[0].lon[0]);\nlng2 = lng2.toFixed(3);\nmsg.lon = lng2\n\n//get grid square from data\ngridsq = data.Callsign[0].grid[0];\ngridsq = gridsq.slice(0,4);\nflow.set('gridsq',gridsq);\nmsg.gridsq = gridsq;\n\n// calc bearing from lat/Lon\nmsg.payload = bear(lat2,lng2);\nmsg.payload = msg.payload.toFixed(0);\nif(msg.payload < 0){\n    msg.payload = 360 + parseFloat(msg.payload);\n}\nmsg.color = \"#27ae60\";\nmsg.degree =  \"<font color=#FFFFFF size=4>\" + msg.payload + \"&#176;\"\n\nflow.set('heading',msg.payload);\n\nreturn [msg,null];\n\nfunction bear(lat1,lng2){\n    lat1 = 37.589;\n    lng1 = -122.483;\n\n    dLon = (lng2-lng1);\n    \n    x = Math.sin(deg_rad(dLon)) * Math.cos(deg_rad(lat2));\n    y = (Math.cos(deg_rad(lat1)) * Math.sin(deg_rad(lat2))) - (Math.sin(deg_rad(lat1)) * Math.cos(deg_rad(lat2)) * Math.cos(deg_rad(dLon)));\n    bearing = rad_deg((Math.atan2(x, y)));\n    return bearing;\n}\nfunction deg_rad(deg){\n    rad = 0\n    rad = (deg * 3.14159) / 180\n    return rad\n}\n\nfunction rad_deg(radns){\n    Degr = 0\n    Degr = (radns * 180) / 3.14159\n    return Degr;\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1100,
+        "y": 1060,
+        "wires": [
+            [
+                "53e17b5ac21a46ec"
+            ],
+            [
+                "d37177f1d2cdf3e7"
+            ]
+        ]
+    },
+    {
+        "id": "d37177f1d2cdf3e7",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "request session key",
+        "func": "username = flow.get('username')||\"?\"; \npassword = flow.get('password')||\"?\"; \nmsg.url = \"http://xmldata.qrz.com/xml/current/?username=\" + username + \";password=\" + password + \";agent=k6hn-spots\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 4,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 1160,
+        "wires": [
+            [
+                "30273ed42ecdd01d"
+            ]
+        ]
+    },
+    {
+        "id": "30273ed42ecdd01d",
+        "type": "http request",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "persist": false,
+        "authType": "",
+        "x": 1570,
+        "y": 1160,
+        "wires": [
+            [
+                "5bcef8c14cf23f8f"
+            ]
+        ]
+    },
+    {
+        "id": "5bcef8c14cf23f8f",
+        "type": "xml",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "",
+        "x": 1710,
+        "y": 1160,
+        "wires": [
+            [
+                "82837704096fd553"
+            ]
+        ]
+    },
+    {
+        "id": "82837704096fd553",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "decode & save session id",
+        "func": "session_id = msg.payload.QRZDatabase.Session[0].Key[0]\nflow.set('session_id',session_id);\nmsg.payload = session_id;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1910,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2a90c108635d6642",
+        "type": "link in",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "links": [
+            "9b1cbc70fd167750"
+        ],
+        "x": 135,
+        "y": 1060,
+        "wires": [
+            [
+                "0a8fd5a57e474407",
+                "aacc5a8612d5ab08"
+            ]
+        ]
+    },
+    {
+        "id": "0a8fd5a57e474407",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "call",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "freq",
+                "pt": "flow",
+                "to": "freq",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "time",
+                "pt": "flow",
+                "to": "time",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 1060,
+        "wires": [
+            [
+                "e93186f5e28c083a"
+            ]
+        ]
+    },
+    {
+        "id": "2fe5f5459f4d1d43",
+        "type": "debug",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1850,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "f94aa90d8b3ec977",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "func": "freq = msg.payload.name\nloc = freq.indexOf(\"-\");\nfreq = freq.slice(loc + 1,99)\nfreq = parseFloat(freq);\nmsg.freq = freq\n\nheading = msg.payload.name\nloc = heading.indexOf(\">\");\nheading = heading.slice(loc + 1,99)\nheading = parseFloat(heading);\nmsg.heading = heading\n\ncall = msg.payload.name\nloc = call.indexOf(\"-\");\ncall = call.slice(0,loc)\nmsg.call = call\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2040,
+        "y": 1060,
+        "wires": [
+            [
+                "f9cb34a2aa66ee8d",
+                "b0f1bccf847af410",
+                "1996c99a2d6cf78d",
+                "631bddd3da41a3aa"
+            ]
+        ]
+    },
+    {
+        "id": "9fc0753eb8d85a7c",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload.action",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "click",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1870,
+        "y": 1060,
+        "wires": [
+            [
+                "f94aa90d8b3ec977"
+            ]
+        ]
+    },
+    {
+        "id": "aacc5a8612d5ab08",
+        "type": "debug",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "8b25b94ce3569620",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "Chaneg Icon here",
+        "info": "",
+        "x": 1310,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "f9cb34a2aa66ee8d",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Format Spot",
+        "func": "var freq = msg.freq \nvar call = msg.call.trim()\nvar age = \"1800\" // seconds before autodelete\nvar d = new Date();\nvar time = d.getTime();\ntime = time / 1000  // time spot received by this node\n\ncolor = \"#FF5733\"\n\nmsg.payload = \"spot add rx_freq=\" + freq + \" callsign=\" + call  + \" color=\" + color + \" timestamp=\" + time + \" lifetime_seconds=\" + age + \" priority=4 \"  + \"\\r\\n\"\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2230,
+        "y": 1060,
+        "wires": [
+            [
+                "22963f3ebce51022"
+            ]
+        ]
+    },
+    {
+        "id": "a391344e379198ed",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Remove all spots",
+        "func": "msg.payload = \"C195|spot clear\\r\\n\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2210,
+        "y": 1000,
+        "wires": [
+            [
+                "22963f3ebce51022"
+            ]
+        ]
+    },
+    {
+        "id": "b8a2b39e9e56eb89",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 2050,
+        "y": 1000,
+        "wires": [
+            [
+                "a391344e379198ed"
+            ]
+        ]
+    },
+    {
+        "id": "b0f1bccf847af410",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Set Radio Freq",
+        "func": "var freq = parseFloat(msg.freq);\nif (typeof freq == \"undefined\") {\n    return;\n}\nif(freq === 0 ){\n    return;\n}\nvar b\nvar f \n\nif(freq < 10){\n    freq = freq.toFixed(5);\n    b = freq.slice(0,6)\n    f = freq.slice(6,7)\n}else{\n    freq = freq.toFixed(6);\n    b = freq.slice(0,7)\n    f = freq.slice(7,8)\n}\nf = parseFloat(f);\nif(f > 0 && f < 5){\n    f = 0\n}else if(f > 5 && f <= 9){\n    f = 5\n}\nfreq = b + f\nmsg.freq = freq\n\nvar s0 = global.get('slice_0.client_handle') || [];\nvar s1 = global.get('slice_1.client_handle') || [];\nvar s2 = global.get('slice_2.client_handle') || [];\nvar s3 = global.get('slice_3.client_handle') || [];\n//var selected = global.get('selected_client.handle') || [];\nvar selected = s0\t\n\nvar slice_num = 9\nvar i = 0\nfor (i = 0; i < 4; i++) { \n\n        var data = global.get('slice_0.data.tx')\n        if (data == 1) {\n            slice_num = 0;\n        }\n        var data = global.get('slice_1.data.tx')\n        if (data == 1) {\n            slice_num = 1;\n        }\n      \n        var data = global.get('slice_2.data.tx')\n        if (data == 1) {\n            slice_num = 2;\n        }\n    \n        var data = global.get('slice_3.data.tx')\n        if (data == 1) {\n            slice_num = 3;\n        }\n     \n}\nglobal.set('selected_slice.tx.number', slice_num)\n\nmsg.payload = \"slice t \" + slice_num + \" \" + freq\n//msg.payload = selected + \",\" + s0 + \",\" + s1 + \",\" + s2 + \",\" +  s3\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2240,
+        "y": 1140,
+        "wires": [
+            [
+                "fd890d9bf48d4b0c",
+                "22963f3ebce51022"
+            ]
+        ]
+    },
+    {
+        "id": "c57d1c10512bb326",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "slice/ 0-3",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "slice/0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "slice/1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "slice/2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "slice/3",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 2240,
+        "y": 1340,
+        "wires": [
+            [
+                "2399c973bdd54410",
+                "1df0197eaf39e002",
+                "9f02a998e1edf18b"
+            ],
+            [
+                "c9a8579496b5ac11",
+                "251c226051045ea1",
+                "78de6c2995936d14"
+            ],
+            [
+                "a126dd3f53588f37",
+                "f2d48222f5ebc4ca",
+                "f823873afc0f919e"
+            ],
+            [
+                "2a2833edfc691be3",
+                "341c45f5a1b1b39b",
+                "21108e7a2bcb11d8"
+            ]
+        ]
+    },
+    {
+        "id": "2399c973bdd54410",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Global save selected program & handle",
+        "func": "var array = flow.get('client_handles')||[];\nvar sta = flow.get('client_stations') ||[];\nvar selected = msg.payload.client_handle;\nvar i = 0\nfor( i=0; i < array.length; i++){\n    if(array[i] == selected){\n        var name = sta[i]\n        name = name.slice(0,7);\n        global.set('slice_0.station',name)\n        global.set('slice_0.client_handle', selected)       \n        msg.payload = i + \",\" + selected + \",\" + name\n        node.send(msg);\n    }\n    //msg.payload = selected + \",\" + array[i]\n    //node.send(msg);\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2620,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9a8579496b5ac11",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Global save selected program & handle",
+        "func": "var array = flow.get('client_handles')||[];\nvar sta = flow.get('client_stations') ||[];\nvar selected = msg.payload.client_handle;\nvar i = 0\nfor( i=0; i < array.length; i++){\n    if(array[i] == selected){\n\n        var name = sta[i]\n        name = name.slice(0, 7);\n        global.set('slice_1.station', name)\n        global.set('slice_1.client_handle', selected)          \n        msg.payload = i + \",\" + selected + \",\" + sta[i]\n        node.send(msg);\n    }\n    //msg.payload = selected + \",\" + array[i]\n    //node.send(msg);\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2620,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a126dd3f53588f37",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Global save selected program & handle",
+        "func": "var array = flow.get('client_handles')||[];\nvar sta = flow.get('client_stations') ||[];\nvar selected = msg.payload.client_handle;\nvar i = 0\nfor( i=0; i < array.length; i++){\n    if(array[i] == selected){\n        var name = sta[i]\n        name = name.slice(0, 7);\n        global.set('slice_2.station', name)\n        global.set('slice_2.client_handle', selected)          \n        msg.payload = i + \",\" + selected + \",\" + sta[i]\n        node.send(msg);\n    }\n    //msg.payload = selected + \",\" + array[i]\n    //node.send(msg);\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2620,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2a2833edfc691be3",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Global save selected program & handle",
+        "func": "var array = flow.get('client_handles')||[];\nvar sta = flow.get('client_stations') ||[];\nvar selected = msg.payload.client_handle;\nvar i = 0\nfor( i=0; i < array.length; i++){\n    if(array[i] == selected){\n        var name = sta[i]\n        name = name.slice(0, 7);\n        global.set('slice_3.station', name)\n        global.set('slice_3.client_handle', selected)      \n        msg.payload = i + \",\" + selected + \",\" + sta[i]\n        node.send(msg);\n    }\n    //msg.payload = selected + \",\" + array[i]\n    //node.send(msg);\n}\nreturn;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2620,
+        "y": 1400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4b93da1eafdb52e9",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 1870,
+        "y": 920,
+        "wires": [
+            [
+                "f5f81060a5667b4d"
+            ]
+        ]
+    },
+    {
+        "id": "3182b23b19d5dbba",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Radio Slice 0 tx",
+        "rules": [
+            {
+                "t": "set",
+                "p": "slice_0.data.tx",
+                "pt": "global",
+                "to": "payload.tx",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2700,
+        "y": 1440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80b38b44d464df6f",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "flow.set client_handles",
+        "func": "array = msg.payload.gui_client_handles||[];\narray.push('SUNSDR');\nflow.set('client_handles',array)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2140,
+        "y": 1460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a33d82d9edd3838",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "flow.set & global.set client_programs",
+        "func": "var array = msg.payload.gui_client_programs||[];\narray.push('SUNSDR');\nflow.set('client_programs',array)\nglobal.set('client_programs',array)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2190,
+        "y": 1500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "72307107eb92d002",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "flow.set & global.set client_stations",
+        "func": "var array = msg.payload.gui_client_stations||[];\narray.push('SUNSDR');\nflow.set('client_stations',array)\nglobal.set('client_stations',array)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2180,
+        "y": 1540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f5f81060a5667b4d",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\"sub radio all\",\"sub client all\",\"sub tx all\",\"sub slice all\"]",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2220,
+        "y": 920,
+        "wires": [
+            [
+                "22963f3ebce51022"
+            ]
+        ]
+    },
+    {
+        "id": "1df0197eaf39e002",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Radio Slice 0 Letter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "slice_0.letter",
+                "pt": "global",
+                "to": "payload.index_letter",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2570,
+        "y": 1480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c5631575819e697a",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Radio Slice 1 tx",
+        "rules": [
+            {
+                "t": "set",
+                "p": "slice_1.data.tx",
+                "pt": "global",
+                "to": "payload.tx",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2700,
+        "y": 1520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f02a998e1edf18b",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload.tx",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2510,
+        "y": 1440,
+        "wires": [
+            [
+                "3182b23b19d5dbba"
+            ]
+        ]
+    },
+    {
+        "id": "251c226051045ea1",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload.tx",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2510,
+        "y": 1520,
+        "wires": [
+            [
+                "c5631575819e697a"
+            ]
+        ]
+    },
+    {
+        "id": "f2d48222f5ebc4ca",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload.tx",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2510,
+        "y": 1600,
+        "wires": [
+            [
+                "4842e8f9b9e35279"
+            ]
+        ]
+    },
+    {
+        "id": "341c45f5a1b1b39b",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload.tx",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2510,
+        "y": 1680,
+        "wires": [
+            [
+                "ad7f6558dde126db"
+            ]
+        ]
+    },
+    {
+        "id": "4842e8f9b9e35279",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Radio Slice 2 tx",
+        "rules": [
+            {
+                "t": "set",
+                "p": "slice_2.data.tx",
+                "pt": "global",
+                "to": "payload.tx",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2700,
+        "y": 1600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad7f6558dde126db",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Radio Slice 3 tx",
+        "rules": [
+            {
+                "t": "set",
+                "p": "slice_3.data.tx",
+                "pt": "global",
+                "to": "payload.tx",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2700,
+        "y": 1680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "78de6c2995936d14",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Radio Slice 1 Letter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "slice_1.letter",
+                "pt": "global",
+                "to": "payload.index_letter",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2570,
+        "y": 1560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f823873afc0f919e",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Radio Slice 2 Letter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "slice_2.letter",
+                "pt": "global",
+                "to": "payload.index_letter",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2574.60009765625,
+        "y": 1636.199951171875,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "21108e7a2bcb11d8",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Radio Slice 3 Letter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "slice_3.letter",
+                "pt": "global",
+                "to": "payload.index_letter",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2570,
+        "y": 1720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7bf4a1e0ad0ffd7c",
+        "type": "delay",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2040,
+        "y": 840,
+        "wires": [
+            [
+                "f5f81060a5667b4d"
+            ]
+        ]
+    },
+    {
+        "id": "5a4064880b91bbd0",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Clear slice & client data ",
+        "func": "var keys = global.keys();\nfor(var i=0;i<keys.length;i++){\n  if(keys[i].includes('slice') === true || keys[i].includes('client') === true || keys[i].includes('smartSDR') === true){\n     msg.payload = msg.payload + keys[i];\n     global.set(keys[i]);\n  }     \n}\nnode.warn(\"global context cleared!\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2090,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "615856d1bf4cca93",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1820,
+        "y": 760,
+        "wires": [
+            [
+                "5a4064880b91bbd0",
+                "7bf4a1e0ad0ffd7c"
+            ]
+        ]
+    },
+    {
+        "id": "b82b9eb51444e020",
+        "type": "debug",
+        "z": "b396cf1d960f03d3",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2080,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "4f134a8628780cf0",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Model",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.model",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2090,
+        "y": 1600,
+        "wires": [
+            [
+                "09f72867653f709d"
+            ]
+        ]
+    },
+    {
+        "id": "09f72867653f709d",
+        "type": "ui_text",
+        "z": "b396cf1d960f03d3",
+        "group": "9a203307d35be521",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "name": "Model",
+        "label": "Connected Radio Model: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 2230,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "0213fa3428388837",
+        "type": "trigger",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "op1": "",
+        "op2": "No Radio",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 2080,
+        "y": 1640,
+        "wires": [
+            [
+                "09f72867653f709d"
+            ]
+        ]
+    },
+    {
+        "id": "fd890d9bf48d4b0c",
+        "type": "ui_text",
+        "z": "b396cf1d960f03d3",
+        "group": "9a203307d35be521",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Last Radio Command Sent: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 2640,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "b9a3d2213ca68391",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Username",
+        "rules": [
+            {
+                "t": "set",
+                "p": "telnet_call",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 700,
+        "wires": [
+            [
+                "ae79f437efcdecf2"
+            ]
+        ]
+    },
+    {
+        "id": "cd1564b2e8118794",
+        "type": "file",
+        "z": "b396cf1d960f03d3",
+        "d": true,
+        "name": "telnet_user",
+        "filename": "\\Users\\remote\\.node-red\\telnet_call.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 950,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c24cf5e8af61e58a",
+        "type": "file in",
+        "z": "b396cf1d960f03d3",
+        "name": "Read user",
+        "filename": "\\Users\\Remote\\.node-red\\telnet_callsign.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 730,
+        "y": 700,
+        "wires": [
+            [
+                "b9a3d2213ca68391"
+            ]
+        ]
+    },
+    {
+        "id": "ae79f437efcdecf2",
+        "type": "debug",
+        "z": "b396cf1d960f03d3",
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "02407c81cc90b6ad",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 520,
+        "y": 740,
+        "wires": [
+            [
+                "c24cf5e8af61e58a"
+            ]
+        ]
+    },
+    {
+        "id": "961ab866d2729154",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Username",
+        "rules": [
+            {
+                "t": "set",
+                "p": "username",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1360,
+        "y": 1580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b63b17aa0dcac343",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Save Password",
+        "rules": [
+            {
+                "t": "set",
+                "p": "password",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1360,
+        "y": 1640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c78ea2822562605b",
+        "type": "file in",
+        "z": "b396cf1d960f03d3",
+        "name": "Read username",
+        "filename": "\\Users\\Remote\\.node-red\\username.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 960,
+        "y": 1580,
+        "wires": [
+            [
+                "961ab866d2729154"
+            ]
+        ]
+    },
+    {
+        "id": "1471b93b41d2d699",
+        "type": "file",
+        "z": "b396cf1d960f03d3",
+        "d": true,
+        "name": "password",
+        "filename": "/Users/daveg/.node-red/data/username.txt",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1340,
+        "y": 1700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3650f98527ffacf9",
+        "type": "file in",
+        "z": "b396cf1d960f03d3",
+        "name": "Read password",
+        "filename": "\\Users\\Remote\\.node-red\\password.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 960,
+        "y": 1640,
+        "wires": [
+            [
+                "b63b17aa0dcac343"
+            ]
+        ]
+    },
+    {
+        "id": "8e2ca0b113c0dc50",
+        "type": "delay",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 700,
+        "y": 1540,
+        "wires": [
+            [
+                "c78ea2822562605b",
+                "3650f98527ffacf9"
+            ]
+        ]
+    },
+    {
+        "id": "4b4c9a05b2071239",
+        "type": "debug",
+        "z": "b396cf1d960f03d3",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "949cf00a18674b93",
+        "type": "delay",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2120,
+        "y": 220,
+        "wires": [
+            [
+                "13d3b463835cfdcf"
+            ]
+        ]
+    },
+    {
+        "id": "13d3b463835cfdcf",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Clear Map",
+        "func": "msg.payload = { \"command\": { \"clear\": \"spots\" } };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2310,
+        "y": 220,
+        "wires": [
+            [
+                "31ed572ba7468a56"
+            ]
+        ]
+    },
+    {
+        "id": "eb603361ac25947c",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "Change to radio node in production",
+        "info": "",
+        "x": 2640,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "8a4bc5f2502137e2",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "Change to radio node in production",
+        "info": "",
+        "x": 1800,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "1794be232f768c43",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "Change to radio node in production",
+        "info": "",
+        "x": 1660,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "57fc1367e3e25243",
+        "type": "link out",
+        "z": "b396cf1d960f03d3",
+        "name": "Rotor Heading",
+        "mode": "link",
+        "links": [],
+        "x": 2865,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "e4e6e0cc33093644",
+        "type": "ui_switch",
+        "z": "b396cf1d960f03d3",
+        "name": "Auto Rotator",
+        "label": "Auto Rotator",
+        "tooltip": "",
+        "group": "9a203307d35be521",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 2550,
+        "y": 1220,
+        "wires": [
+            [
+                "1d2607d6036570dc"
+            ]
+        ]
+    },
+    {
+        "id": "1996c99a2d6cf78d",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Set Heading",
+        "func": "msg.paylod = msg.heading;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2220,
+        "y": 1100,
+        "wires": [
+            [
+                "4d0485c47147ca0e"
+            ]
+        ]
+    },
+    {
+        "id": "4d0485c47147ca0e",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Heading",
+        "func": "msg.payload = parseFloat(msg.heading);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2360,
+        "y": 1220,
+        "wires": [
+            [
+                "1d2607d6036570dc"
+            ]
+        ]
+    },
+    {
+        "id": "b9f6b4a7aa0e7930",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Parse Fields for Table",
+        "func": "let spot = msg.payload\nlet freq = spot.substr(17,8);\nlet call = spot.substr(26,12);\ncall_raw = call\ncall = \"<a target = '_new' href='http://www.qrz.com/lookup/\" + call + \"'>\" + call\nlet comment = spot.substr(39,30);\nlet time = spot.substr(70,5);\nlet end = spot.indexOf(\":\");\nlet from = spot.slice(6,end - 1);\n\nmsg = {\"payload\":{\n    \"command\":\"addData\",\n    \"arguments\":[\n        {\n            freq:freq,call:call,comment:comment,from:from,time:time\n        },\n        true\n    ],\n    \"returnPromise\":true\n    }\n};\n\nmsg1 = {}\nmsg1.freq = freq.trim()\nmsg1.call = call_raw.trim()\nmsg1.time = time.trim()\nmsg1.comment = comment\nmsg1.spotter = from\n\nmsg3={}\nmsg3.payload = call;\n\n\nreturn [msg,msg1,msg3]\n\n//return {\"payload\":{\n//    \"command\":\"addData\",\n//    \"arguments\":[\n//        {\n//            freq:freq,call:call,comment:comment,from:from,time:time\n//        },\n//        true\n//    ],\n//    \"returnPromise\":true\n//    }\n//};",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2620,
+        "y": 380,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c8d6d33aa4d752a2",
+        "type": "trigger",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "op1": "",
+        "op2": "No Radio",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 2160,
+        "y": 1820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fd6359f1dd86cb2b",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1290,
+        "y": 580,
+        "wires": [
+            [
+                "8b071188261b148e"
+            ]
+        ]
+    },
+    {
+        "id": "8b071188261b148e",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "send logout",
+        "func": "var bye = \"bye\";\nmsg.payload = bye + \"\\r\\n\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1250,
+        "y": 640,
+        "wires": [
+            [
+                "c5460123a70876d7"
+            ]
+        ]
+    },
+    {
+        "id": "479c98eaa1daaf87",
+        "type": "delay",
+        "z": "b396cf1d960f03d3",
+        "name": "Auto Off 2 Hours",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "hours",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1490,
+        "y": 580,
+        "wires": [
+            [
+                "69eee92f4e9777fa",
+                "e14b7d6aaa62fbec"
+            ]
+        ]
+    },
+    {
+        "id": "69eee92f4e9777fa",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1620,
+        "y": 620,
+        "wires": [
+            [
+                "e4e6e0cc33093644",
+                "41c5816345ee920e"
+            ]
+        ]
+    },
+    {
+        "id": "7bae39faa10a485f",
+        "type": "file",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "filename": "\\Users\\Remote\\.node-red\\dxtable.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2650,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b053293de6ad64ed",
+        "type": "file in",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "filename": "\\Users\\Remote\\.node-red\\dxtable.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 2450,
+        "y": 560,
+        "wires": [
+            [
+                "6d4620b59191cbfc",
+                "675735941625e441"
+            ]
+        ]
+    },
+    {
+        "id": "6d4620b59191cbfc",
+        "type": "debug",
+        "z": "b396cf1d960f03d3",
+        "name": "debug 527",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2730,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "15371cf52f1c98ee",
+        "type": "ui_button",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "group": "9a203307d35be521",
+        "order": 4,
+        "width": "3",
+        "height": 1,
+        "passthru": false,
+        "label": "Reload Table",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "",
+        "topicType": "str",
+        "x": 2190,
+        "y": 520,
+        "wires": [
+            [
+                "b053293de6ad64ed",
+                "80b844703224093f"
+            ]
+        ]
+    },
+    {
+        "id": "e14b7d6aaa62fbec",
+        "type": "file",
+        "z": "b396cf1d960f03d3",
+        "name": "CLR",
+        "filename": "\\Users\\Remote\\.node-red\\dxtable.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 1970,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4b4e1ead1471b22d",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "login info w6cua",
+        "rules": [
+            {
+                "t": "set",
+                "p": "host",
+                "pt": "msg",
+                "to": "w6cua.no-ip.org",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "port",
+                "pt": "msg",
+                "to": "7300",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3264b8fb341272f3",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "login info w3lpl.net",
+        "rules": [
+            {
+                "t": "set",
+                "p": "host",
+                "pt": "msg",
+                "to": "w3lpl.net",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "port",
+                "pt": "msg",
+                "to": "7373",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "631bddd3da41a3aa",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "freq",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2500,
+        "y": 1120,
+        "wires": [
+            [
+                "33ba08df1c72ce15"
+            ]
+        ]
+    },
+    {
+        "id": "33ba08df1c72ce15",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Set Radio Freq",
+        "func": "var freq = parseFloat(msg.freq);\nif (typeof freq == \"undefined\") {\n    return;\n}\nif(freq === 0 ){\n    return;\n}\nvar b\nvar f \n\nif(freq < 10){\n    freq = freq.toFixed(5);\n    b = freq.slice(0,6)\n    f = freq.slice(6,7)\n}else{\n    freq = freq.toFixed(6);\n    b = freq.slice(0,7)\n    f = freq.slice(7,8)\n}\nf = parseFloat(f);\nif(f > 0 && f < 5){\n    f = 0\n}else if(f > 5 && f <= 9){\n    f = 5\n}\nfreq = b + f\nmsg.freq = freq\n\nvar s0 = global.get('slice_0.client_handle') || [];\nvar s1 = global.get('slice_1.client_handle') || [];\nvar s2 = global.get('slice_2.client_handle') || [];\nvar s3 = global.get('slice_3.client_handle') || [];\n//var selected = global.get('selected_client.handle') || [];\nvar selected = s0\t\n\nvar slice_num = 9\nvar i = 0\nfor (i = 0; i < 4; i++) { \n\n        var data = global.get('slice_0.data.tx')\n        if (data == 1) {\n            slice_num = 0;\n        }\n        var data = global.get('slice_1.data.tx')\n        if (data == 1) {\n            slice_num = 1;\n        }\n      \n        var data = global.get('slice_2.data.tx')\n        if (data == 1) {\n            slice_num = 2;\n        }\n    \n        var data = global.get('slice_3.data.tx')\n        if (data == 1) {\n            slice_num = 3;\n        }\n     \n}\nglobal.set('selected_slice.tx.number', slice_num)\n\nmsg.payload = freq\n//msg.payload = selected + \",\" + s0 + \",\" + s1 + \",\" + s2 + \",\" +  s3\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2700,
+        "y": 1120,
+        "wires": [
+            [
+                "e1481f5c81eaf1ea"
+            ]
+        ]
+    },
+    {
+        "id": "e1481f5c81eaf1ea",
+        "type": "link out",
+        "z": "b396cf1d960f03d3",
+        "name": "Freq for mode",
+        "mode": "link",
+        "links": [
+            "ce9f7a4a103bec03"
+        ],
+        "x": 2855,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "66fb55fd376b743a",
+        "type": "switch",
+        "z": "b396cf1d960f03d3",
+        "name": "Auto Mode",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "3.70000",
+                "vt": "num",
+                "v2": "4.00000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "7.00000",
+                "vt": "num",
+                "v2": "7.07300",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "7.07400",
+                "vt": "num",
+                "v2": "7.09000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "7.10000",
+                "vt": "num",
+                "v2": "7.30000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "10.10000",
+                "vt": "num",
+                "v2": "10.15000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "14.00000",
+                "vt": "num",
+                "v2": "14.07300",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "14.07400",
+                "vt": "num",
+                "v2": "14.09500",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "14.15000",
+                "vt": "num",
+                "v2": "14.35000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "18.06800",
+                "vt": "num",
+                "v2": "18.09400",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "18.09500",
+                "vt": "num",
+                "v2": "18.10500",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "18.10600",
+                "vt": "num",
+                "v2": "18.16800",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "21.00000",
+                "vt": "num",
+                "v2": "21.07300",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "21.07400",
+                "vt": "num",
+                "v2": "21.10000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "21.20000",
+                "vt": "num",
+                "v2": "21.45000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "28.00000",
+                "vt": "num",
+                "v2": "28.07300",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "28.07400",
+                "vt": "num",
+                "v2": "28.10000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "28.10100",
+                "vt": "num",
+                "v2": "28.30000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "28.30100",
+                "vt": "num",
+                "v2": "29.59000",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "29.60000",
+                "vt": "num",
+                "v2": "29.60000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 19,
+        "x": 610,
+        "y": 2040,
+        "wires": [
+            [
+                "900d6b162c855a04"
+            ],
+            [
+                "1c9a78caa029d089"
+            ],
+            [
+                "aac884fbcab01364"
+            ],
+            [
+                "900d6b162c855a04"
+            ],
+            [
+                "1c9a78caa029d089"
+            ],
+            [
+                "1c9a78caa029d089"
+            ],
+            [
+                "a72fdabc2335d2d0",
+                "aac884fbcab01364"
+            ],
+            [
+                "5b332d1335d71dfa"
+            ],
+            [
+                "1c9a78caa029d089"
+            ],
+            [
+                "aac884fbcab01364"
+            ],
+            [
+                "5b332d1335d71dfa"
+            ],
+            [
+                "1c9a78caa029d089"
+            ],
+            [
+                "a72fdabc2335d2d0"
+            ],
+            [
+                "5b332d1335d71dfa"
+            ],
+            [
+                "1c9a78caa029d089"
+            ],
+            [
+                "aac884fbcab01364"
+            ],
+            [
+                "1c9a78caa029d089"
+            ],
+            [
+                "5b332d1335d71dfa"
+            ],
+            [
+                "63334e5b4dc907e3"
+            ]
+        ]
+    },
+    {
+        "id": "9ceb88215143624a",
+        "type": "delay",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": ".5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 2040,
+        "wires": [
+            [
+                "66fb55fd376b743a"
+            ]
+        ]
+    },
+    {
+        "id": "1c9a78caa029d089",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Slice A  Mode CW",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "slice s 0 mode=cw",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1070,
+        "y": 1960,
+        "wires": [
+            [
+                "9c0f5f4e25f934a3"
+            ]
+        ]
+    },
+    {
+        "id": "aac884fbcab01364",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Slice A  Mode DIGU",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "slice s 0 mode=digu",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1070,
+        "y": 2000,
+        "wires": [
+            [
+                "9c0f5f4e25f934a3"
+            ]
+        ]
+    },
+    {
+        "id": "900d6b162c855a04",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Slice A  Mode LSB",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "slice s 0 mode=lsb",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 2040,
+        "wires": [
+            [
+                "9c0f5f4e25f934a3"
+            ]
+        ]
+    },
+    {
+        "id": "a72fdabc2335d2d0",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Slice A  Mode DIGU",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "slice s 0 mode=digu",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 2120,
+        "wires": [
+            [
+                "9c0f5f4e25f934a3"
+            ]
+        ]
+    },
+    {
+        "id": "713e628e23dc5922",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 600,
+        "y": 2480,
+        "wires": [
+            [
+                "eb534e97d6655841"
+            ]
+        ]
+    },
+    {
+        "id": "eb534e97d6655841",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Initial C1|sub client all",
+        "func": "        var msg1,msg2\n        global.set(\"ClientConnected\",0)\n        msg.c1 = \"sub client all\";   \n        msg.c2 = \"sub slice all\";\n        msg.c3 = \"sub meter all\";\n        msg.c4 = \"sub tx all\";\n        msg1 = {payload:msg.c1};\n        msg2 = {payload:msg.c2};\n        msg3 = {payload:msg.c3};\n        msg4 = {payload:msg.c4};\n        node.send(msg1);\n        node.send(msg2);\n        node.send(msg3);\n        node.send(msg4);\n        node.done();\nreturn;",
+        "outputs": 1,
+        "noerr": 4,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 2480,
+        "wires": [
+            [
+                "9c0f5f4e25f934a3"
+            ]
+        ]
+    },
+    {
+        "id": "ce9f7a4a103bec03",
+        "type": "link in",
+        "z": "b396cf1d960f03d3",
+        "name": "Set Mode",
+        "links": [
+            "e1481f5c81eaf1ea"
+        ],
+        "x": 245,
+        "y": 2000,
+        "wires": [
+            [
+                "9ceb88215143624a"
+            ]
+        ]
+    },
+    {
+        "id": "5b332d1335d71dfa",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Slice A  Mode USB",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "slice s 0 mode=usb",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 2180,
+        "wires": [
+            [
+                "9c0f5f4e25f934a3"
+            ]
+        ]
+    },
+    {
+        "id": "63334e5b4dc907e3",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "Slice A  Mode FM",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "slice s 0 mode=fm",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 2220,
+        "wires": [
+            [
+                "9c0f5f4e25f934a3"
+            ]
+        ]
+    },
+    {
+        "id": "8881b4e73941ed60",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "login info ve7cc",
+        "rules": [
+            {
+                "t": "set",
+                "p": "host",
+                "pt": "msg",
+                "to": "ve7cc.net",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "port",
+                "pt": "msg",
+                "to": "23",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80b844703224093f",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "close",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "map",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2360,
+        "y": 440,
+        "wires": [
+            [
+                "4e748b3d42a5393d",
+                "ed4316f6b840238b"
+            ]
+        ]
+    },
+    {
+        "id": "ed4316f6b840238b",
+        "type": "delay",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": ".25",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2550,
+        "y": 440,
+        "wires": [
+            [
+                "c6031abb41e24cff"
+            ]
+        ]
+    },
+    {
+        "id": "c6031abb41e24cff",
+        "type": "change",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "open",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "map",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2720,
+        "y": 440,
+        "wires": [
+            [
+                "4e748b3d42a5393d"
+            ]
+        ]
+    },
+    {
+        "id": "675735941625e441",
+        "type": "split",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 2430,
+        "y": 500,
+        "wires": [
+            [
+                "2c57384b760c25d9"
+            ]
+        ]
+    },
+    {
+        "id": "09647f1f66b57200",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "When changing clusters - edit change 2 rules send and read and the send node after send logout function",
+        "info": "",
+        "x": 1400,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "9598d2f0f446bba0",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "Gate here is to stop table reload from corrupting freq on map",
+        "info": "",
+        "x": 2500,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a349f4546cebdbd4",
+        "type": "file",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "filename": "\\Users\\Remote\\.node-red\\dxtable.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 2070,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b269e75e0573f451",
+        "type": "inject",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1800",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1770,
+        "y": 480,
+        "wires": [
+            [
+                "a349f4546cebdbd4"
+            ]
+        ]
+    },
+    {
+        "id": "c6f7398040d2ae0d",
+        "type": "link in",
+        "z": "b396cf1d960f03d3",
+        "name": "DX Cluster Activate Map In",
+        "links": [
+            "ae3d1be1889fbdb0"
+        ],
+        "x": 1145,
+        "y": 480,
+        "wires": [
+            [
+                "e0ee09013056143d",
+                "479c98eaa1daaf87",
+                "fd6359f1dd86cb2b",
+                "77a87174a053338c"
+            ]
+        ]
+    },
+    {
+        "id": "41c5816345ee920e",
+        "type": "link out",
+        "z": "b396cf1d960f03d3",
+        "name": "DX Cluster Activate Map Out",
+        "mode": "link",
+        "links": [
+            "957899770cf97e94"
+        ],
+        "x": 1775,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "28590d5b81b96629",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Get Pota Spots",
+        "func": "function twoDig(val) { return (('0' + val).slice(-2)); }\n\nvar pota_spots = global.get(\"pota_messages\");\nvar windowInMSeconds = 30 * 60 * 1000;\n\n// Input: msg containing the \"psk_messages\" array\nconst globalContext = global.get(\"pota_messages\") || [];\n\nif (Array.isArray(pota_spots)) {\n    const currentTime = Math.floor(Date.now()); // Current time in seconds since 1970-01-01\n\n    // Filter the array to keep only objects with \"time\" within the time window\n    const filteredMessages = pota_spots.filter((message) => {\n        return (currentTime - (Date.parse(message.time))) <= windowInMSeconds;\n    });\n\n    // Calculate the number of removed objects\n    const removedCount = pota_spots.length - filteredMessages.length;\n\n    // Update the global context with the filtered array\n    global.set(\"pota_messages\", filteredMessages);\n\n    msg.payload = filteredMessages; // Update msg.payload with the modified array\n\n    // Update Node-RED status with the number of removed objects, the length of the modified array, and the windowInSeconds\n    node.status({ text: `Removed ${removedCount} objects, Length: ${filteredMessages.length}, Window: ${windowInMSeconds/1000} seconds` });\n\n    return msg;\n} else {\n    node.status({ text: \"pota_messages is not an array\" });\n    return;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2240,
+        "y": 40,
+        "wires": [
+            [
+                "f56d7f3e2472b160"
+            ]
+        ]
+    },
+    {
+        "id": "a7c09ece243aebfa",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Push Spots to Array",
+        "func": "\n// Define the maximum length for the array\nvar arrayLength =50;\n\n// Get the existing PSK messages array from global context or create it if it doesn't exist\nvar potaMessages = global.get(\"pota_messages\") || [];\n\n// Push the incoming message payload to the top of the array\npotaMessages.unshift(msg.payload);\n\n// Limit the array length to \"arrayLength\" by removing older messages from the bottom\nif (potaMessages.length > arrayLength) {\n    potaMessages = potaMessages.slice(0, arrayLength);\n}\n\n// Store the updated array back in global context\nglobal.set(\"pota_messages\", potaMessages);\n\n// Update the node status with the length of the array\nnode.status({ text: \"POTA Messages Count: \" + potaMessages.length });\n\n// Pass the message along\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2020,
+        "y": 40,
+        "wires": [
+            [
+                "28590d5b81b96629"
+            ]
+        ]
+    },
+    {
+        "id": "12f8680135e0747d",
+        "type": "function",
+        "z": "b396cf1d960f03d3",
+        "name": "Format Spot - old",
+        "func": "\nlet type = \"spot\";\nlet spotID = msg.payload.spotId;\nlet freq = msg.payload.frequency;\nlet call = msg.payload.activator;\nlet time = msg.payload.spotTime + 'Z';\nlet comment = msg.payload.comments;\nlet qthstatus = \"\";\nlet source = \"PO\";\nlet state = msg.payload.state;\nlet calllength = call.length;\nlet parkref = msg.payload.reference;\nlet parkname = msg.payload.name;\n\nreturn {payload : {type:type,spotID:spotID,freq:freq,call:call,comment:comment,time:time,qthstatus:qthstatus,source:source,\nstate:state,calllength:calllength,parkref:parkref,parkname:parkname}};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1810,
+        "y": 60,
+        "wires": [
+            [
+                "a7c09ece243aebfa"
+            ]
+        ]
+    },
+    {
+        "id": "a87433e6a1e9e49b",
+        "type": "ui_ui_control",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "events": "all",
+        "x": 2600,
+        "y": 120,
+        "wires": [
+            [
+                "f56d7f3e2472b160"
+            ]
+        ]
+    },
+    {
+        "id": "a7076e6d95e2581a",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "DX Cluster Flow - enables when DX cluster is switched on in UI",
+        "info": "",
+        "x": 230,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b8a186977bed3b2c",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "Set to preferred cluster",
+        "info": "",
+        "x": 1320,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b9808dfd4fa405ed",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "reset to w6cua when he is back online",
+        "info": "",
+        "x": 1410,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "3e997eb0facd2605",
+        "type": "start-up-trigger",
+        "z": "b396cf1d960f03d3",
+        "x": 1120,
+        "y": 1160,
+        "wires": [
+            [
+                "d37177f1d2cdf3e7"
+            ]
+        ]
+    },
+    {
+        "id": "09c11e1cec9c148b",
+        "type": "start-up-trigger",
+        "z": "b396cf1d960f03d3",
+        "x": 1840,
+        "y": 840,
+        "wires": [
+            [
+                "7bf4a1e0ad0ffd7c",
+                "5a4064880b91bbd0"
+            ]
+        ]
+    },
+    {
+        "id": "415147f496cfb0a1",
+        "type": "start-up-trigger",
+        "z": "b396cf1d960f03d3",
+        "x": 540,
+        "y": 700,
+        "wires": [
+            [
+                "c24cf5e8af61e58a"
+            ]
+        ]
+    },
+    {
+        "id": "4543ff54462aa0e7",
+        "type": "start-up-trigger",
+        "z": "b396cf1d960f03d3",
+        "x": 520,
+        "y": 1540,
+        "wires": [
+            [
+                "8e2ca0b113c0dc50"
+            ]
+        ]
+    },
+    {
+        "id": "93acfe5cf857bb12",
+        "type": "flexradio-message",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "radio": "30624429ce766d11",
+        "client": "all",
+        "topic": "",
+        "topic_type": "mqtt",
+        "x": 1870,
+        "y": 1340,
+        "wires": [
+            [
+                "c57d1c10512bb326",
+                "b82b9eb51444e020"
+            ]
+        ]
+    },
+    {
+        "id": "22963f3ebce51022",
+        "type": "flexradio-request",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "radio": "cc7930ab90601f69",
+        "x": 2570,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c0f5f4e25f934a3",
+        "type": "flexradio-request",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "radio": "30624429ce766d11",
+        "x": 1170,
+        "y": 2480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c25a62bcc533117",
+        "type": "flexradio-discovery",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "port": 4992,
+        "x": 1650,
+        "y": 1480,
+        "wires": [
+            [
+                "80b38b44d464df6f",
+                "6a33d82d9edd3838",
+                "72307107eb92d002",
+                "4f134a8628780cf0",
+                "0213fa3428388837"
+            ]
+        ]
+    },
+    {
+        "id": "31ed572ba7468a56",
+        "type": "worldmap",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "lat": "33.997",
+        "lon": "-90",
+        "zoom": "2",
+        "layer": "EsriDG",
+        "cluster": "",
+        "maxage": "600",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "none",
+        "showgrid": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "overlist": "CO,RA,DN,HM",
+        "maplist": "OSMG,OSMC,EsriC,EsriS,EsriT,EsriDG,UKOS,SW",
+        "mapname": "",
+        "mapurl": "",
+        "mapopt": "",
+        "mapwms": false,
+        "x": 1500,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "29614e40df2021b7",
+        "type": "worldmap in",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "path": "/worldmap",
+        "events": "connect,disconnect,point,layer,bounds,files,draw,other",
+        "x": 1680,
+        "y": 1060,
+        "wires": [
+            [
+                "9fc0753eb8d85a7c",
+                "2fe5f5459f4d1d43"
+            ]
+        ]
+    },
+    {
+        "id": "b86dc4cc4041fca1",
+        "type": "telnet-send",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "connection": "324dfc4e7ddd3e42",
+        "x": 1270,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "c5460123a70876d7",
+        "type": "telnet-send",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "connection": "5a2d68d6c828dda2",
+        "x": 1430,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "448b6ac913eed10b",
+        "type": "telnet-read",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "connection": "324dfc4e7ddd3e42",
+        "x": 1390,
+        "y": 420,
+        "wires": [
+            [
+                "547511e3c4ee87b9",
+                "77a87174a053338c"
+            ]
+        ]
+    },
+    {
+        "id": "ac698159acec2dcc",
+        "type": "string",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "methods": [
+            {
+                "name": "trim",
+                "params": []
+            }
+        ],
+        "prop": "payload",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "x": 710,
+        "y": 660,
+        "wires": [
+            [
+                "b9a3d2213ca68391",
+                "cd1564b2e8118794"
+            ]
+        ]
+    },
+    {
+        "id": "8444f6eff78a65ba",
+        "type": "string",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "methods": [
+            {
+                "name": "trim",
+                "params": []
+            }
+        ],
+        "prop": "payload",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "x": 1130,
+        "y": 1500,
+        "wires": [
+            [
+                "961ab866d2729154"
+            ]
+        ]
+    },
+    {
+        "id": "62df13e7ea930ea0",
+        "type": "string",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "methods": [
+            {
+                "name": "trim",
+                "params": []
+            }
+        ],
+        "prop": "payload",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "x": 1130,
+        "y": 1700,
+        "wires": [
+            [
+                "1471b93b41d2d699",
+                "b63b17aa0dcac343"
+            ]
+        ]
+    },
+    {
+        "id": "1d2607d6036570dc",
+        "type": "gate",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "true",
+        "closeCmd": "false",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 2750,
+        "y": 1220,
+        "wires": [
+            [
+                "57fc1367e3e25243"
+            ]
+        ]
+    },
+    {
+        "id": "77a87174a053338c",
+        "type": "gate",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "true",
+        "closeCmd": "false",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1450,
+        "y": 500,
+        "wires": [
+            [
+                "5f4fdf5e46c293dc"
+            ]
+        ]
+    },
+    {
+        "id": "4e748b3d42a5393d",
+        "type": "gate",
+        "z": "b396cf1d960f03d3",
+        "name": "",
+        "controlTopic": "map",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 2370,
+        "y": 360,
+        "wires": [
+            [
+                "9b1cbc70fd167750"
+            ]
+        ]
+    },
+    {
+        "id": "f56d7f3e2472b160",
+        "type": "ui_table",
+        "z": "b396cf1d960f03d3",
+        "group": "9a203307d35be521",
+        "name": "DX Spots",
+        "order": 10,
+        "width": 14,
+        "height": 10,
+        "columns": [
+            {
+                "field": "freq",
+                "title": "Freq.",
+                "width": "14px",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "call",
+                "title": "Call",
+                "width": "15px",
+                "align": "left",
+                "formatter": "html",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "comment",
+                "title": "Comment",
+                "width": "38px",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "from",
+                "title": "Src.",
+                "width": "19px",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "time",
+                "title": "Time",
+                "width": "14px",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 1,
+        "cts": true,
+        "x": 2440,
+        "y": 140,
+        "wires": [
+            [
+                "a87433e6a1e9e49b"
+            ]
+        ]
+    },
+    {
+        "id": "a9242b68b8a7d384",
+        "type": "ui_iframe",
+        "z": "b396cf1d960f03d3",
+        "group": "879f76776239c9bd",
+        "name": "",
+        "order": 1,
+        "width": 16,
+        "height": 10,
+        "url": "http://127.0.0.1:1880/worldmap",
+        "origin": "*",
+        "scale": 100,
+        "x": 2050,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e7a27a8f1f0d0f43",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "Change to your QRZ credentails in file",
+        "info": "",
+        "x": 1370,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "bd3a4c1dd9eae1eb",
+        "type": "comment",
+        "z": "b396cf1d960f03d3",
+        "name": "Insert your callsign",
+        "info": "",
+        "x": 830,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "2c319c9e544096f4",
+        "type": "ui_spacer",
+        "z": "b396cf1d960f03d3",
+        "name": "spacer",
+        "group": "23d31202bd861c12",
+        "order": 2,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "1cac1f695ccbba48",
+        "type": "ui_spacer",
+        "z": "b396cf1d960f03d3",
+        "name": "spacer",
+        "group": "9a203307d35be521",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "afe11c9cb5f37010",
+        "type": "ui_spacer",
+        "z": "b396cf1d960f03d3",
+        "name": "spacer",
+        "group": "9a203307d35be521",
+        "order": 8,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "50e15357f6aa45ea",
+        "type": "ui_spacer",
+        "z": "b396cf1d960f03d3",
+        "name": "spacer",
+        "group": "9a203307d35be521",
+        "order": 9,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "2eb51b982a9842f6",
+        "type": "ui_spacer",
+        "z": "b396cf1d960f03d3",
+        "name": "spacer",
+        "group": "7d9aa0778ca442f8",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "0ae1ed4d59153d1e",
+        "type": "ui_spacer",
+        "z": "b396cf1d960f03d3",
+        "name": "spacer",
+        "group": "369184bc4925de6f",
+        "order": 2,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "1fad2ec1daf7cfcf",
+        "type": "ui_spacer",
+        "z": "b396cf1d960f03d3",
+        "name": "spacer",
+        "group": "369184bc4925de6f",
+        "order": 9,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "9a203307d35be521",
+        "type": "ui_group",
+        "name": "DX Spots",
+        "tab": "bb4231e7d8a3593a",
+        "order": 2,
+        "disp": false,
+        "width": "14",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "369184bc4925de6f",
+        "type": "ui_group",
+        "name": "Terminal",
+        "tab": "161c58c6d87dcb79",
+        "order": 2,
+        "disp": true,
+        "width": "14",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "cc7930ab90601f69",
+        "type": "flexradio-radio",
+        "name": "",
+        "host_mode": "automatic",
+        "nickname": "",
+        "host": "",
+        "port": "",
+        "station_name": "NodeRed",
+        "slice_mode": "headless",
+        "slice_name": "A",
+        "timeout": ""
+    },
+    {
+        "id": "324dfc4e7ddd3e42",
+        "type": "telnet-connection",
+        "name": "w3lpl",
+        "address": "w3lpl.net",
+        "port": "7373",
+        "inDelimiter": "\\r",
+        "outDelimiter": "\\r",
+        "timeOut": "1500",
+        "clearOut": "",
+        "openTries": "1"
+    },
+    {
+        "id": "879f76776239c9bd",
+        "type": "ui_group",
+        "name": "Click Spot On Map To Change Radio Frequency & Mode",
+        "tab": "bb4231e7d8a3593a",
+        "order": 2,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7d9aa0778ca442f8",
+        "type": "ui_group",
+        "d": true,
+        "name": "User Info",
+        "tab": "161c58c6d87dcb79",
+        "order": 3,
+        "disp": true,
+        "width": "8",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "bb4231e7d8a3593a",
+        "type": "ui_tab",
+        "name": "DX Spots",
+        "icon": "list",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "161c58c6d87dcb79",
+        "type": "ui_tab",
+        "d": true,
+        "name": "DX Spots Settings",
+        "icon": "dashboard",
+        "order": 13,
+        "disabled": false,
+        "hidden": false
+    }
+]

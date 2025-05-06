@@ -1,0 +1,3886 @@
+[
+    {
+        "id": "28b677223bbe2485",
+        "type": "tab",
+        "label": "Color UI - VHF/UHF",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e8b4c9288efa7535",
+        "type": "junction",
+        "z": "28b677223bbe2485",
+        "x": 238.98046875,
+        "y": 2445.99609375,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "02b06d427cf8e097",
+        "type": "junction",
+        "z": "28b677223bbe2485",
+        "x": 696.3528645833333,
+        "y": 3403.0039062499995,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87303e43ce56dbb2",
+        "type": "ui_template",
+        "z": "28b677223bbe2485",
+        "group": "d4adb6a83770eb58",
+        "name": "Clock Toolbar ",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<script id=\"titleScript\" type=\"text/javascript\">\n\n$(function() {\n    if($('.md-toolbar-tools').length != 0){\n        loadClock();\n    }else setTimeout(loadClock, 500)\n});\n\nfunction loadClock(){\n    $('#clock').remove();\n    var toolbar = $('.md-toolbar-tools');\n    \n    var div = $('<div/>');\n    var p = $('<p/ id=\"clock\">');\n    \n    div.append(p);\n    div[0].style.margin = '5px 5px 5px auto';\n    toolbar.append(div);\n\n    //function displayTitle(lh) {\n    //    p.text(lh); \n    //}\n    \n    function upTime() {\n        var d = new Date();\n        p.text(d.toLocaleString());\n    }\n\n    if(document.clockInterval){ \n            clearInterval(document.clockInterval);\n            document.clockInterval = null;\n    }\n        \n    document.clockInterval = setInterval(upTime,1000);\n}\n\n</script>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1580,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a1413673c9b27d6",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "group": "fea0d8d1d94042f3",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "Blank line",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1560,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "3fc508974b2854be",
+        "type": "tcp in",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "server": "client",
+        "host": "192.168.50.196",
+        "port": "4992",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "trim": false,
+        "base64": false,
+        "tls": "",
+        "x": 130,
+        "y": 2440,
+        "wires": [
+            [
+                "2bc224a94a3ced77",
+                "f12139dbe25cfb37",
+                "8d2b26a1917ba513",
+                "f005e705031e98f6",
+                "51b4ac61f8c8b2a5",
+                "bd6e99aba9022741",
+                "5b4f9de42ce5f1f2",
+                "bbbb0fa6275f1999"
+            ]
+        ]
+    },
+    {
+        "id": "17ea2b06b3aaf563",
+        "type": "tcp out",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "host": "",
+        "port": "",
+        "beserver": "reply",
+        "base64": false,
+        "end": false,
+        "x": 930,
+        "y": 2480,
+        "wires": []
+    },
+    {
+        "id": "4eabf9a76479b934",
+        "type": "split",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "splt": " ",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 270,
+        "y": 2840,
+        "wires": [
+            [
+                "238b600554caf4e9"
+            ]
+        ]
+    },
+    {
+        "id": "238b600554caf4e9",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^freq=",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 410,
+        "y": 2840,
+        "wires": [
+            [
+                "30b82c405d179103"
+            ]
+        ]
+    },
+    {
+        "id": "30b82c405d179103",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParseFreq",
+        "func": "\nmsg.payload= msg.payload.split('=')[1]*100000;\n\nflow.set(\"FlexTXFreq\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 596.98046875,
+        "y": 2841.99609375,
+        "wires": [
+            [
+                "4259db53d8822b76"
+            ]
+        ]
+    },
+    {
+        "id": "4259db53d8822b76",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Devide Frequency by 100",
+        "func": "var Frequency=msg.payload/100;\n\n\n\nmsg.payload= parseFloat(Frequency).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 836.98046875,
+        "y": 2841.99609375,
+        "wires": [
+            [
+                "77afc8d1a6bff5cd",
+                "ee4e81ae75600db1",
+                "bb7a4e8cae6b68de"
+            ]
+        ]
+    },
+    {
+        "id": "2bc224a94a3ced77",
+        "type": "trigger",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "op1": "C173|sub tx all",
+        "op2": "C173|sub tx all",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "60",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "outputs": 1,
+        "x": 490,
+        "y": 2440,
+        "wires": [
+            [
+                "613918c94588ad0c",
+                "f97690b9738f9a9b",
+                "eab765be987560e0",
+                "e835d052404a4182"
+            ]
+        ]
+    },
+    {
+        "id": "77afc8d1a6bff5cd",
+        "type": "trigger",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "payl",
+        "duration": "10",
+        "extend": false,
+        "units": "s",
+        "reset": "",
+        "outputs": 1,
+        "x": 676.98046875,
+        "y": 2921.99609375,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "613918c94588ad0c",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "SUB SLICE ALL",
+        "func": "// C172|sub slice all\nmsg.payload = \"C172|sub slice all\\r\"; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 720,
+        "y": 2460,
+        "wires": [
+            [
+                "17ea2b06b3aaf563"
+            ]
+        ]
+    },
+    {
+        "id": "f97690b9738f9a9b",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "SUB CLIENT ALL",
+        "func": "// C172|sub slice all\nmsg.payload = \"C173|sub client all\\r\"; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 2500,
+        "wires": [
+            [
+                "17ea2b06b3aaf563"
+            ]
+        ]
+    },
+    {
+        "id": "eab765be987560e0",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "SUB TX ALL",
+        "func": "// C172|sub slice all\nmsg.payload = \"C202|sub tx all\\r\"; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 2420,
+        "wires": [
+            [
+                "17ea2b06b3aaf563"
+            ]
+        ]
+    },
+    {
+        "id": "f12139dbe25cfb37",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "transmit",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "|transmit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 120,
+        "y": 2840,
+        "wires": [
+            [
+                "4eabf9a76479b934"
+            ]
+        ]
+    },
+    {
+        "id": "e835d052404a4182",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "SUB RADIO ALL",
+        "func": "// C172|sub slice all\nmsg.payload = \"C73|sub radio all\\r\"; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 736.98046875,
+        "y": 2541.99609375,
+        "wires": [
+            [
+                "17ea2b06b3aaf563"
+            ]
+        ]
+    },
+    {
+        "id": "a3c302fec7953bac",
+        "type": "inject",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 337.4921875,
+        "y": 2340.9453125,
+        "wires": [
+            [
+                "eab765be987560e0"
+            ]
+        ]
+    },
+    {
+        "id": "ee4e81ae75600db1",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "cb64fa2a2a1186d6",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "6600 Freq",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1076.98046875,
+        "y": 2841.99609375,
+        "wires": []
+    },
+    {
+        "id": "8d2b26a1917ba513",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "rfpower",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "|transmit",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 100,
+        "y": 3200,
+        "wires": [
+            [
+                "327929d2e1162560"
+            ]
+        ]
+    },
+    {
+        "id": "327929d2e1162560",
+        "type": "split",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "splt": " ",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 270,
+        "y": 3200,
+        "wires": [
+            [
+                "fe5f7581d9e7d48a"
+            ]
+        ]
+    },
+    {
+        "id": "fe5f7581d9e7d48a",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^rfpower=",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 410,
+        "y": 3200,
+        "wires": [
+            [
+                "a3d95fd2e59206a3"
+            ]
+        ]
+    },
+    {
+        "id": "a3d95fd2e59206a3",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParsePWR",
+        "func": "\nmsg.payload= msg.payload.split('=')[1];\n\nflow.set(\"FlexTXPWR\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 3200,
+        "wires": [
+            [
+                "33f1b1250e9d4bea",
+                "995237d82d1a4317"
+            ]
+        ]
+    },
+    {
+        "id": "33f1b1250e9d4bea",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "cb64fa2a2a1186d6",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "TX Power",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1060,
+        "y": 3200,
+        "wires": []
+    },
+    {
+        "id": "84a00d3561a105a1",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "cb64fa2a2a1186d6",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "Client Name",
+        "label": "Client Names",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1070,
+        "y": 3500,
+        "wires": []
+    },
+    {
+        "id": "99324c8f561a3b7e",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParseClients",
+        "func": "\nmsg.payload= msg.payload.split('=')[1];\n\nflow.set(\"station\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 3460,
+        "wires": [
+            [
+                "84a00d3561a105a1"
+            ]
+        ]
+    },
+    {
+        "id": "493861ea66fbc52b",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^station=",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 3460,
+        "wires": [
+            [
+                "99324c8f561a3b7e"
+            ]
+        ]
+    },
+    {
+        "id": "f005e705031e98f6",
+        "type": "split",
+        "z": "28b677223bbe2485",
+        "name": "6600 Data",
+        "splt": " ",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 270,
+        "y": 3280,
+        "wires": [
+            [
+                "1bffeca853a0d440",
+                "6060ad665df053e7",
+                "493861ea66fbc52b",
+                "71974a8da0a5669f",
+                "d169a5eac6274530"
+            ]
+        ]
+    },
+    {
+        "id": "1bffeca853a0d440",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^model=",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 3280,
+        "wires": [
+            [
+                "52a5fdbb162f398f"
+            ]
+        ]
+    },
+    {
+        "id": "6060ad665df053e7",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^callsign=",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 3340,
+        "wires": [
+            [
+                "d66e1103f1603425"
+            ]
+        ]
+    },
+    {
+        "id": "71974a8da0a5669f",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "inuse_ip=",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^program=",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 440,
+        "y": 3400,
+        "wires": [
+            [
+                "f665240730deec92"
+            ]
+        ]
+    },
+    {
+        "id": "52a5fdbb162f398f",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParseModel",
+        "func": "\nmsg.payload= msg.payload.split('-')[1];\n\nflow.set(\"Model\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 3280,
+        "wires": [
+            [
+                "d8994e9d1f488812"
+            ]
+        ]
+    },
+    {
+        "id": "d66e1103f1603425",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParseCallSign",
+        "func": "\nmsg.payload= msg.payload.split('=')[1];\n\nflow.set(\"Callsign\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 3340,
+        "wires": [
+            [
+                "d7fa53d328a72c3e"
+            ]
+        ]
+    },
+    {
+        "id": "f665240730deec92",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParsePGM",
+        "func": "\nmsg.payload= msg.payload.split('=')[1];\n\nflow.set(\"program\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 3400,
+        "wires": [
+            [
+                "ec992a03ec0db985"
+            ]
+        ]
+    },
+    {
+        "id": "d8994e9d1f488812",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "cb64fa2a2a1186d6",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "Model",
+        "label": "Radio Model",
+        "format": "Flex Radio  {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 750,
+        "y": 3280,
+        "wires": []
+    },
+    {
+        "id": "d7fa53d328a72c3e",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "cb64fa2a2a1186d6",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Radio Name",
+        "label": "Radio Name",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 770,
+        "y": 3340,
+        "wires": []
+    },
+    {
+        "id": "ec992a03ec0db985",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "cb64fa2a2a1186d6",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "Program",
+        "label": "Program",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1100,
+        "y": 3400,
+        "wires": []
+    },
+    {
+        "id": "e5cc8ffe4550f957",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Msg Radio Clear",
+        "func": "msg.payload=\"\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 503.01953125,
+        "y": 3538.00390625,
+        "wires": [
+            [
+                "ec992a03ec0db985",
+                "84a00d3561a105a1"
+            ]
+        ]
+    },
+    {
+        "id": "4699e3541203b615",
+        "type": "inject",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 233.01953125,
+        "y": 3538.00390625,
+        "wires": [
+            [
+                "e5cc8ffe4550f957"
+            ]
+        ]
+    },
+    {
+        "id": "672b58bce7b3d737",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 890,
+        "y": 540,
+        "wires": [
+            [
+                "ca7b990d9dc5ce3e"
+            ],
+            [
+                "f108923dbda2659f"
+            ]
+        ]
+    },
+    {
+        "id": "df7303852797e581",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 560,
+        "wires": [
+            [
+                "20015cc1027189a7",
+                "8ca4b426b8799170",
+                "d687a51846cc76ef"
+            ]
+        ]
+    },
+    {
+        "id": "a8a70279031094db",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "144 Transverter On message",
+        "func": "msg.payload=\"144 Transverter is ON\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 4120,
+        "wires": [
+            [
+                "fc2033da98077e06"
+            ]
+        ]
+    },
+    {
+        "id": "fc2033da98077e06",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "144 Transverter On",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "server": "892c7ac1ccc105cf",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1370,
+        "y": 4120,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "61c12b3ae467aec8",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "144 Transverter is Off msg",
+        "func": "msg.payload =\"144 Transverter is OFF\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 4180,
+        "wires": [
+            [
+                "ade0f51f832024e1"
+            ]
+        ]
+    },
+    {
+        "id": "ade0f51f832024e1",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "144 Transverter is Off",
+        "func": "var fc=5;\nvar sa=0;\nvar addresses=1;\nvar value=0x00;\n\nmsg.slave_ip=\"192.168.50.27\";\nmsg.payload={\"value\":value , 'fc':fc , 'united':12 , 'address' : sa , 'quantity': addresses };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 4180,
+        "wires": [
+            [
+                "e3cac15eb563d622"
+            ]
+        ]
+    },
+    {
+        "id": "e3cac15eb563d622",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "VHF Transverter is Off",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "13",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "server": "892c7ac1ccc105cf",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1480,
+        "y": 4180,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "52a8931791a5e6ef",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "144 Preamplifier is Off msg",
+        "func": "msg.payload =\"144 Preamplifier is OFF\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 3780,
+        "wires": [
+            [
+                "fcb8eb0ab3a5b430"
+            ]
+        ]
+    },
+    {
+        "id": "fcb8eb0ab3a5b430",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "144 Preamplifier is Off",
+        "func": "var fc=5;\nvar sa=1;\nvar addresses=1;\nvar value=0x00;\n\nmsg.slave_ip=\"192.168.50.27\";\nmsg.payload={\"value\":value , 'fc':fc , 'united':12 , 'address' : sa , 'quantity': addresses };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 3780,
+        "wires": [
+            [
+                "9c8ec2c56b14a9a5"
+            ]
+        ]
+    },
+    {
+        "id": "9c8ec2c56b14a9a5",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "name": "144 Preamplifier is Off",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "13",
+        "dataType": "Coil",
+        "adr": "1",
+        "quantity": "1",
+        "server": "881a18c9264be93c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1460,
+        "y": 3780,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "161ac662652035a0",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "440 Transverter On message",
+        "func": "msg.payload=\"440 Transverter is ON\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 4280,
+        "wires": [
+            [
+                "f868f257abaced1f"
+            ]
+        ]
+    },
+    {
+        "id": "f868f257abaced1f",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "440 Transverter On",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "2",
+        "quantity": "1",
+        "server": "881a18c9264be93c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1410,
+        "y": 4280,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e7b9fd7e87ee07c9",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "440 Transverter is Off msg",
+        "func": "msg.payload =\"440 Transverter is OFF\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 4340,
+        "wires": [
+            [
+                "cb025e199a9e299c"
+            ]
+        ]
+    },
+    {
+        "id": "cb025e199a9e299c",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "440 Transverter is Off",
+        "func": "var fc=5;\nvar sa=2;\nvar addresses=1;\nvar value=0x00;\n\nmsg.slave_ip=\"192.168.50.25\";\nmsg.payload={\"value\":value , 'fc':fc , 'united':12 , 'address' : sa , 'quantity': addresses };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1300,
+        "y": 4340,
+        "wires": [
+            [
+                "5c6b2fa3c24ae0d1"
+            ]
+        ]
+    },
+    {
+        "id": "5c6b2fa3c24ae0d1",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "UHF Transverter is Off",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "13",
+        "dataType": "Coil",
+        "adr": "2",
+        "quantity": "1",
+        "server": "892c7ac1ccc105cf",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1520,
+        "y": 4340,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4eddb51f32a245ce",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "440 Preamplifier On message",
+        "func": "msg.payload =\"440 Preamplifier is ON\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 3840,
+        "wires": [
+            [
+                "37a20f1bcd98c06b"
+            ]
+        ]
+    },
+    {
+        "id": "37a20f1bcd98c06b",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "name": "440 Preamplifier On",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "2",
+        "quantity": "1",
+        "server": "881a18c9264be93c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1340,
+        "y": 3840,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "2ef4c992c25de488",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "440 Preamplifier is Off msg",
+        "func": "msg.payload =\"440 Preamplifier is OFF\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 3920,
+        "wires": [
+            [
+                "80d76dd2e7b419aa"
+            ]
+        ]
+    },
+    {
+        "id": "80d76dd2e7b419aa",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "440 Preamplifier is Off",
+        "func": "var fc=5;\nvar sa=2;\nvar addresses=1;\nvar value=0x00;\n\nmsg.slave_ip=\"192.168.50.27\";\nmsg.payload={\"value\":value , 'fc':fc , 'united':12 , 'address' : sa , 'quantity': addresses };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1280,
+        "y": 3920,
+        "wires": [
+            [
+                "a89a529dbbc5bd3a"
+            ]
+        ]
+    },
+    {
+        "id": "a89a529dbbc5bd3a",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "name": "440 Preamplifier is Off",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "13",
+        "dataType": "Coil",
+        "adr": "2",
+        "quantity": "1",
+        "server": "881a18c9264be93c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1500,
+        "y": 3920,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f0dcf39dabdfe32f",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 4140,
+        "wires": [
+            [
+                "4e09f6cb68a3b045"
+            ]
+        ]
+    },
+    {
+        "id": "b1a58ead5f947263",
+        "type": "modbus-read",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "Check 144 Transverter On",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "rate": "5",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "892c7ac1ccc105cf",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 170,
+        "y": 4140,
+        "wires": [
+            [
+                "f0dcf39dabdfe32f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "5c9a878d93c3a945",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 3740,
+        "wires": [
+            [
+                "aa353cee0a50307c",
+                "208df898d7f69f5c"
+            ]
+        ]
+    },
+    {
+        "id": "da7f43d0153eed0e",
+        "type": "modbus-read",
+        "z": "28b677223bbe2485",
+        "name": "Check 144 Preamplifer On",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "1",
+        "quantity": "1",
+        "rate": "5",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "881a18c9264be93c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 170,
+        "y": 3740,
+        "wires": [
+            [
+                "5c9a878d93c3a945"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b41b6ad5eedf0080",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 4300,
+        "wires": [
+            [
+                "b02fe41c4557dfc6"
+            ]
+        ]
+    },
+    {
+        "id": "5d900ac60eb4005d",
+        "type": "modbus-read",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "Check 440 Transverter On",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "2",
+        "quantity": "1",
+        "rate": "5",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "892c7ac1ccc105cf",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 190,
+        "y": 4300,
+        "wires": [
+            [
+                "b41b6ad5eedf0080"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2002694bc6205a9f",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 3880,
+        "wires": [
+            [
+                "864d65b083bfa02e",
+                "4a55cd6f92fc3fb2"
+            ]
+        ]
+    },
+    {
+        "id": "626d9f7a8d0787b1",
+        "type": "modbus-read",
+        "z": "28b677223bbe2485",
+        "name": "Check 440 Preamplifer On",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "2",
+        "quantity": "1",
+        "rate": "5",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "881a18c9264be93c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 170,
+        "y": 3880,
+        "wires": [
+            [
+                "2002694bc6205a9f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "4e09f6cb68a3b045",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "144 Transverter",
+        "label": "144 Transverter",
+        "tooltip": "",
+        "group": "c378ac79d0798cde",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 600,
+        "y": 4140,
+        "wires": [
+            [
+                "fb145a8e224b7c91"
+            ]
+        ]
+    },
+    {
+        "id": "fb145a8e224b7c91",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 770,
+        "y": 4180,
+        "wires": [
+            [
+                "a8a70279031094db"
+            ],
+            [
+                "61c12b3ae467aec8"
+            ]
+        ]
+    },
+    {
+        "id": "1826e82d6deb3943",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 750,
+        "y": 3740,
+        "wires": [
+            [
+                "3666b169c825f564"
+            ],
+            [
+                "52a8931791a5e6ef"
+            ]
+        ]
+    },
+    {
+        "id": "aa353cee0a50307c",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "name": "144 Preamplifier",
+        "label": "144 Preamplifier",
+        "tooltip": "",
+        "group": "c378ac79d0798cde",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 580,
+        "y": 3740,
+        "wires": [
+            [
+                "1826e82d6deb3943"
+            ]
+        ]
+    },
+    {
+        "id": "4ce7057486882b92",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 4300,
+        "wires": [
+            [
+                "161ac662652035a0"
+            ],
+            [
+                "e7b9fd7e87ee07c9"
+            ]
+        ]
+    },
+    {
+        "id": "b02fe41c4557dfc6",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "440 Transverter",
+        "label": "440 Transverter",
+        "tooltip": "",
+        "group": "c378ac79d0798cde",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 600,
+        "y": 4300,
+        "wires": [
+            [
+                "4ce7057486882b92"
+            ]
+        ]
+    },
+    {
+        "id": "3666b169c825f564",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "144 Preamplifier On message",
+        "func": "msg.payload =\"144 Preamplifier is ON\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 3720,
+        "wires": [
+            [
+                "4053fadf90012ec0"
+            ]
+        ]
+    },
+    {
+        "id": "4053fadf90012ec0",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "name": "144 Preamplifier On",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "1",
+        "quantity": "1",
+        "server": "881a18c9264be93c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1560,
+        "y": 3720,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c8fdc2f5c76f7cc7",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 3880,
+        "wires": [
+            [
+                "4eddb51f32a245ce"
+            ],
+            [
+                "2ef4c992c25de488"
+            ]
+        ]
+    },
+    {
+        "id": "864d65b083bfa02e",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "name": "440 Preamplifier",
+        "label": "440 Preamplifier",
+        "tooltip": "",
+        "group": "c378ac79d0798cde",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 600,
+        "y": 3880,
+        "wires": [
+            [
+                "c8fdc2f5c76f7cc7"
+            ]
+        ]
+    },
+    {
+        "id": "c7cdccf4472b7daa",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "f5b011ded40207d4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Blank line",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1600,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "69a7c751c568172d",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "523bf51a2d021096",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Blank line",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1780,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "bb7a4e8cae6b68de",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "Divide Freq by 100",
+        "mode": "link",
+        "links": [
+            "22e600366810e8eb"
+        ],
+        "x": 1065,
+        "y": 2780,
+        "wires": []
+    },
+    {
+        "id": "d169a5eac6274530",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "6600 Data Out ",
+        "mode": "link",
+        "links": [
+            "7b3b2f9f36463f32"
+        ],
+        "x": 258.01953125,
+        "y": 3398.00390625,
+        "wires": []
+    },
+    {
+        "id": "995237d82d1a4317",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "TX Power",
+        "mode": "link",
+        "links": [
+            "9f55647efa612d6f"
+        ],
+        "x": 888.01953125,
+        "y": 3238.00390625,
+        "wires": []
+    },
+    {
+        "id": "51b4ac61f8c8b2a5",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "slice_rx=1",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "|slice 0 in_use=2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 2520,
+        "wires": [
+            [
+                "287104f5c15f4f8a"
+            ]
+        ]
+    },
+    {
+        "id": "287104f5c15f4f8a",
+        "type": "split",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "splt": " ",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 430,
+        "y": 2580,
+        "wires": [
+            [
+                "31343c5f2808735d"
+            ]
+        ]
+    },
+    {
+        "id": "31343c5f2808735d",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^RF_frequency",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 2600,
+        "wires": [
+            [
+                "e453739cda1ef92a"
+            ]
+        ]
+    },
+    {
+        "id": "e453739cda1ef92a",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParseFreq",
+        "func": "\nmsg.payload= msg.payload.split('=')[1]*100000;\n\nflow.set(\"FlexTXFreq\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 790,
+        "y": 2600,
+        "wires": [
+            [
+                "e1db8291b5eccd57"
+            ]
+        ]
+    },
+    {
+        "id": "e1db8291b5eccd57",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Devide Frequency by 100",
+        "func": "var Frequency=msg.payload/100;\n\n\n\nmsg.payload= parseFloat(Frequency).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1010,
+        "y": 2580,
+        "wires": [
+            [
+                "af8dcb7954b4c27e"
+            ]
+        ]
+    },
+    {
+        "id": "af8dcb7954b4c27e",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "6600 Freq 2",
+        "mode": "link",
+        "links": [],
+        "x": 1255,
+        "y": 2540,
+        "wires": []
+    },
+    {
+        "id": "bd6e99aba9022741",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "slice_rx=2",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "|slice 1 in_use=1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 2640,
+        "wires": [
+            [
+                "4be18ed76890a29a"
+            ]
+        ]
+    },
+    {
+        "id": "4be18ed76890a29a",
+        "type": "split",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "splt": " ",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 490,
+        "y": 2660,
+        "wires": [
+            [
+                "5e513aec91077bec"
+            ]
+        ]
+    },
+    {
+        "id": "5e513aec91077bec",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^RF_frequency",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 2660,
+        "wires": [
+            [
+                "6077c8f2bec65d7e"
+            ]
+        ]
+    },
+    {
+        "id": "6077c8f2bec65d7e",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParseFreq",
+        "func": "\nmsg.payload= msg.payload.split('=')[1]*100000;\n\nflow.set(\"FlexTXFreq\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 2660,
+        "wires": [
+            [
+                "c82310aeb3cdd813"
+            ]
+        ]
+    },
+    {
+        "id": "c82310aeb3cdd813",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Devide Frequency by 100",
+        "func": "var Frequency=msg.payload/100;\n\n\n\nmsg.payload= parseFloat(Frequency).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1050,
+        "y": 2660,
+        "wires": [
+            [
+                "89b64d9c6b41b77b"
+            ]
+        ]
+    },
+    {
+        "id": "5b4f9de42ce5f1f2",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "slice_rx=3",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "|slice 2 in_use=1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 2720,
+        "wires": [
+            [
+                "882983ac92aa6014"
+            ]
+        ]
+    },
+    {
+        "id": "882983ac92aa6014",
+        "type": "split",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "splt": " ",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 470,
+        "y": 2720,
+        "wires": [
+            [
+                "4169a42600716c0c"
+            ]
+        ]
+    },
+    {
+        "id": "4169a42600716c0c",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^RF_frequency",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 2720,
+        "wires": [
+            [
+                "32e41688b28b7bcd"
+            ]
+        ]
+    },
+    {
+        "id": "32e41688b28b7bcd",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "ParseFreq",
+        "func": "\nmsg.payload= msg.payload.split('=')[1]*100000;\n\nflow.set(\"FlexTXFreq\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 2720,
+        "wires": [
+            [
+                "51c3a02e7415e89d"
+            ]
+        ]
+    },
+    {
+        "id": "51c3a02e7415e89d",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Devide Frequency by 100",
+        "func": "var Frequency=msg.payload/100;\n\n\n\nmsg.payload= parseFloat(Frequency).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1070,
+        "y": 2720,
+        "wires": [
+            [
+                "27fd48d7a55bb8f6"
+            ]
+        ]
+    },
+    {
+        "id": "89b64d9c6b41b77b",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "6600 Freq 3",
+        "mode": "link",
+        "links": [],
+        "x": 1255,
+        "y": 2640,
+        "wires": []
+    },
+    {
+        "id": "27fd48d7a55bb8f6",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "6600 Freq 4",
+        "mode": "link",
+        "links": [],
+        "x": 1265,
+        "y": 2720,
+        "wires": []
+    },
+    {
+        "id": "0aa7832c2f5068f9",
+        "type": "link in",
+        "z": "28b677223bbe2485",
+        "name": "link in 861",
+        "links": [],
+        "x": 725,
+        "y": 3420,
+        "wires": [
+            [
+                "dd48c646e6c25f97"
+            ]
+        ]
+    },
+    {
+        "id": "b57b34ac3f3fce1d",
+        "type": "link in",
+        "z": "28b677223bbe2485",
+        "name": "link in 862",
+        "links": [],
+        "x": 705,
+        "y": 3580,
+        "wires": [
+            [
+                "654a0be8db459ec6"
+            ]
+        ]
+    },
+    {
+        "id": "dd48c646e6c25f97",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "ParsePGM",
+        "func": "\nmsg.payload= msg.payload.split('=')[1];\n\nflow.set(\"program\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 3420,
+        "wires": [
+            [
+                "ec992a03ec0db985"
+            ]
+        ]
+    },
+    {
+        "id": "654a0be8db459ec6",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "ParseClients",
+        "func": "\nmsg.payload= msg.payload.split('=')[1];\n\nflow.set(\"station\",msg.payload);\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 3540,
+        "wires": [
+            [
+                "84a00d3561a105a1"
+            ]
+        ]
+    },
+    {
+        "id": "b14e3b18f301ebbe",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Yaesu Rotor On message",
+        "func": "msg.payload =\"Yaesu Rotor is ON\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 4580,
+        "wires": [
+            [
+                "4d8805018e2e725f"
+            ]
+        ]
+    },
+    {
+        "id": "4d8805018e2e725f",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "Yaesu Rotor On",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "37",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "server": "92f84afe660f393f",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1340,
+        "y": 4580,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "6f2a077acbd34c30",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Yaesu Rotor is Off msg",
+        "func": "msg.payload =\"Yaesu Rotor is OFF\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 4660,
+        "wires": [
+            [
+                "b2b3523c1e480f2c"
+            ]
+        ]
+    },
+    {
+        "id": "b2b3523c1e480f2c",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Yaesu Rotor is Off",
+        "func": "var fc=5;\nvar sa=0;\nvar addresses=1;\nvar value=0x00;\n\nmsg.slave_ip=\"192.168.50.37\";\nmsg.payload={\"value\":value , 'fc':fc , 'united':37 , 'address' : sa , 'quantity': addresses };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 4660,
+        "wires": [
+            [
+                "b3c447aefd0957cd"
+            ]
+        ]
+    },
+    {
+        "id": "b3c447aefd0957cd",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "Yaesu Rotor is Off",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "37",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "server": "92f84afe660f393f",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1510,
+        "y": 4660,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "54cae7439d54223b",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 4620,
+        "wires": [
+            [
+                "f9e121dff8261ad8"
+            ]
+        ]
+    },
+    {
+        "id": "5d7101e42738f011",
+        "type": "modbus-read",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "Check Yaesu Rotor On",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "37",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "rate": "5",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "92f84afe660f393f",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 180,
+        "y": 4620,
+        "wires": [
+            [
+                "54cae7439d54223b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c697f333f2e52a05",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 4620,
+        "wires": [
+            [
+                "b14e3b18f301ebbe"
+            ],
+            [
+                "6f2a077acbd34c30"
+            ]
+        ]
+    },
+    {
+        "id": "f9e121dff8261ad8",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "name": "Yaesu Rotor",
+        "label": "Yaesu Rotor Controller",
+        "tooltip": "",
+        "group": "c378ac79d0798cde",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 610,
+        "y": 4620,
+        "wires": [
+            [
+                "c697f333f2e52a05"
+            ]
+        ]
+    },
+    {
+        "id": "bbbb0fa6275f1999",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "TCP Radio Data Out - Freq",
+        "mode": "link",
+        "links": [],
+        "x": 315,
+        "y": 2980,
+        "wires": []
+    },
+    {
+        "id": "f86d6aa2025953fd",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "name": "Sat Pass",
+        "label": "<font size = 3> Sat Pass Ready",
+        "tooltip": "",
+        "group": "c378ac79d0798cde",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 440,
+        "y": 1060,
+        "wires": [
+            [
+                "9e18003a8088fe92"
+            ]
+        ]
+    },
+    {
+        "id": "9e18003a8088fe92",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 610,
+        "y": 1060,
+        "wires": [
+            [
+                "51a4298e51419598",
+                "eadfeeea97c2c90b",
+                "1bbe4aa18e74181f",
+                "16ccbf1aa17fe8e7"
+            ],
+            [
+                "be70711b8eb7db06",
+                "eadfeeea97c2c90b",
+                "1bbe4aa18e74181f",
+                "4ad4b008c57e3ea7"
+            ]
+        ]
+    },
+    {
+        "id": "9756f84723bf6fbd",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "Sat Pass",
+        "mode": "link",
+        "links": [],
+        "x": 1005,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "a1b011cfa7fde377",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "d43038e704b3ad26",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "name": "Sat Pass",
+        "label": "",
+        "format": "<font size = 3> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1197,
+        "y": 1205,
+        "wires": []
+    },
+    {
+        "id": "51a4298e51419598",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "SAT PASS",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 1220,
+        "wires": [
+            [
+                "a1b011cfa7fde377",
+                "ee17f6df302d7917",
+                "5381a4bdb139e16a"
+            ]
+        ]
+    },
+    {
+        "id": "be70711b8eb7db06",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 882,
+        "y": 1152,
+        "wires": [
+            [
+                "a1b011cfa7fde377",
+                "ee17f6df302d7917",
+                "5381a4bdb139e16a"
+            ]
+        ]
+    },
+    {
+        "id": "5e8ce7aa9db07fcb",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "Sat",
+                "vt": "str"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 1180,
+        "wires": [
+            [
+                "be70711b8eb7db06"
+            ],
+            [
+                "51a4298e51419598"
+            ]
+        ]
+    },
+    {
+        "id": "545cb2dc5f902c57",
+        "type": "ui_template",
+        "z": "28b677223bbe2485",
+        "d": true,
+        "group": "c378ac79d0798cde",
+        "name": "Sat Pass Reset",
+        "order": 12,
+        "width": "0",
+        "height": "0",
+        "format": "<md-button class=\"filled touched bigfont rounded vibrate\" style=\"background-color:#27ae60\" ng-click=\"send({payload: 'Sat Pass Reset'}  )\"> \n    Reset<br/>Sat Pass Indicator\n</md-button> \n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 360,
+        "y": 1180,
+        "wires": [
+            [
+                "5e8ce7aa9db07fcb"
+            ]
+        ]
+    },
+    {
+        "id": "eadfeeea97c2c90b",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "4",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 1040,
+        "wires": [
+            [
+                "9756f84723bf6fbd",
+                "672b58bce7b3d737",
+                "fda5f930b3638def"
+            ]
+        ]
+    },
+    {
+        "id": "1bbe4aa18e74181f",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "5",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 1080,
+        "wires": [
+            [
+                "9756f84723bf6fbd",
+                "672b58bce7b3d737",
+                "fda5f930b3638def"
+            ]
+        ]
+    },
+    {
+        "id": "ee17f6df302d7917",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "c378ac79d0798cde",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Sat Pass",
+        "label": "",
+        "format": "<font size = 3> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1196,
+        "y": 1154,
+        "wires": []
+    },
+    {
+        "id": "b35a0f0c466c5f68",
+        "type": "modbus-read",
+        "z": "28b677223bbe2485",
+        "name": "Check IC9700 On",
+        "topic": "",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "rate": "5",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "881a18c9264be93c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 270,
+        "y": 560,
+        "wires": [
+            [
+                "df7303852797e581",
+                "810aaf63a218bf46"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "20015cc1027189a7",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "name": "9700",
+        "label": "9700",
+        "tooltip": "",
+        "group": "c378ac79d0798cde",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "outlet?21=",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 690,
+        "y": 600,
+        "wires": [
+            [
+                "672b58bce7b3d737"
+            ]
+        ]
+    },
+    {
+        "id": "ca7b990d9dc5ce3e",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "name": "9700 On",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "12",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "server": "881a18c9264be93c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1080,
+        "y": 580,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "f108923dbda2659f",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "9700 Off",
+        "func": "var fc=5;\nvar sa=0;\nvar addresses=1;\nvar value=0x00;\n\nmsg.slave_ip=\"192.168.50.27\";\nmsg.payload={\"value\":value , 'fc':fc , 'united':12 , 'address' : sa , 'quantity': addresses };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1060,
+        "y": 680,
+        "wires": [
+            [
+                "e73ebb4a16481204"
+            ]
+        ]
+    },
+    {
+        "id": "e73ebb4a16481204",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "9700  Off",
+        "func": "var fc=5;\nvar sa=0;\nvar addresses=1;\nvar value=0x00;\n\nmsg.slave_ip=\"192.168.50.27\";\nmsg.payload={\"value\":value , 'fc':fc , 'united':12 , 'address' : sa , 'quantity': addresses };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 680,
+        "wires": [
+            [
+                "ceedc5f57b3a98c9"
+            ]
+        ]
+    },
+    {
+        "id": "ceedc5f57b3a98c9",
+        "type": "modbus-write",
+        "z": "28b677223bbe2485",
+        "name": "9700 is Off",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "13",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "server": "881a18c9264be93c",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 1430,
+        "y": 680,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7e6fade788778043",
+        "type": "comment",
+        "z": "28b677223bbe2485",
+        "name": "Flow VHF/UHF tab",
+        "info": "",
+        "x": 90,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "9a7a8c3b538c9d70",
+        "type": "comment",
+        "z": "28b677223bbe2485",
+        "name": "Switch Turns on 9700 and rotor and displays Sat Pass",
+        "info": "",
+        "x": 640,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "f4162b21899e225d",
+        "type": "comment",
+        "z": "28b677223bbe2485",
+        "name": "Flex Status Display",
+        "info": "",
+        "x": 310,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "bf2698a5b3a5ed9f",
+        "type": "comment",
+        "z": "28b677223bbe2485",
+        "name": "Preamp Controls",
+        "info": "",
+        "x": 140,
+        "y": 3640,
+        "wires": []
+    },
+    {
+        "id": "ca6ce7ab7f89ea40",
+        "type": "comment",
+        "z": "28b677223bbe2485",
+        "name": "Transverter Controls - no longer used",
+        "info": "",
+        "x": 210,
+        "y": 4040,
+        "wires": []
+    },
+    {
+        "id": "d3b2033762e5e713",
+        "type": "comment",
+        "z": "28b677223bbe2485",
+        "name": "Old Rotor Control - no longer used",
+        "info": "",
+        "x": 180,
+        "y": 4500,
+        "wires": []
+    },
+    {
+        "id": "8ca4b426b8799170",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "name": "9700",
+        "label": "9700",
+        "tooltip": "",
+        "group": "546ab70dc0c713ca",
+        "order": 5,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "outlet?21=",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 690,
+        "y": 660,
+        "wires": [
+            [
+                "672b58bce7b3d737"
+            ]
+        ]
+    },
+    {
+        "id": "208df898d7f69f5c",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "name": "144 Preamplifier",
+        "label": "144 Preamplifier",
+        "tooltip": "",
+        "group": "546ab70dc0c713ca",
+        "order": 7,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 580,
+        "y": 3800,
+        "wires": [
+            [
+                "1826e82d6deb3943"
+            ]
+        ]
+    },
+    {
+        "id": "4a55cd6f92fc3fb2",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "name": "440 Preamplifier",
+        "label": "440 Preamplifier",
+        "tooltip": "",
+        "group": "546ab70dc0c713ca",
+        "order": 8,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 600,
+        "y": 3940,
+        "wires": [
+            [
+                "c8fdc2f5c76f7cc7"
+            ]
+        ]
+    },
+    {
+        "id": "adf3293686fe55f9",
+        "type": "ui_switch",
+        "z": "28b677223bbe2485",
+        "name": "Sat Pass",
+        "label": "<font size = 3> Sat Pass Ready",
+        "tooltip": "",
+        "group": "546ab70dc0c713ca",
+        "order": 10,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 440,
+        "y": 1100,
+        "wires": [
+            [
+                "9e18003a8088fe92"
+            ]
+        ]
+    },
+    {
+        "id": "5381a4bdb139e16a",
+        "type": "ui_text",
+        "z": "28b677223bbe2485",
+        "group": "546ab70dc0c713ca",
+        "order": 4,
+        "width": "2",
+        "height": "1",
+        "name": "Sat Pass",
+        "label": "",
+        "format": "<font size = 3> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1201,
+        "y": 1244,
+        "wires": []
+    },
+    {
+        "id": "fda5f930b3638def",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "Preamp",
+        "mode": "link",
+        "links": [
+            "4ada50deb3014041"
+        ],
+        "x": 1025,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "4ada50deb3014041",
+        "type": "link in",
+        "z": "28b677223bbe2485",
+        "name": "Preamp",
+        "links": [
+            "fda5f930b3638def"
+        ],
+        "x": 655,
+        "y": 3660,
+        "wires": [
+            [
+                "1826e82d6deb3943",
+                "c8fdc2f5c76f7cc7"
+            ]
+        ]
+    },
+    {
+        "id": "5e1908d95a50854e",
+        "type": "influxdb out",
+        "z": "28b677223bbe2485",
+        "influxdb": "88b69e91096da659",
+        "name": "9700",
+        "measurement": "9700",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 1510,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5fbc0851f56748c7",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 440,
+        "wires": [
+            [
+                "5e1908d95a50854e",
+                "ff0133474b24ba7b"
+            ]
+        ]
+    },
+    {
+        "id": "fe39914506c9dc78",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1220,
+        "y": 500,
+        "wires": [
+            [
+                "5e1908d95a50854e",
+                "73726847b4dce93b"
+            ]
+        ]
+    },
+    {
+        "id": "ff0133474b24ba7b",
+        "type": "delay",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1486,
+        "y": 503,
+        "wires": [
+            [
+                "c1f66b74f0841520"
+            ]
+        ]
+    },
+    {
+        "id": "73726847b4dce93b",
+        "type": "delay",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1503,
+        "y": 584,
+        "wires": [
+            [
+                "c1f66b74f0841520"
+            ]
+        ]
+    },
+    {
+        "id": "c1f66b74f0841520",
+        "type": "ui_chart",
+        "z": "28b677223bbe2485",
+        "name": "9700",
+        "group": "81d7209723679c17",
+        "order": 20,
+        "width": 0,
+        "height": 0,
+        "label": "9700",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "7",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 2190,
+        "y": 540,
+        "wires": [
+            [
+                "05e07fd97d5f476b"
+            ]
+        ]
+    },
+    {
+        "id": "05e07fd97d5f476b",
+        "type": "file",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "filename": "\\Users\\Remote\\.node-red\\logs\\9700_7d.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 2490,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "827ff31788298cda",
+        "type": "inject",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1590,
+        "y": 660,
+        "wires": [
+            [
+                "88f26f1716798ba0"
+            ]
+        ]
+    },
+    {
+        "id": "88f26f1716798ba0",
+        "type": "file in",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "filename": "\\Users\\Remote\\.node-red\\logs\\9700_7d.txt",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1930,
+        "y": 660,
+        "wires": [
+            [
+                "2fe037e56032e6b1"
+            ]
+        ]
+    },
+    {
+        "id": "2fe037e56032e6b1",
+        "type": "json",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 2230,
+        "y": 660,
+        "wires": [
+            [
+                "c1f66b74f0841520"
+            ]
+        ]
+    },
+    {
+        "id": "765be71b8779ded6",
+        "type": "switch",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 750,
+        "y": 460,
+        "wires": [
+            [
+                "5fbc0851f56748c7"
+            ],
+            [
+                "fe39914506c9dc78"
+            ]
+        ]
+    },
+    {
+        "id": "810aaf63a218bf46",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 500,
+        "wires": [
+            [
+                "765be71b8779ded6"
+            ]
+        ]
+    },
+    {
+        "id": "d687a51846cc76ef",
+        "type": "function",
+        "z": "28b677223bbe2485",
+        "name": "Announce 9700 State with Timestamp",
+        "func": "// Retrieve the last value and the null-logged flag from context\nlet lastValue = context.get('lastValue') || null; // Initialize as null for the first run\nlet hasLoggedLastValue = context.get('hasLoggedLastValue') || false;\n\n// Check if the input is null, undefined, or a false-like value\nif (msg.payload == null || (typeof msg.payload === 'string' && msg.payload.trim() === '')) {\n    if (lastValue && !hasLoggedLastValue) {\n        // Log the last message before null or empty input\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `user disconnect at: ${timestamp}: ${lastValue}`;\n\n        // Set the flag to prevent repeated logging\n        context.set('hasLoggedLastValue', true);\n        return msg;\n    } else {\n        // Ignore subsequent nulls or if there's no last valid value\n        return null;\n    }\n}\n\n// If input is explicitly true\nif (msg.payload === true) {\n    // If transitioning from a different state, update the context\n    if (lastValue !== true) {\n        context.set('lastValue', true);\n\n        // Reset the null-logged flag\n        context.set('hasLoggedLastValue', false);\n\n        // Add a local timestamp and the message \"9700 On\"\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `${timestamp}: 9700 On`;\n\n        // Return the message\n        return msg;\n    }\n\n    // No action if already in \"9700 On\" state\n    return null;\n}\n\n// If input is explicitly false\nif (msg.payload === false) {\n    // If transitioning from a true state, update the context\n    if (lastValue === true) {\n        context.set('lastValue', false);\n\n        // Reset the null-logged flag\n        context.set('hasLoggedLastValue', false);\n\n        // Add a local timestamp and the message \"9700 Off\"\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `${timestamp}: 9700 Off`;\n\n        // Return the message\n        return msg;\n    }\n\n    // No action if already in \"9700 Off\" state\n    return null;\n}\n\n// For other valid inputs\nif (msg.payload !== lastValue || hasLoggedLastValue) {\n    // Update the context with the new value\n    context.set('lastValue', msg.payload);\n\n    // Reset the null-logged flag since we have a new valid message\n    context.set('hasLoggedLastValue', false);\n\n    // Add a local timestamp to the payload\n    let now = new Date();\n    let timestamp = now.toLocaleString();\n    msg.payload = `${timestamp}: ${msg.payload}`;\n\n    // Pass the message for writing\n    return msg;\n}\n\n// If no change and no null transition, do nothing\nreturn null;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 380,
+        "wires": [
+            [
+                "506feae45ac85ebe"
+            ]
+        ]
+    },
+    {
+        "id": "506feae45ac85ebe",
+        "type": "link out",
+        "z": "28b677223bbe2485",
+        "name": "9700 On/Off Log",
+        "mode": "link",
+        "links": [],
+        "x": 985,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a1ed060a3f532daf",
+        "type": "comment",
+        "z": "28b677223bbe2485",
+        "name": "Log 9700 On",
+        "info": "",
+        "x": 735,
+        "y": 333,
+        "wires": []
+    },
+    {
+        "id": "4ad4b008c57e3ea7",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "reset",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 414,
+        "y": 1311,
+        "wires": [
+            [
+                "16ccbf1aa17fe8e7"
+            ]
+        ]
+    },
+    {
+        "id": "16ccbf1aa17fe8e7",
+        "type": "delay",
+        "z": "28b677223bbe2485",
+        "name": "Turn off radio/preamps/rotor after 90 minutes - reset of turned off",
+        "pauseType": "delay",
+        "timeout": "90",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 671,
+        "y": 1405,
+        "wires": [
+            [
+                "736866e51f330350"
+            ]
+        ]
+    },
+    {
+        "id": "736866e51f330350",
+        "type": "change",
+        "z": "28b677223bbe2485",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 930,
+        "y": 1318,
+        "wires": [
+            [
+                "9e18003a8088fe92",
+                "adf3293686fe55f9"
+            ]
+        ]
+    },
+    {
+        "id": "d4adb6a83770eb58",
+        "type": "ui_group",
+        "name": "Radio",
+        "tab": "",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "fea0d8d1d94042f3",
+        "type": "ui_group",
+        "name": "Status",
+        "tab": "",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "cb64fa2a2a1186d6",
+        "type": "ui_group",
+        "name": "Radio Info",
+        "tab": "b35a51ba4e1dee85",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "892c7ac1ccc105cf",
+        "type": "modbus-client",
+        "name": "Modbus 25",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.50.25",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 25,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "881a18c9264be93c",
+        "type": "modbus-client",
+        "name": "Modbus 27",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.50.27",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "c378ac79d0798cde",
+        "type": "ui_group",
+        "name": "Radio",
+        "tab": "b35a51ba4e1dee85",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f5b011ded40207d4",
+        "type": "ui_group",
+        "name": "Tuner Control",
+        "tab": "",
+        "order": 6,
+        "disp": true,
+        "width": "3",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "523bf51a2d021096",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "b35a51ba4e1dee85",
+        "order": 4,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "92f84afe660f393f",
+        "type": "modbus-client",
+        "name": "Modbus 37",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "192.168.50.37",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "37",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "d43038e704b3ad26",
+        "type": "ui_group",
+        "name": "Alerts",
+        "tab": "d3fd3a03eeca216a",
+        "order": 1,
+        "disp": true,
+        "width": "3",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "546ab70dc0c713ca",
+        "type": "ui_group",
+        "name": "Radio Control",
+        "tab": "6d6f25e436f987a2",
+        "order": 1,
+        "disp": false,
+        "width": "32",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "88b69e91096da659",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "Org",
+        "name": "InfluxDB Server",
+        "usetls": false,
+        "tls": "c1307d285c9ead74",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "81d7209723679c17",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "6f2586bb65b2193a",
+        "order": 1,
+        "disp": false,
+        "width": 4,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b35a51ba4e1dee85",
+        "type": "ui_tab",
+        "d": true,
+        "name": "VHF/UHF Station Control",
+        "icon": "radio",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d3fd3a03eeca216a",
+        "type": "ui_tab",
+        "name": "HF Station Control",
+        "icon": "radio",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6d6f25e436f987a2",
+        "type": "ui_tab",
+        "name": "Sat Control",
+        "icon": "dashboard",
+        "order": 15,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c1307d285c9ead74",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "6f2586bb65b2193a",
+        "type": "ui_tab",
+        "name": "Master Status Graphs",
+        "icon": "show_chart",
+        "order": 12,
+        "disabled": false,
+        "hidden": false
+    }
+]

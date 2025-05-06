@@ -1,0 +1,3734 @@
+[
+    {
+        "id": "6d24782ad2111ba5",
+        "type": "tab",
+        "label": "External Processing - MQTT_InfluxDB",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6270361ba16e3a5e",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Inverter Voltage :15",
+        "links": [],
+        "x": 165,
+        "y": 320,
+        "wires": [
+            [
+                "bce74aec18d05d3a",
+                "b3b01d4b0b99f2f8"
+            ]
+        ]
+    },
+    {
+        "id": "bce74aec18d05d3a",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Inverter",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 440,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "4d27ac482364b194",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Wind Turbine :15",
+        "links": [
+            "6185b144525fa228"
+        ],
+        "x": 185,
+        "y": 540,
+        "wires": [
+            [
+                "0c7b7fa6c5f9a0e7",
+                "a7fc9bcb23d04c0b"
+            ]
+        ]
+    },
+    {
+        "id": "0c7b7fa6c5f9a0e7",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Wind_Turbine",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 440,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "f73533d8bc97083b",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Grid Voltage :15",
+        "links": [
+            "6dbfd3f252c2a48e"
+        ],
+        "x": 185,
+        "y": 780,
+        "wires": [
+            [
+                "31252fa73dcf99c8",
+                "26a30e687599b8e7"
+            ]
+        ]
+    },
+    {
+        "id": "31252fa73dcf99c8",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Grid",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 450,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "adc7e0c902cde74a",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Grey_Box",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 420,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "b3d2915189b040cd",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Grey Box Temp :30",
+        "links": [
+            "2c60e49ef595faab"
+        ],
+        "x": 195,
+        "y": 1060,
+        "wires": [
+            [
+                "adc7e0c902cde74a",
+                "a8517c4269b44a31"
+            ]
+        ]
+    },
+    {
+        "id": "024dff0828a0b866",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Radio_Power",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 430,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "bb36633970364544",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Radio Power Voltage :15",
+        "links": [
+            "4a2121e7b11fcfea"
+        ],
+        "x": 185,
+        "y": 1260,
+        "wires": [
+            [
+                "024dff0828a0b866",
+                "47793688981165a8"
+            ]
+        ]
+    },
+    {
+        "id": "c7f0eeaabdad5fbd",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Inside_Vault",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 430,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "df287bc5ee3b059a",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Inside Vault Temp :30",
+        "links": [
+            "6ff3c26f3da57212"
+        ],
+        "x": 205,
+        "y": 1520,
+        "wires": [
+            [
+                "c7f0eeaabdad5fbd",
+                "7b8655c247ec0c71"
+            ]
+        ]
+    },
+    {
+        "id": "9b4abe4c8e748cc1",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Solar_Control",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 440,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "c5f14dafefa7525c",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Solar Control Temp :30",
+        "links": [
+            "bf7e84f90fd21c5e"
+        ],
+        "x": 215,
+        "y": 1700,
+        "wires": [
+            [
+                "a297d7c9b995935b",
+                "9b4abe4c8e748cc1"
+            ]
+        ]
+    },
+    {
+        "id": "ec7b7c6d16c1da85",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Outside_Air",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 430,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "cd6fc22555eea9db",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Outside Air Temp :30",
+        "links": [
+            "3594b0273dc9d42d"
+        ],
+        "x": 225,
+        "y": 1900,
+        "wires": [
+            [
+                "5edce8e7bf93e9ce",
+                "ec7b7c6d16c1da85"
+            ]
+        ]
+    },
+    {
+        "id": "8d7629d9897038d6",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Inside_Enclosure",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 450,
+        "y": 2240,
+        "wires": []
+    },
+    {
+        "id": "3c0af8fee4c4a226",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Inside Enclosure Temp :30",
+        "links": [
+            "08bf1974d6235795"
+        ],
+        "x": 235,
+        "y": 2200,
+        "wires": [
+            [
+                "8d7629d9897038d6"
+            ]
+        ]
+    },
+    {
+        "id": "adb5d36435e2b3c1",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Controller_Temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 470,
+        "y": 2520,
+        "wires": []
+    },
+    {
+        "id": "e39bcb6677fef909",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Controller Temp :30",
+        "links": [
+            "7354a693b73ef962"
+        ],
+        "x": 235,
+        "y": 2460,
+        "wires": [
+            [
+                "adb5d36435e2b3c1"
+            ]
+        ]
+    },
+    {
+        "id": "63c8d19b3140e65b",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Tower Base Batt :15",
+        "links": [
+            "f1da1fed1b2b1e0d"
+        ],
+        "x": 245,
+        "y": 2700,
+        "wires": [
+            [
+                "f0ef3c7f807c87a3"
+            ]
+        ]
+    },
+    {
+        "id": "f0ef3c7f807c87a3",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Tower_Base_Batt",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 430,
+        "y": 2820,
+        "wires": []
+    },
+    {
+        "id": "4465f8fafdac8bb1",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "MQTT_InfluxDB Env Tab",
+        "info": "",
+        "x": 510,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "88aef5238eb38948",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "MQTT_InfluxDB Master Status Tab",
+        "info": "",
+        "x": 1620,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3f9df05465fbfa9f",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1740,
+        "y": 460,
+        "wires": [
+            [
+                "efd3055f39aa1757"
+            ]
+        ]
+    },
+    {
+        "id": "efd3055f39aa1757",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "RPI_On_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 1960,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "d0fd17e4f17abb7a",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Rpi 4 On Status - True - 1",
+        "links": [],
+        "x": 1405,
+        "y": 280,
+        "wires": [
+            [
+                "3f9df05465fbfa9f",
+                "8f97c3c627c68647"
+            ]
+        ]
+    },
+    {
+        "id": "3bfd4d4d92b6b664",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Rpi 4 On Status - False - 0",
+        "links": [],
+        "x": 1405,
+        "y": 400,
+        "wires": [
+            [
+                "3f9df05465fbfa9f",
+                "8f97c3c627c68647"
+            ]
+        ]
+    },
+    {
+        "id": "c15ba4c5075dadfc",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "WX Station On Status - True - 1",
+        "links": [],
+        "x": 1425,
+        "y": 620,
+        "wires": [
+            [
+                "adc00a74fdc99e56",
+                "d96045c9f1d7e127"
+            ]
+        ]
+    },
+    {
+        "id": "8503ab97e6037e9f",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "WX Station On Status - False - 0",
+        "links": [],
+        "x": 1425,
+        "y": 740,
+        "wires": [
+            [
+                "adc00a74fdc99e56",
+                "d96045c9f1d7e127"
+            ]
+        ]
+    },
+    {
+        "id": "fe0d1fe88b8f0739",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "PC Computer Status - True - 1",
+        "links": [],
+        "x": 1435,
+        "y": 900,
+        "wires": [
+            [
+                "8c96bff488417168",
+                "39b91b14601a589d"
+            ]
+        ]
+    },
+    {
+        "id": "b4d8bab5e9ef9a31",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "PC Computer Status - False - 0",
+        "links": [],
+        "x": 1435,
+        "y": 1020,
+        "wires": [
+            [
+                "8c96bff488417168",
+                "39b91b14601a589d"
+            ]
+        ]
+    },
+    {
+        "id": "39644c12e6ce4641",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Keep Alive Status - True - 1",
+        "links": [],
+        "x": 1435,
+        "y": 1160,
+        "wires": [
+            [
+                "5d352d8e95517748",
+                "2ea4bcc1312def29"
+            ]
+        ]
+    },
+    {
+        "id": "2ad02dcbc6d6d100",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Keep Alive Status - False - 0",
+        "links": [],
+        "x": 1435,
+        "y": 1280,
+        "wires": [
+            [
+                "5d352d8e95517748",
+                "2ea4bcc1312def29"
+            ]
+        ]
+    },
+    {
+        "id": "0c3f60ebb5f8a172",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Radio Power Status - True - 1",
+        "links": [],
+        "x": 1435,
+        "y": 1380,
+        "wires": [
+            [
+                "80f3d44424439a9f",
+                "c5d73c19a5bf9c5b"
+            ]
+        ]
+    },
+    {
+        "id": "f813895538d576fd",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Radio Power Status - False - 0",
+        "links": [],
+        "x": 1435,
+        "y": 1500,
+        "wires": [
+            [
+                "80f3d44424439a9f",
+                "c5d73c19a5bf9c5b"
+            ]
+        ]
+    },
+    {
+        "id": "ee237cfd212129cd",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Vault Fan Status - True - 1",
+        "links": [],
+        "x": 1435,
+        "y": 1640,
+        "wires": [
+            [
+                "5deff5fbb5d2a06a",
+                "a2ccd0e236894096"
+            ]
+        ]
+    },
+    {
+        "id": "d7a889cc3658cbf9",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Vault Fan Status - False - 0",
+        "links": [],
+        "x": 1435,
+        "y": 1720,
+        "wires": [
+            [
+                "5deff5fbb5d2a06a",
+                "a2ccd0e236894096"
+            ]
+        ]
+    },
+    {
+        "id": "aaf14edb34e174d2",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "AC Status - True - 1",
+        "links": [],
+        "x": 1435,
+        "y": 1820,
+        "wires": [
+            [
+                "3e599fa3ddd7cd10",
+                "7079abf5ed98cd6e"
+            ]
+        ]
+    },
+    {
+        "id": "d144f883ffa947a5",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "AC Status - False - 0",
+        "links": [],
+        "x": 1435,
+        "y": 1900,
+        "wires": [
+            [
+                "3e599fa3ddd7cd10",
+                "7079abf5ed98cd6e"
+            ]
+        ]
+    },
+    {
+        "id": "2bd223e9d0d2253f",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Solar Status - True - 1",
+        "links": [],
+        "x": 1435,
+        "y": 2020,
+        "wires": [
+            [
+                "d9d62fbd93c385d3",
+                "819f6e863323260d"
+            ]
+        ]
+    },
+    {
+        "id": "ae3909e90f908383",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Solar Status - False - 0",
+        "links": [],
+        "x": 1435,
+        "y": 2100,
+        "wires": [
+            [
+                "d9d62fbd93c385d3",
+                "819f6e863323260d"
+            ]
+        ]
+    },
+    {
+        "id": "79839cdcec3d98b0",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Grid Status - True - 1",
+        "links": [],
+        "x": 1435,
+        "y": 2220,
+        "wires": [
+            [
+                "4070b48dfd24aa06"
+            ]
+        ]
+    },
+    {
+        "id": "59488f7031e04bb9",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Grid Status - False - 0",
+        "links": [],
+        "x": 1435,
+        "y": 2340,
+        "wires": [
+            [
+                "4070b48dfd24aa06"
+            ]
+        ]
+    },
+    {
+        "id": "adc00a74fdc99e56",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1720,
+        "y": 780,
+        "wires": [
+            [
+                "d96045c9f1d7e127"
+            ]
+        ]
+    },
+    {
+        "id": "d96045c9f1d7e127",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "WX_On_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 1980,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "39b91b14601a589d",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "PC_Computer_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2060,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "2ea4bcc1312def29",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Keep_Alive_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2050,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "5d352d8e95517748",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1720,
+        "y": 1280,
+        "wires": [
+            [
+                "2ea4bcc1312def29"
+            ]
+        ]
+    },
+    {
+        "id": "8c96bff488417168",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1720,
+        "y": 1040,
+        "wires": [
+            [
+                "39b91b14601a589d"
+            ]
+        ]
+    },
+    {
+        "id": "80f3d44424439a9f",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1720,
+        "y": 1540,
+        "wires": [
+            [
+                "c5d73c19a5bf9c5b"
+            ]
+        ]
+    },
+    {
+        "id": "c5d73c19a5bf9c5b",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Radio_Power_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2080,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "5deff5fbb5d2a06a",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1720,
+        "y": 1740,
+        "wires": [
+            [
+                "a2ccd0e236894096"
+            ]
+        ]
+    },
+    {
+        "id": "a2ccd0e236894096",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Vault_Fan_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2090,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "3e599fa3ddd7cd10",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1720,
+        "y": 1940,
+        "wires": [
+            [
+                "7079abf5ed98cd6e"
+            ]
+        ]
+    },
+    {
+        "id": "7079abf5ed98cd6e",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "AC_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "75cf19f0f3b40ef5",
+        "x": 2050,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "d9d62fbd93c385d3",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1718,
+        "y": 2140,
+        "wires": [
+            [
+                "819f6e863323260d"
+            ]
+        ]
+    },
+    {
+        "id": "819f6e863323260d",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Solar_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2054,
+        "y": 2131,
+        "wires": []
+    },
+    {
+        "id": "4070b48dfd24aa06",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1725,
+        "y": 2348,
+        "wires": [
+            [
+                "2ba3ad8148f805c2"
+            ]
+        ]
+    },
+    {
+        "id": "2ba3ad8148f805c2",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Grid_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2054,
+        "y": 2345,
+        "wires": []
+    },
+    {
+        "id": "367201e41d746e28",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Flex 6600 Ping",
+        "links": [],
+        "x": 1435,
+        "y": 2440,
+        "wires": [
+            [
+                "56add3d600bb1390",
+                "68cf53527376f250"
+            ]
+        ]
+    },
+    {
+        "id": "764f39f6998829e5",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Secuirty Camera Server Status Ping",
+        "links": [],
+        "x": 1435,
+        "y": 2640,
+        "wires": [
+            [
+                "6a3f238c913704e7",
+                "fc484827136ac2bb"
+            ]
+        ]
+    },
+    {
+        "id": "e9d53bbfd2534b3e",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "VHF/UHF Web Relay Status Ping",
+        "links": [],
+        "x": 1435,
+        "y": 2820,
+        "wires": [
+            [
+                "1e4dd20eb7d47c10",
+                "4b5e54d94558a224"
+            ]
+        ]
+    },
+    {
+        "id": "92709f8077eb436b",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Antenna Control Web Relay Ping",
+        "links": [],
+        "x": 1425,
+        "y": 3040,
+        "wires": [
+            [
+                "2d039cdbf4176707",
+                "fc32bbcec578c847"
+            ]
+        ]
+    },
+    {
+        "id": "435d9944022a002d",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "4 Square Arduino Ping",
+        "links": [],
+        "x": 1425,
+        "y": 3200,
+        "wires": [
+            [
+                "1780c1c658c56a11",
+                "297aef59747123b9"
+            ]
+        ]
+    },
+    {
+        "id": "bdbc384af6396ea9",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Arduino Power Web Relay Ping",
+        "links": [],
+        "x": 1425,
+        "y": 3400,
+        "wires": [
+            [
+                "8f7faca9335d1816",
+                "0d2a267724146481"
+            ]
+        ]
+    },
+    {
+        "id": "6167161e42a97af9",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Tower Base Comp Ping",
+        "links": [],
+        "x": 1425,
+        "y": 3620,
+        "wires": [
+            [
+                "a92d8e3d2ba56765",
+                "2564b66e01a6ea38"
+            ]
+        ]
+    },
+    {
+        "id": "1e75476f4f71e4eb",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Env Control Web Relay Ping",
+        "links": [],
+        "x": 1425,
+        "y": 3840,
+        "wires": [
+            [
+                "5784e9ef313c8b5a",
+                "5733a8c7f6a48949"
+            ]
+        ]
+    },
+    {
+        "id": "5bf8721c1fd8f552",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "RPI 4 Ping",
+        "links": [],
+        "x": 1425,
+        "y": 4040,
+        "wires": [
+            [
+                "1adc6753fdf4c169",
+                "c99572f5edfc90a7"
+            ]
+        ]
+    },
+    {
+        "id": "e4c60a308b841d7c",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "WX Station Hub Ping",
+        "links": [],
+        "x": 1425,
+        "y": 4220,
+        "wires": [
+            [
+                "04e7f8648f7366ee",
+                "f947966299b1565e"
+            ]
+        ]
+    },
+    {
+        "id": "07ace2dce2131abf",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Main Router Ping",
+        "links": [],
+        "x": 1435,
+        "y": 4900,
+        "wires": [
+            [
+                "0204bc4214496859",
+                "4f262d8159fc5779"
+            ]
+        ]
+    },
+    {
+        "id": "36ebe80601bf27ed",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Antenna Status Web Relay Ping",
+        "links": [],
+        "x": 1425,
+        "y": 4400,
+        "wires": [
+            [
+                "2896511698b9dfb3",
+                "b538677a61b31ca7"
+            ]
+        ]
+    },
+    {
+        "id": "36e39008eacac701",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Rotor Control Ping",
+        "links": [],
+        "x": 1425,
+        "y": 4580,
+        "wires": [
+            [
+                "95a4677d62c3e1d4",
+                "34665c5e3f6c347c"
+            ]
+        ]
+    },
+    {
+        "id": "615ba95b05e4d126",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Satellite Controller Web Relay Ping",
+        "links": [],
+        "x": 1425,
+        "y": 4740,
+        "wires": [
+            [
+                "82240a921638c9c0",
+                "4869d1f46b9e64bf"
+            ]
+        ]
+    },
+    {
+        "id": "56add3d600bb1390",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1720,
+        "y": 2520,
+        "wires": [
+            [
+                "68cf53527376f250"
+            ]
+        ]
+    },
+    {
+        "id": "68cf53527376f250",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Flex_6600_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2050,
+        "y": 2520,
+        "wires": []
+    },
+    {
+        "id": "6a3f238c913704e7",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 2720,
+        "wires": [
+            [
+                "fc484827136ac2bb"
+            ]
+        ]
+    },
+    {
+        "id": "fc484827136ac2bb",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Security_Camera_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2070,
+        "y": 2720,
+        "wires": []
+    },
+    {
+        "id": "4b5e54d94558a224",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "VHF/UHF_Web Relay_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2080,
+        "y": 2920,
+        "wires": []
+    },
+    {
+        "id": "1e4dd20eb7d47c10",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 2920,
+        "wires": [
+            [
+                "4b5e54d94558a224"
+            ]
+        ]
+    },
+    {
+        "id": "fc32bbcec578c847",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Antenna_Control_Web_Relay_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2110,
+        "y": 3100,
+        "wires": []
+    },
+    {
+        "id": "2d039cdbf4176707",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 3100,
+        "wires": [
+            [
+                "fc32bbcec578c847"
+            ]
+        ]
+    },
+    {
+        "id": "1780c1c658c56a11",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 3280,
+        "wires": [
+            [
+                "297aef59747123b9"
+            ]
+        ]
+    },
+    {
+        "id": "297aef59747123b9",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "4_Square_Arduino_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2070,
+        "y": 3280,
+        "wires": []
+    },
+    {
+        "id": "8f7faca9335d1816",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Arduino_Pwr_WR_Ping_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2090,
+        "y": 3480,
+        "wires": []
+    },
+    {
+        "id": "2564b66e01a6ea38",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Tower Base Comp Ping Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2090,
+        "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "a92d8e3d2ba56765",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 3680,
+        "wires": [
+            [
+                "2564b66e01a6ea38"
+            ]
+        ]
+    },
+    {
+        "id": "5733a8c7f6a48949",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Env_Control_Web_Relay_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "75cf19f0f3b40ef5",
+        "x": 2090,
+        "y": 3880,
+        "wires": []
+    },
+    {
+        "id": "5784e9ef313c8b5a",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 3880,
+        "wires": [
+            [
+                "5733a8c7f6a48949"
+            ]
+        ]
+    },
+    {
+        "id": "c99572f5edfc90a7",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Rpi_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2030,
+        "y": 4080,
+        "wires": []
+    },
+    {
+        "id": "1adc6753fdf4c169",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 4080,
+        "wires": [
+            [
+                "c99572f5edfc90a7"
+            ]
+        ]
+    },
+    {
+        "id": "f947966299b1565e",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "WX_Station_Hub_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2070,
+        "y": 4280,
+        "wires": []
+    },
+    {
+        "id": "04e7f8648f7366ee",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 4280,
+        "wires": [
+            [
+                "f947966299b1565e"
+            ]
+        ]
+    },
+    {
+        "id": "b538677a61b31ca7",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Antenna_Status_Web_Relay_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2100,
+        "y": 4460,
+        "wires": []
+    },
+    {
+        "id": "2896511698b9dfb3",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 4460,
+        "wires": [
+            [
+                "b538677a61b31ca7"
+            ]
+        ]
+    },
+    {
+        "id": "95a4677d62c3e1d4",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 4640,
+        "wires": [
+            [
+                "34665c5e3f6c347c"
+            ]
+        ]
+    },
+    {
+        "id": "34665c5e3f6c347c",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Rotor_Control_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2060,
+        "y": 4640,
+        "wires": []
+    },
+    {
+        "id": "82240a921638c9c0",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 4800,
+        "wires": [
+            [
+                "4869d1f46b9e64bf"
+            ]
+        ]
+    },
+    {
+        "id": "4869d1f46b9e64bf",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Satellite_Controller_Web_Relay_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2110,
+        "y": 4800,
+        "wires": []
+    },
+    {
+        "id": "0204bc4214496859",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1720,
+        "y": 4980,
+        "wires": [
+            [
+                "4f262d8159fc5779"
+            ]
+        ]
+    },
+    {
+        "id": "4f262d8159fc5779",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "Main_Router_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2060,
+        "y": 4980,
+        "wires": []
+    },
+    {
+        "id": "649ad7d3f183e94d",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Cam Status",
+        "info": "",
+        "x": 2510,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "bed7c166d6920d28",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Tower 8-2 Cam Status - True - 1",
+        "links": [],
+        "x": 2465,
+        "y": 240,
+        "wires": [
+            [
+                "7f999e6522bff0d5"
+            ]
+        ]
+    },
+    {
+        "id": "49f62ea3ceeb6c51",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Tower 8-2 Cam Status - False - 0",
+        "links": [],
+        "x": 2465,
+        "y": 320,
+        "wires": [
+            [
+                "7f999e6522bff0d5"
+            ]
+        ]
+    },
+    {
+        "id": "7422b5f2d807c880",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Sat 3-2 Cam Status - True - 1",
+        "links": [],
+        "x": 2475,
+        "y": 400,
+        "wires": [
+            [
+                "100af88693a76038"
+            ]
+        ]
+    },
+    {
+        "id": "d77834c203195ea4",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Sat 3-2 Cam Status - False - 0",
+        "links": [],
+        "x": 2475,
+        "y": 460,
+        "wires": [
+            [
+                "100af88693a76038"
+            ]
+        ]
+    },
+    {
+        "id": "48770411bf99aaec",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Vault 4-2 Cam Status - True - 1",
+        "links": [],
+        "x": 2485,
+        "y": 600,
+        "wires": [
+            [
+                "f353a4d5634e2a3d"
+            ]
+        ]
+    },
+    {
+        "id": "4f78db5e5bc0a76c",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Vault 4-2 Cam Status - False - 0",
+        "links": [],
+        "x": 2485,
+        "y": 680,
+        "wires": [
+            [
+                "f353a4d5634e2a3d"
+            ]
+        ]
+    },
+    {
+        "id": "b3d5ad1cf149b311",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "4-Square 2-2 Cam Status - True - 1",
+        "links": [],
+        "x": 2495,
+        "y": 820,
+        "wires": [
+            [
+                "bdf7c28b9892e5d1"
+            ]
+        ]
+    },
+    {
+        "id": "9884e642bccbdc3d",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "4-Square 2-2 Cam Status - False - 0",
+        "links": [],
+        "x": 2495,
+        "y": 900,
+        "wires": [
+            [
+                "bdf7c28b9892e5d1"
+            ]
+        ]
+    },
+    {
+        "id": "0f195869b5b58bed",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Beam 1-2 Cam Status - True - 1",
+        "links": [],
+        "x": 2505,
+        "y": 1040,
+        "wires": [
+            [
+                "f3f43bf862d19be3"
+            ]
+        ]
+    },
+    {
+        "id": "ba18a79168b90171",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Beam 1-2 Cam Status - False - 0",
+        "links": [],
+        "x": 2505,
+        "y": 1120,
+        "wires": [
+            [
+                "f3f43bf862d19be3"
+            ]
+        ]
+    },
+    {
+        "id": "3b4335049ab28ab8",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "MQTT_InfluxDB WX Station Tab",
+        "info": "",
+        "x": 2670,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "1a0f371bbc0cf7ba",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Wind Last",
+        "links": [],
+        "x": 2445,
+        "y": 1300,
+        "wires": [
+            [
+                "916c25db5a995898"
+            ]
+        ]
+    },
+    {
+        "id": "3fca6220bc5df04e",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Wind Avg",
+        "links": [],
+        "x": 2445,
+        "y": 1400,
+        "wires": [
+            [
+                "5072f9db7635489a"
+            ]
+        ]
+    },
+    {
+        "id": "97b62a0d06cd5b3e",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Wind Gust",
+        "links": [],
+        "x": 2445,
+        "y": 1500,
+        "wires": [
+            [
+                "3fb40dc2f13e52ed"
+            ]
+        ]
+    },
+    {
+        "id": "20a8fb6e47b5e384",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Pressure In",
+        "links": [],
+        "x": 2445,
+        "y": 1600,
+        "wires": [
+            [
+                "28eecf78a0f764a7"
+            ]
+        ]
+    },
+    {
+        "id": "0bbcb96ecc23726d",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Temp F",
+        "links": [],
+        "x": 2445,
+        "y": 1700,
+        "wires": [
+            [
+                "c8c7073d2de7fdac"
+            ]
+        ]
+    },
+    {
+        "id": "190f86246d8b7af5",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Humidity",
+        "links": [],
+        "x": 2445,
+        "y": 1820,
+        "wires": [
+            [
+                "132e3a25fc599509"
+            ]
+        ]
+    },
+    {
+        "id": "8a7ad5579d15efce",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Illuminance",
+        "links": [],
+        "x": 2445,
+        "y": 1940,
+        "wires": [
+            [
+                "1392a15fafd036b7"
+            ]
+        ]
+    },
+    {
+        "id": "91521141f36ec2ac",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "UV",
+        "links": [],
+        "x": 2445,
+        "y": 2060,
+        "wires": [
+            [
+                "a0341d8f7d3b83e5"
+            ]
+        ]
+    },
+    {
+        "id": "204f70aa7d62a325",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Solar",
+        "links": [],
+        "x": 2445,
+        "y": 2180,
+        "wires": [
+            [
+                "36e2a031d5a8dfde"
+            ]
+        ]
+    },
+    {
+        "id": "11d52ace4f6ffb21",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Lighting Count",
+        "links": [],
+        "x": 2445,
+        "y": 2280,
+        "wires": [
+            [
+                "2e5da1c2cc80df32"
+            ]
+        ]
+    },
+    {
+        "id": "aa85897be80b8d05",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Feels Like",
+        "links": [],
+        "x": 2445,
+        "y": 2400,
+        "wires": [
+            [
+                "7f5d29f721699fbb"
+            ]
+        ]
+    },
+    {
+        "id": "343b427dadf2690d",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Heat Index",
+        "links": [],
+        "x": 2445,
+        "y": 2520,
+        "wires": [
+            [
+                "c1b50c905ce3e666"
+            ]
+        ]
+    },
+    {
+        "id": "db7d660f06685f84",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "precip_accum_local_day",
+        "links": [],
+        "x": 2445,
+        "y": 2640,
+        "wires": [
+            [
+                "320d3a8435763cf1"
+            ]
+        ]
+    },
+    {
+        "id": "a1df7aa30798d153",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "precip_accum_last_1hr",
+        "links": [],
+        "x": 2445,
+        "y": 2760,
+        "wires": [
+            [
+                "48be96c5407c4ce3"
+            ]
+        ]
+    },
+    {
+        "id": "fdcd2f548391a2c4",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Precip Accum Ystday",
+        "links": [],
+        "x": 2445,
+        "y": 2880,
+        "wires": [
+            [
+                "4676f3bb5a30df9f"
+            ]
+        ]
+    },
+    {
+        "id": "12510d246b32b59e",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Air Batt",
+        "links": [],
+        "x": 2445,
+        "y": 3000,
+        "wires": [
+            [
+                "aa562060cad76f8b"
+            ]
+        ]
+    },
+    {
+        "id": "44f8770559c6cc71",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Air RSSI",
+        "links": [],
+        "x": 2445,
+        "y": 3120,
+        "wires": [
+            [
+                "a90f332ac31bb750"
+            ]
+        ]
+    },
+    {
+        "id": "bfaf35c9fcc21ccd",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "Hub RSSI",
+        "links": [],
+        "x": 2445,
+        "y": 3240,
+        "wires": [
+            [
+                "3d602269334fa63b"
+            ]
+        ]
+    },
+    {
+        "id": "847f6dc2aa083f73",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "EMPC Voltage :15",
+        "links": [
+            "60f6e345732125cb"
+        ],
+        "x": 265,
+        "y": 2940,
+        "wires": [
+            [
+                "907cb75c792c9a31"
+            ]
+        ]
+    },
+    {
+        "id": "907cb75c792c9a31",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "EMPC",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 410,
+        "y": 3020,
+        "wires": []
+    },
+    {
+        "id": "b62eaa453d2444ec",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "InfluxDB Ping Status - True - 1",
+        "links": [],
+        "x": 1396.5,
+        "y": 5089.5,
+        "wires": [
+            [
+                "238b844039ef9ec7",
+                "49bef84264884e22"
+            ]
+        ]
+    },
+    {
+        "id": "61f9dbe868462df2",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "InfluxDB Ping Status - False - 0",
+        "links": [],
+        "x": 1396.5,
+        "y": 5209.5,
+        "wires": [
+            [
+                "238b844039ef9ec7",
+                "49bef84264884e22"
+            ]
+        ]
+    },
+    {
+        "id": "49bef84264884e22",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "InfluxDB_Ping_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2021.5,
+        "y": 5229.5,
+        "wires": []
+    },
+    {
+        "id": "238b844039ef9ec7",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1681.5,
+        "y": 5229.5,
+        "wires": [
+            [
+                "49bef84264884e22"
+            ]
+        ]
+    },
+    {
+        "id": "2c196ab3d6c99303",
+        "type": "link in",
+        "z": "6d24782ad2111ba5",
+        "name": "DLJ_Power_Status Ping",
+        "links": [],
+        "x": 1400,
+        "y": 5348.75,
+        "wires": [
+            [
+                "e438cfd32e5f746f",
+                "c125fb794cec2e24"
+            ]
+        ]
+    },
+    {
+        "id": "e438cfd32e5f746f",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1685,
+        "y": 5428.75,
+        "wires": [
+            [
+                "c125fb794cec2e24"
+            ]
+        ]
+    },
+    {
+        "id": "c125fb794cec2e24",
+        "type": "mqtt out",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "topic": "DLJ_Power_Status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "c7dd2839537522c9",
+        "x": 2015,
+        "y": 5428.75,
+        "wires": []
+    },
+    {
+        "id": "b3b01d4b0b99f2f8",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Inverter",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 510,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a297d7c9b995935b",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Solar_Control",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "w6brs",
+        "bucket": "w6brs_grafana",
+        "x": 510,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "5edce8e7bf93e9ce",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Outside_Air",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "w6brs",
+        "bucket": "w6brs_grafana",
+        "x": 500,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "7f999e6522bff0d5",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Tower-Cam-Status1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2750,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "100af88693a76038",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Sat-Cam-Status1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2740,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "f353a4d5634e2a3d",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Vault-Cam-Status1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2740,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "bdf7c28b9892e5d1",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "4-Square-Cam-Status1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2780,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "f3f43bf862d19be3",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Beam-Cam-Status1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2770,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "916c25db5a995898",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Last",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2640,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "5072f9db7635489a",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "WX_Wind_Avg",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2670,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "3fb40dc2f13e52ed",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Gust",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2640,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "28eecf78a0f764a7",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Pressure_In",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2660,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "c8c7073d2de7fdac",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "WX_Temp_F",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2660,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "132e3a25fc599509",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Humidity",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2650,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "1392a15fafd036b7",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "illuminance",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2660,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "a0341d8f7d3b83e5",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "UV",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2630,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "36e2a031d5a8dfde",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Solar",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2640,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "2e5da1c2cc80df32",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Solar",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2640,
+        "y": 2240,
+        "wires": []
+    },
+    {
+        "id": "7f5d29f721699fbb",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Feels_Like",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2660,
+        "y": 2360,
+        "wires": []
+    },
+    {
+        "id": "c1b50c905ce3e666",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Heat_Index",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2660,
+        "y": 2460,
+        "wires": []
+    },
+    {
+        "id": "48be96c5407c4ce3",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Precip Accum Hour",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2680,
+        "y": 2740,
+        "wires": []
+    },
+    {
+        "id": "4676f3bb5a30df9f",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Precip Accum Ystday",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2690,
+        "y": 2860,
+        "wires": []
+    },
+    {
+        "id": "aa562060cad76f8b",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Air_Battery",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2660,
+        "y": 2960,
+        "wires": []
+    },
+    {
+        "id": "a90f332ac31bb750",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Air_RSSI",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2650,
+        "y": 3080,
+        "wires": []
+    },
+    {
+        "id": "3d602269334fa63b",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Hub_RSSI",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2660,
+        "y": 3200,
+        "wires": []
+    },
+    {
+        "id": "320d3a8435763cf1",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "precip_accum_local_day",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 2700,
+        "y": 2620,
+        "wires": []
+    },
+    {
+        "id": "420520447a5bba5c",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Set InfluxDB Credentials",
+        "info": "",
+        "x": 510,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e4b7d3ed20a9bba3",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Optional - Set InfluxDB Credentials",
+        "info": "",
+        "x": 800,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d3961b9715fdd474",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Setup Mqtt Server",
+        "info": "",
+        "x": 430,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "0d2a267724146481",
+        "type": "delay",
+        "z": "6d24782ad2111ba5",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1700,
+        "y": 3480,
+        "wires": [
+            [
+                "8f7faca9335d1816"
+            ]
+        ]
+    },
+    {
+        "id": "a7fc9bcb23d04c0b",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Wind_Turbine",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 490,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "26a30e687599b8e7",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Grid",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 480,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "a8517c4269b44a31",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Grey_Box",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 490,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "47793688981165a8",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Radio_Power",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 500,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "7b8655c247ec0c71",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "Inside_Vault",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 500,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "ca252a539094d2e1",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 490,
+        "y": 2440,
+        "wires": []
+    },
+    {
+        "id": "506bee18825e52bd",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 490,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "52f5df0c45d95eea",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 470,
+        "y": 2680,
+        "wires": []
+    },
+    {
+        "id": "c571078bc5455fcd",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 450,
+        "y": 2920,
+        "wires": []
+    },
+    {
+        "id": "8f97c3c627c68647",
+        "type": "influxdb out",
+        "z": "6d24782ad2111ba5",
+        "influxdb": "88b69e91096da659",
+        "name": "",
+        "measurement": "RPI_On_Status_1",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "Org",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Org",
+        "bucket": "Org_Bucket",
+        "x": 1780,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d693d4b5eb16e584",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1810,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "f1f1352cbefa0b05",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1810,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "80751a4e120dc50c",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1853.333251953125,
+        "y": 1147.7777099609375,
+        "wires": []
+    },
+    {
+        "id": "ba80f0231b72a615",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1850,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "864503aaedb4df8f",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1870,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "2241596886e62cd9",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1898.8887939453125,
+        "y": 1811.111083984375,
+        "wires": []
+    },
+    {
+        "id": "d238c808f98cfaee",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1890,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "2e8d1730af9a13cd",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1770,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "4e83a00d38624afd",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1770,
+        "y": 2400,
+        "wires": []
+    },
+    {
+        "id": "4fb9df5050e9f9f1",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1770,
+        "y": 2600,
+        "wires": []
+    },
+    {
+        "id": "75ae7fda328665f3",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 2800,
+        "wires": []
+    },
+    {
+        "id": "681ef0f33ef473a7",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 2980,
+        "wires": []
+    },
+    {
+        "id": "b831b87401ddbe02",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 3160,
+        "wires": []
+    },
+    {
+        "id": "452319a2e2ebb2e2",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 3340,
+        "wires": []
+    },
+    {
+        "id": "a146ca48aa345c25",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 3540,
+        "wires": []
+    },
+    {
+        "id": "55638bcb02273a12",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 3760,
+        "wires": []
+    },
+    {
+        "id": "4edffe3099b59261",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 3960,
+        "wires": []
+    },
+    {
+        "id": "e5b0e6806dad33c9",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1770,
+        "y": 4160,
+        "wires": []
+    },
+    {
+        "id": "0ce8d9124719f577",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1770,
+        "y": 4560,
+        "wires": []
+    },
+    {
+        "id": "f87021697d9027d0",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1770,
+        "y": 4400,
+        "wires": []
+    },
+    {
+        "id": "6fa146537ad74830",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 4720,
+        "wires": []
+    },
+    {
+        "id": "d1749c7f6f28b563",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 4880,
+        "wires": []
+    },
+    {
+        "id": "4aa5f25bf08f53b5",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 5080,
+        "wires": []
+    },
+    {
+        "id": "934843f53ac7d2ed",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Add InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1750,
+        "y": 5340,
+        "wires": []
+    },
+    {
+        "id": "ac46cf1c4413f527",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 1800,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8dfaedc720e9ae95",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 500,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "6e07479d06e14de9",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 480,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "c49ba901455ab7e1",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 500,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "62d81d31e2992f9f",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 500,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "f338a9c9ab748383",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 500,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "7ea3450165e115c8",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 500,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "74e9ede9845fa41f",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 500,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "52205c78126807a7",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2760,
+        "y": 197.77777099609375,
+        "wires": []
+    },
+    {
+        "id": "345af01dd26a4dd7",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2740,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "2cba37a7772fde9d",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2740,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "8de04d96b4f28165",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2740,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "94cb7b7b3e3ee7ad",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2740,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "02092f714bf193e6",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2680,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "1f95470b63e0360c",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2680,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "d2f28bab353e03a7",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "a29d3f66005daac1",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "bfda641eaf10d6b2",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "5b41f413204e9d7c",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "b85052652aa37410",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "92e7948228f5daee",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "4667ccbba3ad7e01",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 2080,
+        "wires": []
+    },
+    {
+        "id": "571417e493266872",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "6051720231e75829",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 2320,
+        "wires": []
+    },
+    {
+        "id": "836cb9261914a0b0",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "3a931cbe1a1fd4aa",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 2580,
+        "wires": []
+    },
+    {
+        "id": "ee85a5684ab8f07a",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 2700,
+        "wires": []
+    },
+    {
+        "id": "3cda4a7e1949eb5b",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 2820,
+        "wires": []
+    },
+    {
+        "id": "87fcfc982152f214",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 2920,
+        "wires": []
+    },
+    {
+        "id": "083963f5e8369838",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 3040,
+        "wires": []
+    },
+    {
+        "id": "b5d453c2a724ffc9",
+        "type": "comment",
+        "z": "6d24782ad2111ba5",
+        "name": "Example InfluxDB Node for Grafana",
+        "info": "",
+        "x": 2660,
+        "y": 3160,
+        "wires": []
+    },
+    {
+        "id": "c7dd2839537522c9",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "75cf19f0f3b40ef5",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "88b69e91096da659",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "Org",
+        "name": "InfluxDB Server",
+        "usetls": false,
+        "tls": "c1307d285c9ead74",
+        "influxdbVersion": "2.0",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "c1307d285c9ead74",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    }
+]

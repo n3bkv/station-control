@@ -1,0 +1,470 @@
+[
+    {
+        "id": "9200240fab1fc64d",
+        "type": "tab",
+        "label": "DX Cluster Activate",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "67be2ef42bbb62bc",
+        "type": "ui_switch",
+        "z": "9200240fab1fc64d",
+        "name": "DX Cluster",
+        "label": "DX Cluster",
+        "tooltip": "",
+        "group": "9a203307d35be521",
+        "order": 2,
+        "width": 3,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "control",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-2x fa-power-off",
+        "oncolor": "lightgreen",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-2x fa-power-off",
+        "offcolor": "red",
+        "animate": true,
+        "className": "",
+        "x": 270,
+        "y": 220,
+        "wires": [
+            [
+                "ab533ef8f4c86313",
+                "c9b2d74734d29fc8"
+            ]
+        ]
+    },
+    {
+        "id": "ae3d1be1889fbdb0",
+        "type": "link out",
+        "z": "9200240fab1fc64d",
+        "name": "DX Cluster Active Out",
+        "mode": "link",
+        "links": [],
+        "x": 865,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "957899770cf97e94",
+        "type": "link in",
+        "z": "9200240fab1fc64d",
+        "name": "DX Cluster Active In",
+        "links": [],
+        "x": 155,
+        "y": 320,
+        "wires": [
+            [
+                "67be2ef42bbb62bc"
+            ]
+        ]
+    },
+    {
+        "id": "c9b2d74734d29fc8",
+        "type": "switch",
+        "z": "9200240fab1fc64d",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 440,
+        "wires": [
+            [
+                "f4a0e5dfdbf78f0c"
+            ],
+            [
+                "a1c1e342ab3d5f28"
+            ]
+        ]
+    },
+    {
+        "id": "f4a0e5dfdbf78f0c",
+        "type": "change",
+        "z": "9200240fab1fc64d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "flowStatus",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "DX Cluster & Map",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 440,
+        "wires": [
+            [
+                "a8c134ff6ce5de26"
+            ]
+        ]
+    },
+    {
+        "id": "a8c134ff6ce5de26",
+        "type": "http request",
+        "z": "9200240fab1fc64d",
+        "name": "Get flows",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flows",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 800,
+        "y": 440,
+        "wires": [
+            [
+                "b54802c6226ea46a"
+            ]
+        ]
+    },
+    {
+        "id": "b54802c6226ea46a",
+        "type": "change",
+        "z": "9200240fab1fc64d",
+        "name": "get flowId by name",
+        "rules": [
+            {
+                "t": "set",
+                "p": "flowId",
+                "pt": "msg",
+                "to": "*[type = 'tab' and label = $$.topic].id",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 440,
+        "wires": [
+            [
+                "28333e90e3aa30c3"
+            ]
+        ]
+    },
+    {
+        "id": "28333e90e3aa30c3",
+        "type": "http request",
+        "z": "9200240fab1fc64d",
+        "name": "Get single flow",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flow/{{flowId}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1260,
+        "y": 440,
+        "wires": [
+            [
+                "6be1e5ce9906470e"
+            ]
+        ]
+    },
+    {
+        "id": "6be1e5ce9906470e",
+        "type": "change",
+        "z": "9200240fab1fc64d",
+        "name": "Enable_DX_Cluster_Start",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.disabled",
+                "pt": "msg",
+                "to": "flowStatus",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1490,
+        "y": 440,
+        "wires": [
+            [
+                "5f3bcca87b436317"
+            ]
+        ]
+    },
+    {
+        "id": "5f3bcca87b436317",
+        "type": "http request",
+        "z": "9200240fab1fc64d",
+        "name": "Update flow",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flow/{{payload.id}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1730,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab533ef8f4c86313",
+        "type": "delay",
+        "z": "9200240fab1fc64d",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 640,
+        "y": 220,
+        "wires": [
+            [
+                "ae3d1be1889fbdb0"
+            ]
+        ]
+    },
+    {
+        "id": "a1c1e342ab3d5f28",
+        "type": "change",
+        "z": "9200240fab1fc64d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "flowStatus",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "DX Cluster & Map",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 540,
+        "wires": [
+            [
+                "a20a875a693633f2"
+            ]
+        ]
+    },
+    {
+        "id": "a20a875a693633f2",
+        "type": "http request",
+        "z": "9200240fab1fc64d",
+        "name": "Get flows",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flows",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 540,
+        "y": 540,
+        "wires": [
+            [
+                "ac7d4a1815d4c8ae"
+            ]
+        ]
+    },
+    {
+        "id": "ac7d4a1815d4c8ae",
+        "type": "change",
+        "z": "9200240fab1fc64d",
+        "name": "get flowId by name",
+        "rules": [
+            {
+                "t": "set",
+                "p": "flowId",
+                "pt": "msg",
+                "to": "*[type = 'tab' and label = $$.topic].id",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 540,
+        "wires": [
+            [
+                "3eb2da0df8654c59"
+            ]
+        ]
+    },
+    {
+        "id": "3eb2da0df8654c59",
+        "type": "http request",
+        "z": "9200240fab1fc64d",
+        "name": "Get single flow",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flow/{{flowId}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1120,
+        "y": 540,
+        "wires": [
+            [
+                "14219b5cf8a8de25"
+            ]
+        ]
+    },
+    {
+        "id": "14219b5cf8a8de25",
+        "type": "change",
+        "z": "9200240fab1fc64d",
+        "name": "Disable DX Cluster",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.disabled",
+                "pt": "msg",
+                "to": "flowStatus",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1410,
+        "y": 540,
+        "wires": [
+            [
+                "6188c8e969e901cf"
+            ]
+        ]
+    },
+    {
+        "id": "6188c8e969e901cf",
+        "type": "http request",
+        "z": "9200240fab1fc64d",
+        "name": "Update flow",
+        "method": "PUT",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/flow/{{payload.id}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1710,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89466013872a5f42",
+        "type": "comment",
+        "z": "9200240fab1fc64d",
+        "name": "Flow to turn on DX cluster display",
+        "info": "",
+        "x": 197.77777099609375,
+        "y": 42.22222137451172,
+        "wires": []
+    },
+    {
+        "id": "9a203307d35be521",
+        "type": "ui_group",
+        "name": "DX Spots",
+        "tab": "bb4231e7d8a3593a",
+        "order": 2,
+        "disp": false,
+        "width": "14",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bb4231e7d8a3593a",
+        "type": "ui_tab",
+        "name": "DX Spots",
+        "icon": "list",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]

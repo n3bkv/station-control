@@ -1,0 +1,4087 @@
+[
+    {
+        "id": "2d79a63e086969f7",
+        "type": "tab",
+        "label": "Discovery",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e67f69b13ac6949f",
+        "type": "link out",
+        "z": "2d79a63e086969f7",
+        "name": "Discovery 6600 Out",
+        "mode": "link",
+        "links": [
+            "e14c0ae47bf47dc9",
+            "987d0242d63c425e",
+            "b4cd80e14593f007",
+            "3af04ffb996bc32b",
+            "f61875700c0d8883",
+            "9cfd6222b21355bb",
+            "a279d1924a012b74",
+            "ad976115ef7c5a68",
+            "54d9e4b9a0c6937e",
+            "2e66bf816db9d47c",
+            "4fcdc7ab17c76b51",
+            "f076a8d898ae4734",
+            "0b74e346b34ff5af",
+            "d6dfa23a2eb618c4",
+            "74ee4f3640808e49",
+            "866eb86d023d7688",
+            "07813580626811eb",
+            "d91045910d92d996",
+            "c5371b1c367f5740",
+            "11bff89897e9f191",
+            "49c5a8eeda70e566",
+            "59077a8725951b4b",
+            "d8dfada0b5513126",
+            "b792cd11771eee64",
+            "bdfb56b4625fabf8",
+            "8cf9bd27e38bee56",
+            "4a8da23ca29a3e0c"
+        ],
+        "x": 865,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ee7a9d0d537ffdc0",
+        "type": "link out",
+        "z": "2d79a63e086969f7",
+        "name": "Discovery",
+        "links": [],
+        "x": 655,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "74ee4f3640808e49",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1720,
+        "wires": [
+            [
+                "076942384720d77b"
+            ]
+        ]
+    },
+    {
+        "id": "a2b979228ad13ff4",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "6700 Discovery Messages",
+        "info": "",
+        "x": 390,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "076942384720d77b",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Protocal Version",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.discovery_protocol_version",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1720,
+        "wires": [
+            [
+                "8958c5a78efa525d"
+            ]
+        ]
+    },
+    {
+        "id": "8958c5a78efa525d",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Discovery Protocol Versions",
+        "label": "<font size = 5> Discovery Version",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 660,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "b792cd11771eee64",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1760,
+        "wires": [
+            [
+                "e7eb5a3fc658903f"
+            ]
+        ]
+    },
+    {
+        "id": "e7eb5a3fc658903f",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Model",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.model",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 1760,
+        "wires": [
+            [
+                "406db51e184d8938"
+            ]
+        ]
+    },
+    {
+        "id": "406db51e184d8938",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Model",
+        "label": "<font size = 5> Model",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 540,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "54d9e4b9a0c6937e",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1800,
+        "wires": [
+            [
+                "25f2c731ae5acbcf"
+            ]
+        ]
+    },
+    {
+        "id": "25f2c731ae5acbcf",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Serial",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.serial",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 1800,
+        "wires": [
+            [
+                "6916c5ca42c885d9"
+            ]
+        ]
+    },
+    {
+        "id": "6916c5ca42c885d9",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "name": "Serial Number",
+        "label": "<font size = 5>Serial Number",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 570,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "f61875700c0d8883",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 520,
+        "wires": [
+            [
+                "321631e54ce20d2a"
+            ]
+        ]
+    },
+    {
+        "id": "321631e54ce20d2a",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Nickname",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.nickname",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 520,
+        "wires": [
+            [
+                "d6e0499c212541fc",
+                "cc21db908986b527"
+            ]
+        ]
+    },
+    {
+        "id": "d6e0499c212541fc",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "name": "Nickname",
+        "label": "<font size = 5>Nickname",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 570,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "3af04ffb996bc32b",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 560,
+        "wires": [
+            [
+                "ae9b1f77c8108ca3"
+            ]
+        ]
+    },
+    {
+        "id": "ae9b1f77c8108ca3",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Call Sign",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.callsign",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 560,
+        "wires": [
+            [
+                "f2c3198a7dcf82fa"
+            ]
+        ]
+    },
+    {
+        "id": "f2c3198a7dcf82fa",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "Call Sign",
+        "label": "<font size = 5>Call Sign",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 570,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "59077a8725951b4b",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 840,
+        "wires": [
+            [
+                "5e55888fdd7fce30"
+            ]
+        ]
+    },
+    {
+        "id": "5e55888fdd7fce30",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "IP",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.ip",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 840,
+        "wires": [
+            [
+                "ba8ce28c4a66c4ed"
+            ]
+        ]
+    },
+    {
+        "id": "ba8ce28c4a66c4ed",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "name": "IP",
+        "label": "<font size = 5> IP",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 540,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "d91045910d92d996",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 880,
+        "wires": [
+            [
+                "69eada60353bb467"
+            ]
+        ]
+    },
+    {
+        "id": "69eada60353bb467",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Port",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.port",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 880,
+        "wires": [
+            [
+                "6550c5474c068456"
+            ]
+        ]
+    },
+    {
+        "id": "6550c5474c068456",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "name": "Port",
+        "label": "<font size = 5>Port",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 540,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "d6dfa23a2eb618c4",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 920,
+        "wires": [
+            [
+                "f265ea7640ac720a"
+            ]
+        ]
+    },
+    {
+        "id": "f265ea7640ac720a",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.status",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 920,
+        "wires": [
+            [
+                "444d6c2cde1767b0"
+            ]
+        ]
+    },
+    {
+        "id": "444d6c2cde1767b0",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 6,
+        "width": "0",
+        "height": "0",
+        "name": "Status",
+        "label": "<font size = 5> Status",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 540,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "2e66bf816db9d47c",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1040,
+        "wires": [
+            [
+                "59840f86a2e1ceee",
+                "a6514a854ffd3975"
+            ]
+        ]
+    },
+    {
+        "id": "59840f86a2e1ceee",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "In Use IP 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.inuse_ip",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1040,
+        "wires": [
+            [
+                "945326adb1b4b133"
+            ]
+        ]
+    },
+    {
+        "id": "945326adb1b4b133",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 15,
+        "width": "0",
+        "height": "0",
+        "name": "In Use IP 1",
+        "label": "<font size = 5> In Use IP 1",
+        "format": "<font size = 5> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 580,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "4fcdc7ab17c76b51",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1120,
+        "wires": [
+            [
+                "eda520dd71c4c536",
+                "12130ac49c9bf7bc"
+            ]
+        ]
+    },
+    {
+        "id": "eda520dd71c4c536",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "In Use Host 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.inuse_host",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1120,
+        "wires": [
+            [
+                "47d707b5dffe19ac"
+            ]
+        ]
+    },
+    {
+        "id": "47d707b5dffe19ac",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 13,
+        "width": "0",
+        "height": "0",
+        "name": "In Use Host 1",
+        "label": "<font size = 5> In Use Host 1",
+        "format": "<font size = 5> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 580,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "a279d1924a012b74",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1360,
+        "wires": [
+            [
+                "2c307a8eb5f91cc1"
+            ]
+        ]
+    },
+    {
+        "id": "2c307a8eb5f91cc1",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Licensed Version",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.max_licensed_version",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 1360,
+        "wires": [
+            [
+                "1a74104de87d55c0"
+            ]
+        ]
+    },
+    {
+        "id": "1a74104de87d55c0",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 8,
+        "width": "0",
+        "height": "0",
+        "name": "Licensed Versions",
+        "label": "<font size = 5> Licensed Version",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 630,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "f076a8d898ae4734",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1480,
+        "wires": [
+            [
+                "1c58fa79091e0d5b"
+            ]
+        ]
+    },
+    {
+        "id": "1c58fa79091e0d5b",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Radio License",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.radio_license_id",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1480,
+        "wires": [
+            [
+                "5a38e753c3978e33"
+            ]
+        ]
+    },
+    {
+        "id": "5a38e753c3978e33",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 9,
+        "width": "0",
+        "height": "0",
+        "name": "Radio License",
+        "label": "<font size = 5> Radio License",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 610,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "0b74e346b34ff5af",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1520,
+        "wires": [
+            [
+                "dd62a25fdd99fd46"
+            ]
+        ]
+    },
+    {
+        "id": "dd62a25fdd99fd46",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Requires Additional Licenses",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.requires_additional_license",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 1520,
+        "wires": [
+            [
+                "8c0d9f565bd8c2bd"
+            ]
+        ]
+    },
+    {
+        "id": "8c0d9f565bd8c2bd",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 10,
+        "width": "0",
+        "height": "0",
+        "name": "Additional License",
+        "label": "<font size = 5> Additional License",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 680,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "c5371b1c367f5740",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 600,
+        "wires": [
+            [
+                "22904b1015872532"
+            ]
+        ]
+    },
+    {
+        "id": "22904b1015872532",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "fpc mac",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.fpc_mac",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 600,
+        "wires": [
+            [
+                "b02e114083866587"
+            ]
+        ]
+    },
+    {
+        "id": "b02e114083866587",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "e01b097f943953f0",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "name": "fpc mac",
+        "label": "<font size = 5> fpc mac",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 580,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "e14c0ae47bf47dc9",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 640,
+        "wires": [
+            [
+                "21823b1b1dbbb706"
+            ]
+        ]
+    },
+    {
+        "id": "21823b1b1dbbb706",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "WAN Connected",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.wan_connected",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 640,
+        "wires": [
+            [
+                "e0b486ce229b225d"
+            ]
+        ]
+    },
+    {
+        "id": "e0b486ce229b225d",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 11,
+        "width": "0",
+        "height": "0",
+        "name": "WAN Connected",
+        "label": "<font size = 5> WAN Connected",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 630,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "ad976115ef7c5a68",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 680,
+        "wires": [
+            [
+                "c26394e466681550"
+            ]
+        ]
+    },
+    {
+        "id": "c26394e466681550",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Licensed Clients",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.licensed_clients",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 680,
+        "wires": [
+            [
+                "4c72b6d5a0c04e09"
+            ]
+        ]
+    },
+    {
+        "id": "4c72b6d5a0c04e09",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 12,
+        "width": "0",
+        "height": "0",
+        "name": "Licensed Clients",
+        "label": "<font size = 5> Licensed Clients",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 620,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "4a8da23ca29a3e0c",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 720,
+        "wires": [
+            [
+                "872ead178c15a024"
+            ]
+        ]
+    },
+    {
+        "id": "872ead178c15a024",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Available Clients",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.available_clients",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 720,
+        "wires": [
+            [
+                "3d104ec3858dee2a"
+            ]
+        ]
+    },
+    {
+        "id": "3d104ec3858dee2a",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 7,
+        "width": "0",
+        "height": "0",
+        "name": "Available Clients",
+        "label": "<font size = 5> Available Clients",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "987d0242d63c425e",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 760,
+        "wires": [
+            [
+                "749afa0ac97add3b"
+            ]
+        ]
+    },
+    {
+        "id": "749afa0ac97add3b",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Max Panadapters",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.max_panadapters",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 760,
+        "wires": [
+            [
+                "ef0d3907531f47e4"
+            ]
+        ]
+    },
+    {
+        "id": "ef0d3907531f47e4",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 13,
+        "width": "0",
+        "height": "0",
+        "name": "Max Panadapters",
+        "label": "<font size = 5> Max Panadapters",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 610,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "bdfb56b4625fabf8",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 800,
+        "wires": [
+            [
+                "87565ea24a35e95b"
+            ]
+        ]
+    },
+    {
+        "id": "87565ea24a35e95b",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Available Pandapters",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.available_panadapters",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 800,
+        "wires": [
+            [
+                "c651f7d9a9e4fd29"
+            ]
+        ]
+    },
+    {
+        "id": "c651f7d9a9e4fd29",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 14,
+        "width": "0",
+        "height": "0",
+        "name": " Available Panadapters",
+        "label": "<font size = 5> Available Panadapters",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 640,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "49c5a8eeda70e566",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 960,
+        "wires": [
+            [
+                "0ea9cc5e5c6e4d7d"
+            ]
+        ]
+    },
+    {
+        "id": "0ea9cc5e5c6e4d7d",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Max Slices",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.max_slices",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 960,
+        "wires": [
+            [
+                "ed1f8e45af012177"
+            ]
+        ]
+    },
+    {
+        "id": "ed1f8e45af012177",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 15,
+        "width": "0",
+        "height": "0",
+        "name": "Max Slices",
+        "label": "<font size = 5> Max Slices",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 570,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "b4cd80e14593f007",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1000,
+        "wires": [
+            [
+                "8bc7f1d3678785e9"
+            ]
+        ]
+    },
+    {
+        "id": "8bc7f1d3678785e9",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Available Slices",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.available_slices",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1000,
+        "wires": [
+            [
+                "fb788171e2c8e3a8"
+            ]
+        ]
+    },
+    {
+        "id": "fb788171e2c8e3a8",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "8ddcd4902d4ba12a",
+        "order": 16,
+        "width": "0",
+        "height": "0",
+        "name": "Available Slices",
+        "label": "<font size = 5> Available Slices",
+        "format": "<font size = 5> {{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "07813580626811eb",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1200,
+        "wires": [
+            [
+                "a3c3c529542f20fa",
+                "d0341f9c00df251f"
+            ]
+        ]
+    },
+    {
+        "id": "a3c3c529542f20fa",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client IP 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_ips",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1200,
+        "wires": [
+            [
+                "b43e66bbb0fd8683",
+                "68ca78cb26c8b71d"
+            ]
+        ]
+    },
+    {
+        "id": "b43e66bbb0fd8683",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "name": "Client IP 1",
+        "label": "<font size = 5> Client IP 1",
+        "format": "<font size = 5> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 590,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "d8dfada0b5513126",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1280,
+        "wires": [
+            [
+                "2226ca0955f0937c",
+                "d269836bfd1acfcf"
+            ]
+        ]
+    },
+    {
+        "id": "2226ca0955f0937c",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client Host1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_hosts",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1280,
+        "wires": [
+            [
+                "bb6085d45088eecd"
+            ]
+        ]
+    },
+    {
+        "id": "bb6085d45088eecd",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "Client Host 1",
+        "label": "<font size = 5> Client Host 1",
+        "format": "<font size = 5> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 590,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "8cf9bd27e38bee56",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1400,
+        "wires": [
+            [
+                "c189c55532fd189f",
+                "7f222a699063c6b0"
+            ]
+        ]
+    },
+    {
+        "id": "c189c55532fd189f",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client Program1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_programs",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1400,
+        "wires": [
+            [
+                "aea9a7a330ff14a3",
+                "a450bd6da0c2e833"
+            ]
+        ]
+    },
+    {
+        "id": "aea9a7a330ff14a3",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 7,
+        "width": "0",
+        "height": "0",
+        "name": "Client Program 1",
+        "label": "<font size = 5>Client Program 1",
+        "format": "<font size = 5> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 630,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "866eb86d023d7688",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1560,
+        "wires": [
+            [
+                "538214e12d5f94da",
+                "bea49cbd78f34240"
+            ]
+        ]
+    },
+    {
+        "id": "538214e12d5f94da",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client Stations global.6700.client_station 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_stations",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "6700.client_stations",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 1560,
+        "wires": [
+            [
+                "4653bf827c33f338",
+                "aa7417efe83bdc49",
+                "6300c829cd3cec22",
+                "25a9081cfbd61259",
+                "8124ff3aef871031",
+                "1ae4fcbd53160da6",
+                "8c0e70b06eb25fe1"
+            ]
+        ]
+    },
+    {
+        "id": "4653bf827c33f338",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 11,
+        "width": "0",
+        "height": "0",
+        "name": "Client Station 1",
+        "label": "<font size = 5> Client Station 1",
+        "format": "<font size = 5> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 740,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "11bff89897e9f191",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 235,
+        "y": 1640,
+        "wires": [
+            [
+                "1f97bb362d1322c2",
+                "a737fced2508f4ac"
+            ]
+        ]
+    },
+    {
+        "id": "1f97bb362d1322c2",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client Handles global.6700.client_handle 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_handles",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "6700.client_handles",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 1640,
+        "wires": [
+            [
+                "4f13168b61380966"
+            ]
+        ]
+    },
+    {
+        "id": "4f13168b61380966",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 9,
+        "width": "0",
+        "height": "0",
+        "name": "Client Handle 1",
+        "label": "<font size = 5> Client Handle 1",
+        "format": "<font size = 5> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 740,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "cc21db908986b527",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "global.set('radio_name');",
+        "func": "global.set('radio_name',msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 460,
+        "wires": [
+            [
+                "077d4c74fdc17b25"
+            ]
+        ]
+    },
+    {
+        "id": "31835ee7f094221a",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "radio_name",
+                "pt": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "077d4c74fdc17b25",
+        "type": "trigger",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "op1": "",
+        "op2": "true",
+        "op1type": "nul",
+        "op2type": "bool",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 690,
+        "y": 460,
+        "wires": [
+            [
+                "31835ee7f094221a"
+            ]
+        ]
+    },
+    {
+        "id": "84d6850a4512d9f1",
+        "type": "inject",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1130,
+        "y": 160,
+        "wires": [
+            [
+                "22a6ca229fa12ea7"
+            ]
+        ]
+    },
+    {
+        "id": "22a6ca229fa12ea7",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "selected_radio",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1320,
+        "y": 160,
+        "wires": [
+            [
+                "4110529b4b161aee"
+            ]
+        ]
+    },
+    {
+        "id": "3d48a0ba1ff5996e",
+        "type": "rbe",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1850,
+        "y": 160,
+        "wires": [
+            [
+                "8f8072b91e79cafe"
+            ]
+        ]
+    },
+    {
+        "id": "ca92aa58eb4df798",
+        "type": "switch",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1690,
+        "y": 160,
+        "wires": [
+            [
+                "3d48a0ba1ff5996e"
+            ]
+        ]
+    },
+    {
+        "id": "8f8072b91e79cafe",
+        "type": "ui_template",
+        "z": "2d79a63e086969f7",
+        "d": true,
+        "group": "e426551e1e10f6a9",
+        "name": "",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "format": "<script>\n    (function(scope) {\n        scope.$watch('msg', function(data) {\n            var elem = document.getElementById(\"headerStatus\")\n            if(elem !== null) {\n                elem.className = data.payload;\n                elem.innerHTML = data.payload;\n            }\n        });\n    })(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 2000,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4110529b4b161aee",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$globalContext('radio_name') & \" \" &  $flowContext('radio_status') & \" - \" & $globalContext('selected_client.program')",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1520,
+        "y": 160,
+        "wires": [
+            [
+                "ca92aa58eb4df798"
+            ]
+        ]
+    },
+    {
+        "id": "c1542746c11353df",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Need template in each group to display properly",
+        "info": "",
+        "x": 2000,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "77017b3084da8443",
+        "type": "ui_ui_control",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "events": "connect",
+        "x": 1320,
+        "y": 100,
+        "wires": [
+            [
+                "df5b2466ff19081b"
+            ]
+        ]
+    },
+    {
+        "id": "b1f806660eade242",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "RADIO STATUS",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1680,
+        "y": 100,
+        "wires": [
+            [
+                "3d48a0ba1ff5996e"
+            ]
+        ]
+    },
+    {
+        "id": "c108ab3ac70fdf95",
+        "type": "inject",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1470,
+        "y": 60,
+        "wires": [
+            [
+                "b1f806660eade242"
+            ]
+        ]
+    },
+    {
+        "id": "0cfec68418deaf25",
+        "type": "ui_template",
+        "z": "2d79a63e086969f7",
+        "d": true,
+        "group": "70ec6420bcbbe2ae",
+        "name": "Header Status",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "format": "<script id=\"titleScript\" type=\"text/javascript\">\n$(function() {\n    if($('.md-toolbar-tools').length){\n        initHeader();\n    } else setTimeout(initHeader, 500)\n});\n\nfunction initHeader(){\n    if (!$('#headerStatus').length) {\n        var toolbar = $('.md-toolbar-tools');\n        var div = $('<div/>');\n        var p = $('<p id=\"headerStatus\" />');\n        div[0].style.margin = '5px 5px 5px auto';\n        div.append(p);\n        toolbar.append(div);\n    }\n}\n</script>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 1080,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cfd6222b21355bb",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "links": [
+            "e67f69b13ac6949f"
+        ],
+        "x": 1215,
+        "y": 220,
+        "wires": [
+            [
+                "bebb4aef0b9e2774"
+            ]
+        ]
+    },
+    {
+        "id": "bebb4aef0b9e2774",
+        "type": "trigger",
+        "z": "2d79a63e086969f7",
+        "name": "Disconnect if no data",
+        "op1": "Online",
+        "op2": "Offline",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "6",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1420,
+        "y": 220,
+        "wires": [
+            [
+                "2f8d6f2c8f005302",
+                "234a570305852805"
+            ]
+        ]
+    },
+    {
+        "id": "2f8d6f2c8f005302",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "func": "//msg.title = \"#66ff66\";\nif(msg.payload == \"Offline\"){\n    msg.color = \"#ff0000\";\n}else{\n    msg.color = \"#66ff66\";\n}\nflow.set('radio_status',msg.payload)\nmsg.payload = \"6700 \" + msg.payload \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1640,
+        "y": 220,
+        "wires": [
+            [
+                "7fcec43e7097578d"
+            ]
+        ]
+    },
+    {
+        "id": "233e0ac30a185355",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "Discovery",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [
+                "ee7a9d0d537ffdc0",
+                "911caa445de21582",
+                "37fd354adf315754"
+            ]
+        ]
+    },
+    {
+        "id": "ee10f049ec984457",
+        "type": "flexradio-discovery",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "port": 4992,
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "233e0ac30a185355",
+                "f32d061410acefa5"
+            ]
+        ]
+    },
+    {
+        "id": "911caa445de21582",
+        "type": "debug",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "b53d88844c139c04",
+        "type": "inject",
+        "z": "2d79a63e086969f7",
+        "name": "Reset",
+        "props": [
+            {
+                "p": "reset",
+                "v": "true",
+                "vt": "bool"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1210,
+        "y": 260,
+        "wires": [
+            [
+                "bebb4aef0b9e2774",
+                "234a570305852805"
+            ]
+        ]
+    },
+    {
+        "id": "df5b2466ff19081b",
+        "type": "delay",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1480,
+        "y": 100,
+        "wires": [
+            [
+                "b1f806660eade242"
+            ]
+        ]
+    },
+    {
+        "id": "2d1b817d1bb30849",
+        "type": "catch",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "398d180ea191f1a4"
+            ]
+        ]
+    },
+    {
+        "id": "398d180ea191f1a4",
+        "type": "switch",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "Error:",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 540,
+        "y": 240,
+        "wires": [
+            [
+                "55085fad2e8fc84f",
+                "6c4175af2df34879"
+            ]
+        ]
+    },
+    {
+        "id": "55085fad2e8fc84f",
+        "type": "debug",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "6c4175af2df34879",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "e01b097f943953f0",
+        "order": 14,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "<b>Error Msg:",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 750,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f32d061410acefa5",
+        "type": "debug",
+        "z": "2d79a63e086969f7",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "37fd354adf315754",
+        "type": "switch",
+        "z": "2d79a63e086969f7",
+        "name": "Set to Radio IP Address ",
+        "property": "payload.ip",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "192.168.50.196",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 710,
+        "y": 120,
+        "wires": [
+            [
+                "e67f69b13ac6949f"
+            ]
+        ]
+    },
+    {
+        "id": "d269836bfd1acfcf",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client Host2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_hosts",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1320,
+        "wires": [
+            [
+                "5c750e912963a40b"
+            ]
+        ]
+    },
+    {
+        "id": "5c750e912963a40b",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "name": "Client Host 2 ",
+        "label": "<font size = 5> Client Host 2",
+        "format": "<font size = 5> {{msg.payload[1]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 590,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "7f222a699063c6b0",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client Program2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_programs",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1440,
+        "wires": [
+            [
+                "ca319f4aa8abe4ce"
+            ]
+        ]
+    },
+    {
+        "id": "ca319f4aa8abe4ce",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 8,
+        "width": "0",
+        "height": "0",
+        "name": "Client Program 2",
+        "label": "<font size = 5>Client Program 2",
+        "format": "<font size = 5> {{msg.payload[1]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 630,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "a6514a854ffd3975",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "In Use IP 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.inuse_ip",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1080,
+        "wires": [
+            [
+                "1824cdf834fae33d"
+            ]
+        ]
+    },
+    {
+        "id": "1824cdf834fae33d",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 16,
+        "width": "0",
+        "height": "0",
+        "name": "In Use IP 2",
+        "label": "<font size = 5> In Use IP 2",
+        "format": "<font size = 5> {{msg.payload[1]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 570,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "12130ac49c9bf7bc",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "In Use Host 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.inuse_host",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 1160,
+        "wires": [
+            [
+                "4cf517ed46188971"
+            ]
+        ]
+    },
+    {
+        "id": "4cf517ed46188971",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 14,
+        "width": "0",
+        "height": "0",
+        "name": "In Use Host 2",
+        "label": "<font size = 5> In Use Host 2",
+        "format": "<font size = 5> {{msg.payload[1]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 580,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "d0341f9c00df251f",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client IP 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_ips",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1240,
+        "wires": [
+            [
+                "127b9521e5d61a25"
+            ]
+        ]
+    },
+    {
+        "id": "127b9521e5d61a25",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 6,
+        "width": "0",
+        "height": "0",
+        "name": "Client IP 2",
+        "label": "<font size = 5> Client IP 2",
+        "format": "<font size = 5> {{msg.payload[1]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 590,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "bea49cbd78f34240",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client Stations global.6700.client_stations 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_stations",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "6700.client_stations",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 1600,
+        "wires": [
+            [
+                "0e2ef5187747d5ed"
+            ]
+        ]
+    },
+    {
+        "id": "0e2ef5187747d5ed",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 12,
+        "width": "0",
+        "height": "0",
+        "name": "Client Station 2",
+        "label": "<font size = 5> Client Station 2",
+        "format": "<font size = 5> {{msg.payload[1]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 740,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "a737fced2508f4ac",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "Client Handles global.6700.client_handle 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.gui_client_handles",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "6700.client_handles",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 1680,
+        "wires": [
+            [
+                "90b13ac7a4e2f448"
+            ]
+        ]
+    },
+    {
+        "id": "90b13ac7a4e2f448",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "192171bb8bb409b2",
+        "order": 10,
+        "width": "0",
+        "height": "0",
+        "name": "Client Handle 2",
+        "label": "<font size = 5> Client Handle 2",
+        "format": "<font size = 5> {{msg.payload[1]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 740,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "c3b4eec088a3a8c6",
+        "type": "debug",
+        "z": "2d79a63e086969f7",
+        "name": "debug 10",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "203d077adb0f729e",
+        "type": "switch",
+        "z": "2d79a63e086969f7",
+        "name": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "|transmitting",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 770,
+        "y": 360,
+        "wires": [
+            [
+                "54fcb7c30a901f8b"
+            ]
+        ]
+    },
+    {
+        "id": "54fcb7c30a901f8b",
+        "type": "split",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "splt": " ",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 910,
+        "y": 360,
+        "wires": [
+            [
+                "a0cefac8d1b791bf"
+            ]
+        ]
+    },
+    {
+        "id": "a0cefac8d1b791bf",
+        "type": "switch",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^state=",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1050,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93cdc9482de00d2a",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "state",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "tx_client_handle",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 300,
+        "wires": [
+            [
+                "c3b4eec088a3a8c6"
+            ]
+        ]
+    },
+    {
+        "id": "a450bd6da0c2e833",
+        "type": "link out",
+        "z": "2d79a63e086969f7",
+        "name": "Client Program",
+        "mode": "link",
+        "links": [],
+        "x": 1035,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "aa7417efe83bdc49",
+        "type": "link out",
+        "z": "2d79a63e086969f7",
+        "name": "Client Station 1",
+        "mode": "link",
+        "links": [],
+        "x": 1045,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "7fcec43e7097578d",
+        "type": "link out",
+        "z": "2d79a63e086969f7",
+        "name": "Radio Off",
+        "mode": "link",
+        "links": [
+            "b021d17598577984"
+        ],
+        "x": 1775,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4f555b4793bc7cbe",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "link in 865",
+        "links": [
+            "11cbcf8221efe280"
+        ],
+        "x": 65,
+        "y": 740,
+        "wires": [
+            [
+                "945326adb1b4b133",
+                "1824cdf834fae33d",
+                "47d707b5dffe19ac",
+                "4cf517ed46188971",
+                "b43e66bbb0fd8683",
+                "127b9521e5d61a25",
+                "bb6085d45088eecd",
+                "5c750e912963a40b",
+                "aea9a7a330ff14a3",
+                "ca319f4aa8abe4ce",
+                "4653bf827c33f338",
+                "0e2ef5187747d5ed",
+                "4f13168b61380966",
+                "90b13ac7a4e2f448",
+                "3d104ec3858dee2a",
+                "c651f7d9a9e4fd29",
+                "fb788171e2c8e3a8",
+                "444d6c2cde1767b0",
+                "e0b486ce229b225d",
+                "6300c829cd3cec22",
+                "25a9081cfbd61259",
+                "8124ff3aef871031",
+                "6d868e44e6e0a89c"
+            ]
+        ]
+    },
+    {
+        "id": "11cbcf8221efe280",
+        "type": "link out",
+        "z": "2d79a63e086969f7",
+        "name": "Radio Off Clr",
+        "mode": "link",
+        "links": [
+            "4f555b4793bc7cbe"
+        ],
+        "x": 1745,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "234a570305852805",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "Msg Radio Clear",
+        "func": "msg.payload = \"\";\nmsg.payload[0] = \"\";\nmsg.payload[1] = \"\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1630,
+        "y": 320,
+        "wires": [
+            [
+                "11cbcf8221efe280"
+            ]
+        ]
+    },
+    {
+        "id": "efe3870ce39c7b85",
+        "type": "link out",
+        "z": "2d79a63e086969f7",
+        "name": "Radio Turn Off Timer After Disconnect",
+        "mode": "link",
+        "links": [],
+        "x": 2552,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "40a4ddf0b102542d",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Client IP",
+        "links": [
+            "68ca78cb26c8b71d"
+        ],
+        "x": 1385,
+        "y": 600,
+        "wires": [
+            [
+                "b3ee2464bac11e1c"
+            ]
+        ]
+    },
+    {
+        "id": "b3ee2464bac11e1c",
+        "type": "switch",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1650,
+        "y": 540,
+        "wires": [
+            [
+                "2d0043ddc5550b28",
+                "565379e37940c6f4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "68ca78cb26c8b71d",
+        "type": "link out",
+        "z": "2d79a63e086969f7",
+        "name": "Client IP",
+        "mode": "link",
+        "links": [
+            "40a4ddf0b102542d"
+        ],
+        "x": 815,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "2d0043ddc5550b28",
+        "type": "trigger",
+        "z": "2d79a63e086969f7",
+        "name": "Turn off radio if no one is connected 60 min after client disconnect",
+        "op1": "",
+        "op2": "false",
+        "op1type": "nul",
+        "op2type": "bool",
+        "duration": "60",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 2014,
+        "y": 508,
+        "wires": [
+            [
+                "efe3870ce39c7b85"
+            ]
+        ]
+    },
+    {
+        "id": "6300c829cd3cec22",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "d43038e704b3ad26",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "name": "Connected User",
+        "label": "<font color = #0094CE font size = 3> Connected User",
+        "format": "<font size = 1> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1020,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "25a9081cfbd61259",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "b69172af60866d2d",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Connected User",
+        "label": "<font size = 3> Connected User",
+        "format": "<font size = 2> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1040,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "099862cfeb72d42b",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Flow to get 6600 info and display in Flex tab",
+        "info": "",
+        "x": 210,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ac7e3b03e028b42f",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Show user connected to station on HF and VHF/UHF tabs",
+        "info": "",
+        "x": 1180,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "8124ff3aef871031",
+        "type": "ui_text",
+        "z": "2d79a63e086969f7",
+        "group": "546ab70dc0c713ca",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "name": "Connected User",
+        "label": "<font size = 3> Connected User",
+        "format": "<font size = 1> {{msg.payload[0]}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1020,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "aedb5782a5c74ea0",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1120,
+        "y": 1720,
+        "wires": [
+            [
+                "a474f4e5cc798686"
+            ]
+        ]
+    },
+    {
+        "id": "1ae4fcbd53160da6",
+        "type": "switch",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "RON",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "Dave",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 950,
+        "y": 1700,
+        "wires": [
+            [
+                "aedb5782a5c74ea0"
+            ],
+            [
+                "28e50c30134ee115"
+            ]
+        ]
+    },
+    {
+        "id": "a474f4e5cc798686",
+        "type": "delay",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1320,
+        "y": 1740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "28e50c30134ee115",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "2",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1106,
+        "y": 1775,
+        "wires": [
+            [
+                "a474f4e5cc798686"
+            ]
+        ]
+    },
+    {
+        "id": "6d868e44e6e0a89c",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "Log User",
+        "func": "// Retrieve the last value and the null-logged flag from context\nlet lastValue = context.get('lastValue') || null; // Initialize as null for the first run\nlet hasLoggedLastValue = context.get('hasLoggedLastValue') || false;\n\n// Check if the input is null, undefined, or empty\nif (msg.payload == null || msg.payload.trim() === '') {\n    if (lastValue && !hasLoggedLastValue) {\n        // Log the last message before null or empty input\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `user disconnect at: ${timestamp}: ${lastValue}`;\n\n        // Set the flag to prevent repeated logging\n        context.set('hasLoggedLastValue', true);\n        return msg;\n    } else {\n        // Ignore subsequent nulls or if there's no last valid value\n        return null;\n    }\n}\n\n// For valid (non-null) input\nif (msg.payload !== lastValue || hasLoggedLastValue) {\n    // Update the context with the new value\n    context.set('lastValue', msg.payload);\n\n    // Reset the null-logged flag since we have a new valid message\n    context.set('hasLoggedLastValue', false);\n\n    // Add a local timestamp to the payload\n    let now = new Date();\n    let timestamp = now.toLocaleString();\n    msg.payload = `${timestamp}: ${msg.payload}`;\n\n    // Pass the message for writing\n    return msg;\n}\n\n// If no change and no null transition, do nothing\nreturn null;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 1060,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a",
+                "cfeafe69ec41a436",
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "8c0e70b06eb25fe1",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 1140,
+        "wires": [
+            [
+                "6d868e44e6e0a89c"
+            ]
+        ]
+    },
+    {
+        "id": "d02ffbae50ee8c23",
+        "type": "inject",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "blank",
+        "payloadType": "str",
+        "x": 820,
+        "y": 960,
+        "wires": [
+            [
+                "6d868e44e6e0a89c"
+            ]
+        ]
+    },
+    {
+        "id": "14e0c39b91a9ff3a",
+        "type": "file",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "filename": "\\Users\\Remote\\.node-red\\logs\\flexuser.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1616,
+        "y": 1045,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cfeafe69ec41a436",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "function 42",
+        "func": "let userlog = msg.payload; // Send Email\n\n// Construct the subject and message body for the email\nmsg.topic = \"Boron Radio Use\"; // Email subject\nmsg.payload = `Boron radio access ${userlog} .`; // Email body (as plain text, not wrapped in quotes)\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 1200,
+        "wires": [
+            [
+                "6ece5e5367aff72f"
+            ]
+        ]
+    },
+    {
+        "id": "e57132460677fb40",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Log User Actions",
+        "info": "",
+        "x": 1080,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "807dcf5a6010849d",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Amp Status Log",
+        "links": [],
+        "x": 985,
+        "y": 920,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a",
+                "cfeafe69ec41a436",
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "bb98f840ba242050",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "9700 Log",
+        "links": [],
+        "x": 1095,
+        "y": 920,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a",
+                "cfeafe69ec41a436",
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "566fa765b548670c",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Log Freq",
+        "links": [
+            "33c91808eed24960"
+        ],
+        "x": 1175,
+        "y": 820,
+        "wires": [
+            [
+                "92ebd4d6d9d0752a"
+            ]
+        ]
+    },
+    {
+        "id": "f6714b4f1cfdd8a9",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Log Mode",
+        "links": [
+            "d7bd2fcab2aef49f"
+        ],
+        "x": 1175,
+        "y": 920,
+        "wires": [
+            [
+                "0b5a573826c0dbc0"
+            ]
+        ]
+    },
+    {
+        "id": "92ebd4d6d9d0752a",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "Log Freq",
+        "func": "// Retrieve the last value and the null-logged flag from context\nlet lastValueF = context.get('lastValue') || null; // Initialize as null for the first run\nlet hasLoggedLastValue = context.get('hasLoggedLastValue') || false;\n\n// Check if the input is null, undefined, or empty\nif (msg.payload == null || msg.payload.trim() === '') {\n    if (lastValueF && !hasLoggedLastValue) {\n        // Log the last message before null or empty input\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `user disconnect at: ${timestamp}: ${lastValueF}`;\n\n        // Set the flag to prevent repeated logging\n        context.set('hasLoggedLastValue', true);\n        return msg;\n    } else {\n        // Ignore subsequent nulls or if there's no last valid value\n        return null;\n    }\n}\n\n// For valid (non-null) input\nif (msg.payload !== lastValueF || hasLoggedLastValue) {\n    // Update the context with the new value\n    context.set('lastValue', msg.payload);\n\n    // Reset the null-logged flag since we have a new valid message\n    context.set('hasLoggedLastValue', false);\n\n    // Add a local timestamp to the payload\n    let now = new Date();\n    let timestamp = now.toLocaleString();\n    msg.payload = `${timestamp}: ${msg.payload}`;\n\n    // Pass the message for writing\n    return msg;\n}\n\n// If no change and no null transition, do nothing\nreturn null;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1300,
+        "y": 820,
+        "wires": [
+            [
+                "c7ed21c225657652"
+            ]
+        ]
+    },
+    {
+        "id": "0b5a573826c0dbc0",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "Log Mode",
+        "func": "// Retrieve the last value and the null-logged flag from context\nlet lastValueM = context.get('lastValue') || null; // Initialize as null for the first run\nlet hasLoggedLastValue = context.get('hasLoggedLastValue') || false;\n\n// Check if the input is null, undefined, or empty\nif (msg.payload == null || msg.payload.trim() === '') {\n    if (lastValueM && !hasLoggedLastValue) {\n        // Log the last message before null or empty input\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `user disconnect at: ${timestamp}: ${lastValueM}`;\n\n        // Set the flag to prevent repeated logging\n        context.set('hasLoggedLastValue', true);\n        return msg;\n    } else {\n        // Ignore subsequent nulls or if there's no last valid value\n        return null;\n    }\n}\n\n// For valid (non-null) input\nif (msg.payload !== lastValueM || hasLoggedLastValue) {\n    // Update the context with the new value\n    context.set('lastValue', msg.payload);\n\n    // Reset the null-logged flag since we have a new valid message\n    context.set('hasLoggedLastValue', false);\n\n    // Add a local timestamp to the payload\n    let now = new Date();\n    let timestamp = now.toLocaleString();\n    msg.payload = `${timestamp}: ${msg.payload}`;\n\n    // Pass the message for writing\n    return msg;\n}\n\n// If no change and no null transition, do nothing\nreturn null;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 920,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a",
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "c7ed21c225657652",
+        "type": "delay",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "3",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1400,
+        "y": 860,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a",
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "3236b3ae3748e5e7",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Email Actions",
+        "info": "",
+        "x": 1435,
+        "y": 1102,
+        "wires": []
+    },
+    {
+        "id": "21bbcf86e19866ec",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Log Radio Status",
+        "links": [],
+        "x": 1175,
+        "y": 760,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a",
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "6de65a537841e546",
+        "type": "delay",
+        "z": "2d79a63e086969f7",
+        "name": "Turn off radio if no one connects after 30 min of turning on",
+        "pauseType": "delay",
+        "timeout": "30",
+        "timeoutUnits": "minutes",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2162.5,
+        "y": 692.5,
+        "wires": [
+            [
+                "a678d194b0d4595a"
+            ]
+        ]
+    },
+    {
+        "id": "565379e37940c6f4",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "reset",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1925.5,
+        "y": 598.5,
+        "wires": [
+            [
+                "6de65a537841e546"
+            ]
+        ]
+    },
+    {
+        "id": "a678d194b0d4595a",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "did not reset",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2441.5,
+        "y": 605.5,
+        "wires": [
+            [
+                "efe3870ce39c7b85"
+            ]
+        ]
+    },
+    {
+        "id": "a3f156d397a3d9fa",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Client IP",
+        "links": [],
+        "x": 1459.5,
+        "y": 472.5,
+        "wires": [
+            [
+                "6de65a537841e546"
+            ]
+        ]
+    },
+    {
+        "id": "7e4e3bb5e43b8055",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Auto turn off radio after 60 min client disconnect or 30 minutes of being on and no connections",
+        "info": "",
+        "x": 2106,
+        "y": 441,
+        "wires": []
+    },
+    {
+        "id": "bf605994aca98e3a",
+        "type": "inject",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "channel",
+                "v": "1335469715899813902",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "hello",
+        "payloadType": "str",
+        "x": 1600,
+        "y": 825,
+        "wires": [
+            [
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "e6a1421fc9a3ef18",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Amp Info",
+        "links": [],
+        "x": 1391,
+        "y": 741,
+        "wires": [
+            [
+                "3ba83fa290db2623",
+                "33a924c6bd6670ae"
+            ]
+        ]
+    },
+    {
+        "id": "26f02b62563c22d9",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Amp Stby/Op Alarms - to be tested",
+        "info": "",
+        "x": 1456,
+        "y": 698,
+        "wires": []
+    },
+    {
+        "id": "1958498ea48812f5",
+        "type": "debug",
+        "z": "2d79a63e086969f7",
+        "name": "debug 13",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2197,
+        "y": 924,
+        "wires": []
+    },
+    {
+        "id": "3ba83fa290db2623",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "d": true,
+        "name": "function 14",
+        "func": "// Retrieve the previous state from context\nlet previousState = context.get(\"previousState\");\n\n// Get the current state from the incoming message\nlet currentState = msg.payload;\n\nif (previousState === undefined) {\n    // If this is the first message, just store the state and do nothing\n    context.set(\"previousState\", currentState);\n    return null;\n}\n\n// Check if the state has changed\nif (currentState !== previousState) {\n    // Update the stored state\n    context.set(\"previousState\", currentState);\n    return msg; // Pass the message along\n}\n\n// If the state has not changed, block the message\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1514,
+        "y": 740,
+        "wires": [
+            [
+                "4729755d4ff0d98a"
+            ]
+        ]
+    },
+    {
+        "id": "4729755d4ff0d98a",
+        "type": "switch",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 1671,
+        "y": 710,
+        "wires": [
+            [
+                "b57ebec0dbe0e2d0"
+            ],
+            [
+                "5bf618317ef4ea8a"
+            ],
+            [
+                "1958498ea48812f5",
+                "e8cb1366bc2aa519",
+                "14e0c39b91a9ff3a"
+            ]
+        ]
+    },
+    {
+        "id": "b57ebec0dbe0e2d0",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Amp Status Operate",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1846,
+        "y": 727,
+        "wires": [
+            [
+                "1958498ea48812f5",
+                "e8cb1366bc2aa519",
+                "d2e305b54959aa39"
+            ]
+        ]
+    },
+    {
+        "id": "5bf618317ef4ea8a",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Amp Status Standby",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1819,
+        "y": 781,
+        "wires": [
+            [
+                "1958498ea48812f5",
+                "e8cb1366bc2aa519",
+                "d2e305b54959aa39"
+            ]
+        ]
+    },
+    {
+        "id": "33a924c6bd6670ae",
+        "type": "rbe",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 1544,
+        "y": 783,
+        "wires": [
+            [
+                "4729755d4ff0d98a"
+            ]
+        ]
+    },
+    {
+        "id": "9d02d88f06114b9d",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Log Internet Recovery",
+        "links": [],
+        "x": 980,
+        "y": 665,
+        "wires": [
+            [
+                "03600ed8922e04fd"
+            ]
+        ]
+    },
+    {
+        "id": "03600ed8922e04fd",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "Log Internet Reset with Timestamp",
+        "func": "// Retrieve the last value and the null-logged flag from context\nlet lastValue = context.get('lastValue') || null; // Initialize as null for the first run\nlet hasLoggedLastValue = context.get('hasLoggedLastValue') || false;\n\n// Check if the input is null, undefined, or a false-like value\nif (msg.payload == null || (typeof msg.payload === 'string' && msg.payload.trim() === '')) {\n    if (lastValue && !hasLoggedLastValue) {\n        // Log the last message before null or empty input\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `user disconnect at: ${timestamp}: ${lastValue}`;\n\n        // Set the flag to prevent repeated logging\n        context.set('hasLoggedLastValue', true);\n        return msg;\n    } else {\n        // Ignore subsequent nulls or if there's no last valid value\n        return null;\n    }\n}\n\n// If input is explicitly true\nif (msg.payload === true) {\n    // If transitioning from a different state, update the context\n    if (lastValue !== true) {\n        context.set('lastValue', true);\n\n        // Reset the null-logged flag\n        context.set('hasLoggedLastValue', false);\n\n        // Add a local timestamp and the message \"Amp On\"\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `${timestamp}: Amp On`;\n\n        // Return the message\n        return msg;\n    }\n\n    // No action if already in \"Amp On\" state\n    return null;\n}\n\n// If input is explicitly false\nif (msg.payload === false) {\n    // If transitioning from a true state, update the context\n    if (lastValue === true) {\n        context.set('lastValue', false);\n\n        // Reset the null-logged flag\n        context.set('hasLoggedLastValue', false);\n\n        // Add a local timestamp and the message \"Amp Off\"\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `${timestamp}: Amp Off`;\n\n        // Return the message\n        return msg;\n    }\n\n    // No action if already in \"Amp Off\" state\n    return null;\n}\n\n// For other valid inputs\nif (msg.payload !== lastValue || hasLoggedLastValue) {\n    // Update the context with the new value\n    context.set('lastValue', msg.payload);\n\n    // Reset the null-logged flag since we have a new valid message\n    context.set('hasLoggedLastValue', false);\n\n    // Add a local timestamp to the payload\n    let now = new Date();\n    let timestamp = now.toLocaleString();\n    msg.payload = `${timestamp}: ${msg.payload}`;\n\n    // Pass the message for writing\n    return msg;\n}\n\n// If no change and no null transition, do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1095,
+        "y": 570,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a"
+            ]
+        ]
+    },
+    {
+        "id": "d2e305b54959aa39",
+        "type": "function",
+        "z": "2d79a63e086969f7",
+        "name": "Log Amp",
+        "func": "// Retrieve the last value and the null-logged flag from context\nlet lastValue = context.get('lastValue') || null; // Initialize as null for the first run\nlet hasLoggedLastValue = context.get('hasLoggedLastValue') || false;\n\n// Check if the input is null, undefined, or empty\nif (msg.payload == null || msg.payload.trim() === '') {\n    if (lastValue && !hasLoggedLastValue) {\n        // Log the last message before null or empty input\n        let now = new Date();\n        let timestamp = now.toLocaleString();\n        msg.payload = `user disconnect at: ${timestamp}: ${lastValue}`;\n\n        // Set the flag to prevent repeated logging\n        context.set('hasLoggedLastValue', true);\n        return msg;\n    } else {\n        // Ignore subsequent nulls or if there's no last valid value\n        return null;\n    }\n}\n\n// For valid (non-null) input\nif (msg.payload !== lastValue || hasLoggedLastValue) {\n    // Update the context with the new value\n    context.set('lastValue', msg.payload);\n\n    // Reset the null-logged flag since we have a new valid message\n    context.set('hasLoggedLastValue', false);\n\n    // Add a local timestamp to the payload\n    let now = new Date();\n    let timestamp = now.toLocaleString();\n    msg.payload = `${timestamp}: ${msg.payload}`;\n\n    // Pass the message for writing\n    return msg;\n}\n\n// If no change and no null transition, do nothing\nreturn null;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2073.5,
+        "y": 756.5,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a"
+            ]
+        ]
+    },
+    {
+        "id": "dd9c8cc04b21ce92",
+        "type": "link in",
+        "z": "2d79a63e086969f7",
+        "name": "Uptime Robot Log",
+        "links": [],
+        "x": 1177.5,
+        "y": 874.5,
+        "wires": [
+            [
+                "14e0c39b91a9ff3a",
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "610cfba89878682f",
+        "type": "inject",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1073.5,
+        "y": 1278.5,
+        "wires": [
+            [
+                "9367e58b9c9de15f"
+            ]
+        ]
+    },
+    {
+        "id": "9367e58b9c9de15f",
+        "type": "change",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Restart",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1289.5,
+        "y": 1280.5,
+        "wires": [
+            [
+                "0b5a573826c0dbc0"
+            ]
+        ]
+    },
+    {
+        "id": "6d952f2ed9235ac9",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Log Restarts",
+        "info": "",
+        "x": 1152.5,
+        "y": 1232.5,
+        "wires": []
+    },
+    {
+        "id": "0922f2f41772f059",
+        "type": "inject",
+        "z": "2d79a63e086969f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "test",
+        "payloadType": "str",
+        "x": 1789,
+        "y": 837,
+        "wires": [
+            [
+                "e8cb1366bc2aa519"
+            ]
+        ]
+    },
+    {
+        "id": "6ece5e5367aff72f",
+        "type": "e-mail",
+        "z": "2d79a63e086969f7",
+        "d": true,
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": false,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": false,
+        "name": "Your Email",
+        "dname": "Send Alert",
+        "x": 1640,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "e8cb1366bc2aa519",
+        "type": "discordMessageManager",
+        "z": "2d79a63e086969f7",
+        "d": true,
+        "name": "",
+        "channel": "Your Ch ID",
+        "token": "",
+        "x": 1748.5,
+        "y": 975.5,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "311bc43f5c4f1bc3",
+        "type": "comment",
+        "z": "2d79a63e086969f7",
+        "name": "Optional Discord Logging",
+        "info": "",
+        "x": 1830,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "e28362374090775d",
+        "type": "ui_spacer",
+        "z": "2d79a63e086969f7",
+        "name": "spacer",
+        "group": "e01b097f943953f0",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "84abd2c363fac372",
+        "type": "ui_spacer",
+        "z": "2d79a63e086969f7",
+        "name": "spacer",
+        "group": "8ddcd4902d4ba12a",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8ddcd4902d4ba12a",
+        "type": "ui_group",
+        "name": "6600 Info 2",
+        "tab": "549c889b2dd69333",
+        "order": 2,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "192171bb8bb409b2",
+        "type": "ui_group",
+        "name": "6600 Info",
+        "tab": "549c889b2dd69333",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "e01b097f943953f0",
+        "type": "ui_group",
+        "name": "6600 Group 3",
+        "tab": "549c889b2dd69333",
+        "order": 3,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e426551e1e10f6a9",
+        "type": "ui_group",
+        "name": "Slice A Header",
+        "tab": "",
+        "order": 2,
+        "disp": false,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "70ec6420bcbbe2ae",
+        "type": "ui_group",
+        "name": "Text In Header",
+        "tab": "",
+        "order": 8,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d43038e704b3ad26",
+        "type": "ui_group",
+        "name": "Alerts",
+        "tab": "d3fd3a03eeca216a",
+        "order": 1,
+        "disp": true,
+        "width": "3",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b69172af60866d2d",
+        "type": "ui_group",
+        "name": "Radio",
+        "tab": "b35a51ba4e1dee85",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "546ab70dc0c713ca",
+        "type": "ui_group",
+        "name": "Radio Control",
+        "tab": "6d6f25e436f987a2",
+        "order": 1,
+        "disp": false,
+        "width": "32",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "549c889b2dd69333",
+        "type": "ui_tab",
+        "name": "Flex Info",
+        "icon": "info",
+        "order": 8,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d3fd3a03eeca216a",
+        "type": "ui_tab",
+        "name": "HF Station Control",
+        "icon": "radio",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b35a51ba4e1dee85",
+        "type": "ui_tab",
+        "d": true,
+        "name": "VHF/UHF Station Control",
+        "icon": "radio",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6d6f25e436f987a2",
+        "type": "ui_tab",
+        "name": "Sat Control",
+        "icon": "dashboard",
+        "order": 15,
+        "disabled": false,
+        "hidden": false
+    }
+]

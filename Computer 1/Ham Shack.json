@@ -1,0 +1,58 @@
+[
+    {
+        "id": "690ea02291d586a5",
+        "type": "tab",
+        "label": "Ham Shack Dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "98dc2f428b8e9687",
+        "type": "ui_iframe",
+        "z": "690ea02291d586a5",
+        "group": "8dbae2f9260b48b1",
+        "name": "",
+        "order": 5,
+        "width": "27",
+        "height": "20",
+        "url": "https://nject.us/HAMSHACK-DASHBOARD-O.html",
+        "origin": "*",
+        "scale": "100",
+        "x": 310,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cb0c1479723a08ee",
+        "type": "comment",
+        "z": "690ea02291d586a5",
+        "name": "Ham Shack Dashboard tab ",
+        "info": "",
+        "x": 148.57142639160156,
+        "y": 48.57143020629883,
+        "wires": []
+    },
+    {
+        "id": "8dbae2f9260b48b1",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "8601f8f5995ff1f9",
+        "order": 1,
+        "disp": false,
+        "width": "50",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8601f8f5995ff1f9",
+        "type": "ui_tab",
+        "name": "Ham Shack Dashboard",
+        "icon": "dashboard",
+        "order": 9,
+        "disabled": false,
+        "hidden": false
+    }
+]

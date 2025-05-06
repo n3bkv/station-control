@@ -1,0 +1,3372 @@
+[
+    {
+        "id": "cbaf9eb9.60c0b",
+        "type": "tab",
+        "label": "KPA500-Comp 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c99e64b3.2ae638",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Query Function",
+        "func": "msg.payload = \"^BN;^FL;^TM;^FC;^OS;^WS;^AL;^VI;^ON;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2560,
+        "y": 460,
+        "wires": [
+            [
+                "650e9662.36a498"
+            ]
+        ]
+    },
+    {
+        "id": "cbe42052.3f676",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "ON",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "TM",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "FC",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "OS",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "WS",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "VI",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "BN",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "FL",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "PJ",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 9,
+        "x": 610,
+        "y": 620,
+        "wires": [
+            [
+                "d596dd84.39026"
+            ],
+            [
+                "ab0e1f00.0e3b3"
+            ],
+            [
+                "fc2705c8.4d6548"
+            ],
+            [
+                "1413d704.828619",
+                "21fefecf.3f4252",
+                "43c114a2.b9bc1c"
+            ],
+            [
+                "9f7343d1.17dce"
+            ],
+            [
+                "8ec5336.776b1d"
+            ],
+            [
+                "5e475eab.7b9b5"
+            ],
+            [
+                "8b0fd5b8.c2ba68"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dc325dbc.b3fe4",
+        "type": "split",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "splt": "^",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 470,
+        "y": 620,
+        "wires": [
+            [
+                "cbe42052.3f676"
+            ]
+        ]
+    },
+    {
+        "id": "49ea8cbd.300a84",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Parse Temp",
+        "func": "msg.payload = parseFloat(msg.payload.substr(2,3))\nif (isNaN(msg.payload)) {\n    return;   \n}  \nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 950,
+        "y": 440,
+        "wires": [
+            [
+                "d0b5095b.734168"
+            ]
+        ]
+    },
+    {
+        "id": "1413d704.828619",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Sby/Operate",
+        "func": "msg.payload = parseInt(msg.payload.substr(2,1))\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 950,
+        "y": 580,
+        "wires": [
+            [
+                "3890834e.3bfd6c"
+            ]
+        ]
+    },
+    {
+        "id": "7d016842.733898",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Watts",
+        "func": "msg.payload = parseInt(msg.payload.substr(2,3))\nif (isNaN(msg.payload)) {\n    return;   \n}  \nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 640,
+        "wires": [
+            [
+                "13efa47.a5c7d5c",
+                "fba5f582.23f698"
+            ]
+        ]
+    },
+    {
+        "id": "762ac23e.fa690c",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Fault",
+        "func": "msg.payload = parseInt(msg.payload.substr(2,2))\nif (isNaN(msg.payload)) {\n    return;   \n}    \nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 1000,
+        "wires": [
+            [
+                "708811d3.8ab0c"
+            ]
+        ]
+    },
+    {
+        "id": "5e475eab.7b9b5",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Band",
+        "func": "msg.payload = parseInt(msg.payload.substr(2,3))\nif (isNaN(msg.payload)) {\n    return;   \n}  \nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 900,
+        "wires": [
+            [
+                "7c2a36a9.1351f8"
+            ]
+        ]
+    },
+    {
+        "id": "7c2a36a9.1351f8",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Band",
+        "func": "var bandcode = msg.payload;\nvar band = '';\nswitch(bandcode) {\ncase 0:\n    band = \"160m\";\nbreak;\ncase 1:\n    band = \"80m\";\nbreak;\ncase 2:\n    band = \"60m\";\nbreak;\ncase 3:\n    band = \"40m\";\nbreak;\ncase 4:\n    band = \"30m\";\nbreak;\ncase 5:\n    band = \"20m\";\nbreak;\ncase 6:\n    band = \"17m\";\nbreak;\ncase 7:\n    band = \"15m\";\nbreak;\ncase 8:\n    band = \"12m\";\nbreak;\ncase 9:\n    band = \"10m\";\nbreak;\ncase 10:\n    band = \"6m\";\n}\n\nreturn  {payload: band};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1130,
+        "y": 900,
+        "wires": [
+            [
+                "c4339b18.922768",
+                "67df0124.1ac7e"
+            ]
+        ]
+    },
+    {
+        "id": "1bb87995.4c0c76",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "SWR",
+        "func": "msg.payload = parseInt(msg.payload.substr(7,3))/10\nif (isNaN(msg.payload)) {\n    return;   \n}  \nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 720,
+        "wires": [
+            [
+                "be6510eb.11a63"
+            ]
+        ]
+    },
+    {
+        "id": "95dc068f.720178",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1850,
+        "y": 380,
+        "wires": [
+            [
+                "79542f86.ae3dd",
+                "c3a2f0fb.e77a8",
+                "fb3ca8b.e9fa058",
+                "ca8a8bf7.de5c38"
+            ],
+            [
+                "444998a6.8f5f58",
+                "e9770134.8bae9",
+                "b485a9b2.8f81d8",
+                "5c8bc3f4.f3604c"
+            ]
+        ]
+    },
+    {
+        "id": "79542f86.ae3dd",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Power On",
+        "func": "msg.payload = \"P\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2220,
+        "y": 360,
+        "wires": [
+            [
+                "335138ba.c2bcd8",
+                "480a47d6.360d38"
+            ]
+        ]
+    },
+    {
+        "id": "444998a6.8f5f58",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Power Off",
+        "func": "msg.payload = \";^ON0;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2220,
+        "y": 400,
+        "wires": [
+            [
+                "c99e64b3.2ae638",
+                "480a47d6.360d38"
+            ]
+        ]
+    },
+    {
+        "id": "530e28dc.d3f498",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "KPA 500 Notes",
+        "info": "KPA 500 for Node-Red\n\nYou will need the Dashboard installed\n\nModify the Serial to and From the KPA500 to match\nyour serial ports.\n\nYou will require a Serial cable from your\nhardware running NodeRed to the PC control on the \nKPA500.\n\nMore work could be done in the Fault Conditions and\nI never wrote any flow to reset a fault condition,\nhowever, you can power cycle the amp to reset it.\n\nThe meter reading cycle is something you may want\nto play with.  Those settings are in the 'timestamp' \nbutton. \n\nThere is more to add, but if you get this far, feel\nfree to expand to more meters.\n\n\n^AL ALC Threshold\n^OS STBY/OP Mode Selection\n^AR Atten Fault Release Time \n^PJ Power Adjustment\n^BC STBY on Band Change \n^RVM Firmware Version\n^BN Band Selection \n^SN Serial Number\n^BRP PC Port RS232 Data Rate \n^SP Speaker On/Off\n^BRX XCVR Port RS232 Data Rate \n^TM PA Temperature\n^DMO Demo Mode \n^TR T/R Delay Time\n^FC Fan Minimum Control \n^VI PA Voltage and Current\n^FL Fault value \n^WS Power / SWR\n^NH INHIBIT input control \n^XI Radio Interface Selection\n^ON Power Status/Control\n\nInital flows by K6HN...\n\nK0VM added ......\nPA Standby on Band Change\nBand tracking\nDrive reduction in Operate vs Standby\nand other flow 'refinements'\nThis flow interacts with my Radio flow or equivalent. \nYou will need to configure the serial port name.\n",
+        "x": 400,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "77575a15.ed5124",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Operate",
+        "func": "msg.payload = \"^OS1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2220,
+        "y": 560,
+        "wires": [
+            [
+                "650e9662.36a498",
+                "440602a9.04220c"
+            ]
+        ]
+    },
+    {
+        "id": "eea29b6e.4f48f8",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Standby",
+        "func": "msg.payload = \"^OS0;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2200,
+        "y": 620,
+        "wires": [
+            [
+                "650e9662.36a498",
+                "440602a9.04220c"
+            ]
+        ]
+    },
+    {
+        "id": "708811d3.8ab0c",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Alarm Decode",
+        "func": "var alarmcode = msg.payload;\nvar alarm = 'Error';\nswitch(alarmcode) {\ncase 0:\n    alarm = \"None\";\nbreak;\ncase 15:\n    alarm = \"Gain Err\";\nbreak;\ncase 2:\n    alarm = \"HI CURR\";\nbreak;\ncase 4:\n    alarm = \"HI TEMP\";\nbreak;\ncase 6:\n    alarm = \"PWRIN HI\";\nbreak;\ncase 11:\n    alarm = \"PA DISS\";\nbreak;\ncase 12:\n    alarm = \"POUT HI\";\nbreak;\ncase 9:\n    alarm = \"REFL HI\";\nbreak;\ncase 8:\n    alarm = \"60V HIGH\";\nbreak;\ncase 13:\n    alarm = \"60V FAIL\";\nbreak;\ncase 14:\n    alarm = \"270V ERR\";\n}\n\nreturn  {payload: alarm};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1100,
+        "y": 1000,
+        "wires": [
+            [
+                "9b8b7058.4df42"
+            ]
+        ]
+    },
+    {
+        "id": "3890834e.3bfd6c",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Mode",
+        "func": "var opmode = msg.payload;\nvar status = '';\nvar color = \"grey\"\nswitch(opmode) {\ncase 0:\n    status = \"StandBy\";\n    color = \"yellow\";\n    opmode = false ;\nbreak;\ncase 1:\n    color = \"#66ff66\";\n    status = \"Operate\";\n    opmode = true\n}\n\nreturn  {topic: status, payload: opmode, color: color};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1130,
+        "y": 580,
+        "wires": [
+            [
+                "4edc6ba0.c1bca4",
+                "8fc88c70a48b7b21"
+            ]
+        ]
+    },
+    {
+        "id": "c4339b18.922768",
+        "type": "ui_text",
+        "z": "cbaf9eb9.60c0b",
+        "group": "784db929e887af7e",
+        "order": 14,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Operating Band:",
+        "format": "<font color=#66ff66 size=\"4\">{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1640,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "5ae7f34d.2e42fc",
+        "type": "debug",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Message debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "4edc6ba0.c1bca4",
+        "type": "ui_switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "OP/STBY In",
+        "label": "PA Mode : <font color = {{msg.color}}>{{msg.topic}}",
+        "tooltip": "Toggle Standby,Operate",
+        "group": "784db929e887af7e",
+        "order": 12,
+        "width": 6,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-circle fa-lg",
+        "oncolor": "lime",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-circle fa-lg",
+        "offcolor": "yellow",
+        "animate": true,
+        "className": "",
+        "x": 1630,
+        "y": 580,
+        "wires": [
+            [
+                "7b0abede.e74db",
+                "580b5dac.056354"
+            ]
+        ]
+    },
+    {
+        "id": "7b0abede.e74db",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "OP/STBY",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1860,
+        "y": 580,
+        "wires": [
+            [
+                "77575a15.ed5124",
+                "9996c6bb.7686d8",
+                "4e619df6.667b04"
+            ],
+            [
+                "eea29b6e.4f48f8",
+                "4e619df6.667b04",
+                "657a1c61.7ca924"
+            ]
+        ]
+    },
+    {
+        "id": "3d5e5a11.d3ccd6",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Fan Level",
+        "func": "msg.payload = parseInt(msg.payload.substr(2,2))\nif (isNaN(msg.payload)) {\n    return;   \n}  \nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 940,
+        "y": 500,
+        "wires": [
+            [
+                "89a5cfa0.586b1"
+            ]
+        ]
+    },
+    {
+        "id": "89a5cfa0.586b1",
+        "type": "ui_numeric",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Fan Level",
+        "label": "Idle Fan Speed",
+        "tooltip": "Select idle fan speed",
+        "group": "784db929e887af7e",
+        "order": 28,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": false,
+        "topic": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "6",
+        "step": 1,
+        "x": 1620,
+        "y": 500,
+        "wires": [
+            [
+                "7dbedf93.0c61a",
+                "580b5dac.056354"
+            ]
+        ]
+    },
+    {
+        "id": "7dbedf93.0c61a",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Fan Speed",
+        "func": "var fan=context.get('fan') || 0;\nfan=msg.payload;\ncontext.set('fan',fan);\nmsg.payload =\";^FC\"+fan+\";\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2230,
+        "y": 500,
+        "wires": [
+            [
+                "650e9662.36a498"
+            ]
+        ]
+    },
+    {
+        "id": "ef92ee37.23756",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Power On/Off comment",
+        "info": "If you power on using the KPA PWR button, you can power cycle the KPA with the node-red power button.\n\nIf you power off using the KPA PWR button, you can not turn it on using the node-red power button.\n\nTo power the amp on you need to send a logic low pulse to pin 8 on the AUX connector of the amp.\n\nPin 5 of the AUX connector is ground, so common of a relay would go to pin 5 and normally open of the relay to pin 8 Program relay to close for 150 mS then open.\n\nYou can use the Power On function node in KPA500 flow to control a relay ( not currently imlimented. ).",
+        "x": 720,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "8ec5336.776b1d",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "PA V/A",
+        "func": "msg1 = {}\n\nvolts = parseInt(msg.payload.substr(2,3))\nvolts = volts * .1\nvolts = volts.toFixed(1);\namps = parseInt(msg.payload.substr(6,3))\namps = amps * .1\namps = amps.toFixed(1);\nmsg.payload = volts;\nif (isNaN(msg.payload)) {\n    return;   \n}  \nmsg1.payload = amps;\nif (isNaN(msg1.payload)) {\n    return;   \n}  \nreturn [msg,msg1];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 800,
+        "wires": [
+            [
+                "b2fd175d.442058"
+            ],
+            [
+                "749a6052.bfed2"
+            ]
+        ]
+    },
+    {
+        "id": "b893c4c0.218038",
+        "type": "ui_switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Alarm",
+        "label": "Alarm : {{msg.topic}}",
+        "tooltip": "Display/Clear PA fault conditions",
+        "group": "784db929e887af7e",
+        "order": 26,
+        "width": 6,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-exclamation-circle fa-2x",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-exclamation-circle fa-2x",
+        "offcolor": "#505050",
+        "animate": true,
+        "className": "",
+        "x": 1610,
+        "y": 1000,
+        "wires": [
+            [
+                "580b5dac.056354",
+                "4f9ac757.37ba88"
+            ]
+        ]
+    },
+    {
+        "id": "9b8b7058.4df42",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "None",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1250,
+        "y": 1000,
+        "wires": [
+            [
+                "3177ee25.ad1ed2"
+            ],
+            [
+                "bcd2422c.a0401"
+            ]
+        ]
+    },
+    {
+        "id": "3177ee25.ad1ed2",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 980,
+        "wires": [
+            [
+                "b893c4c0.218038"
+            ]
+        ]
+    },
+    {
+        "id": "bcd2422c.a0401",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 1020,
+        "wires": [
+            [
+                "b893c4c0.218038"
+            ]
+        ]
+    },
+    {
+        "id": "580b5dac.056354",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "50",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 2230,
+        "y": 460,
+        "wires": [
+            [
+                "c99e64b3.2ae638"
+            ]
+        ]
+    },
+    {
+        "id": "4f9ac757.37ba88",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Fault",
+        "func": "msg.payload = \"^FL;^FLC;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2210,
+        "y": 1000,
+        "wires": [
+            [
+                "650e9662.36a498"
+            ]
+        ]
+    },
+    {
+        "id": "d596dd84.39026",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "On",
+        "func": "msg.payload = parseInt(msg.payload.substr(2,1))\nif (isNaN(msg.payload)) {\n    return;   \n}  \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 380,
+        "wires": [
+            [
+                "8ebad229.de50c"
+            ]
+        ]
+    },
+    {
+        "id": "8ebad229.de50c",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1130,
+        "y": 380,
+        "wires": [
+            [
+                "db79b700.cfb078"
+            ],
+            [
+                "3b346b33.0e5184"
+            ]
+        ]
+    },
+    {
+        "id": "db79b700.cfb078",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "text",
+                "pt": "msg",
+                "to": "On",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 360,
+        "wires": [
+            [
+                "d8f9e177d4926f27",
+                "729f3943.5faf88",
+                "9327131dd9aa168e"
+            ]
+        ]
+    },
+    {
+        "id": "650e9662.36a498",
+        "type": "gate",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "persist": false,
+        "x": 2590,
+        "y": 540,
+        "wires": [
+            [
+                "7b3d61c6.b8515",
+                "480a47d6.360d38"
+            ]
+        ]
+    },
+    {
+        "id": "c3a2f0fb.e77a8",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Open",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "open",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2070,
+        "y": 340,
+        "wires": [
+            [
+                "650e9662.36a498"
+            ]
+        ]
+    },
+    {
+        "id": "5c8bc3f4.f3604c",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Close",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "close",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2070,
+        "y": 420,
+        "wires": [
+            [
+                "650e9662.36a498"
+            ]
+        ]
+    },
+    {
+        "id": "312c5f5c.d91b4",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "Off - Bypassed",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "color",
+                "pt": "msg",
+                "to": "grey",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 560,
+        "wires": [
+            [
+                "4edc6ba0.c1bca4"
+            ]
+        ]
+    },
+    {
+        "id": "b485a9b2.8f81d8",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 1200,
+        "y": 540,
+        "wires": [
+            [
+                "312c5f5c.d91b4",
+                "e905a4d9.6f1be8",
+                "353833e.94bf3cc",
+                "3b346b33.0e5184",
+                "db79b700.cfb078"
+            ]
+        ]
+    },
+    {
+        "id": "e905a4d9.6f1be8",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "--",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 880,
+        "wires": [
+            [
+                "c4339b18.922768"
+            ]
+        ]
+    },
+    {
+        "id": "353833e.94bf3cc",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 680,
+        "wires": [
+            [
+                "d0b5095b.734168",
+                "749a6052.bfed2",
+                "13efa47.a5c7d5c",
+                "b2fd175d.442058"
+            ]
+        ]
+    },
+    {
+        "id": "20ebc0af.23448",
+        "type": "inject",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 2010,
+        "y": 160,
+        "wires": [
+            [
+                "9996c6bb.7686d8"
+            ]
+        ]
+    },
+    {
+        "id": "e9770134.8bae9",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 2020,
+        "y": 200,
+        "wires": [
+            [
+                "657a1c61.7ca924"
+            ]
+        ]
+    },
+    {
+        "id": "cc41d6d.1d93b28",
+        "type": "link in",
+        "z": "cbaf9eb9.60c0b",
+        "name": "RadioBand",
+        "links": [],
+        "x": 1995,
+        "y": 840,
+        "wires": [
+            [
+                "fc7b0e29.8d06d",
+                "b87fb4bb.e134b8"
+            ]
+        ]
+    },
+    {
+        "id": "b87fb4bb.e134b8",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "F>Band",
+        "func": "var frequency=parseFloat(msg.payload) ; \nvar band=\"^BN;\";\n\nswitch (true) {\n        \n    case (frequency >=  1800 && frequency <=  2000): band=\";^BN00;\" ; break;\n    case (frequency >=  3500 && frequency <=  4000): band=\";^BN01;\" ; break;\n    case (frequency >=  5330 && frequency <=  5405): band=\";^BN02;\" ; break;\n    case (frequency >=  7000 && frequency <=  7300): band=\";^BN03;\" ; break;\n    case (frequency >= 10100 && frequency <= 10150): band=\";^BN04;\" ; break;\n    case (frequency >= 14000 && frequency <= 14350): band=\";^BN05;\" ; break;\n    case (frequency >= 18068 && frequency <= 18168): band=\";^BN06;\" ; break;\n    case (frequency >= 21000 && frequency <= 21450): band=\";^BN07;\" ; break;\n    case (frequency >= 24890 && frequency <= 24990): band=\";^BN08;\" ; break;\n    case (frequency >= 28000 && frequency <= 29700): band=\";^BN09;\" ; break;\n    case (frequency >= 50000 && frequency <= 54000): band=\";^BN10;\" ; break;\n\n}\n\nmsg.payload=band;\nmsg.topic = \"null\" ;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2120,
+        "y": 840,
+        "wires": [
+            [
+                "2afb8d86.be9e92"
+            ]
+        ]
+    },
+    {
+        "id": "4e619df6.667b04",
+        "type": "link out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Op Pwr",
+        "links": [
+            "dadc5f71.f44cd"
+        ],
+        "x": 2035,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "67df0124.1ac7e",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Stby on BC",
+        "func": "newband = msg.payload \n\nif ( msg.topic  == \"init\") {\n    band = \"20m\"\n    }\nif ( newband != band ) {\n        msg.payload = false ;\n        band = newband ;\n    } \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1630,
+        "y": 940,
+        "wires": [
+            [
+                "79a359ce.ccb768"
+            ]
+        ],
+        "info": "Force PA Standby on band change"
+    },
+    {
+        "id": "b30dd135.b3a47",
+        "type": "inject",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "init",
+        "payload": "20m",
+        "payloadType": "str",
+        "x": 1260,
+        "y": 940,
+        "wires": [
+            [
+                "67df0124.1ac7e"
+            ]
+        ]
+    },
+    {
+        "id": "ab0e1f00.0e3b3",
+        "type": "rbe",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 790,
+        "y": 440,
+        "wires": [
+            [
+                "49ea8cbd.300a84"
+            ]
+        ]
+    },
+    {
+        "id": "fc2705c8.4d6548",
+        "type": "rbe",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 790,
+        "y": 500,
+        "wires": [
+            [
+                "3d5e5a11.d3ccd6"
+            ]
+        ]
+    },
+    {
+        "id": "8b0fd5b8.c2ba68",
+        "type": "rbe",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 790,
+        "y": 1000,
+        "wires": [
+            [
+                "762ac23e.fa690c"
+            ]
+        ]
+    },
+    {
+        "id": "9f7343d1.17dce",
+        "type": "rbe",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 790,
+        "y": 640,
+        "wires": [
+            [
+                "7d016842.733898",
+                "1bb87995.4c0c76"
+            ]
+        ]
+    },
+    {
+        "id": "fba5f582.23f698",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Reset Timer",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1150,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6525ce77.4dbd5",
+        "type": "inject",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 1610,
+        "y": 200,
+        "wires": [
+            [
+                "f8322e66.dfd8b",
+                "7b0abede.e74db"
+            ]
+        ]
+    },
+    {
+        "id": "79a359ce.ccb768",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "false",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1820,
+        "y": 940,
+        "wires": [
+            [
+                "7b0abede.e74db"
+            ]
+        ]
+    },
+    {
+        "id": "f8322e66.dfd8b",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 1630,
+        "y": 260,
+        "wires": [
+            [
+                "95dc068f.720178"
+            ]
+        ]
+    },
+    {
+        "id": "fb3ca8b.e9fa058",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 1950,
+        "y": 800,
+        "wires": [
+            [
+                "e7bcfe20.93051"
+            ]
+        ]
+    },
+    {
+        "id": "e7bcfe20.93051",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "F=0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "^BN;",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "null",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2110,
+        "y": 800,
+        "wires": [
+            [
+                "2afb8d86.be9e92"
+            ]
+        ]
+    },
+    {
+        "id": "2afb8d86.be9e92",
+        "type": "rbe",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 2270,
+        "y": 800,
+        "wires": [
+            [
+                "650e9662.36a498"
+            ]
+        ]
+    },
+    {
+        "id": "8834b8c.8039b48",
+        "type": "inject",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2030,
+        "y": 120,
+        "wires": [
+            [
+                "cc9de1dd.fdcff"
+            ]
+        ]
+    },
+    {
+        "id": "cc9de1dd.fdcff",
+        "type": "msg-resend",
+        "z": "cbaf9eb9.60c0b",
+        "interval": "200",
+        "intervalUnit": "msecs",
+        "maximum": "5",
+        "bytopic": false,
+        "clone": false,
+        "firstDelayed": false,
+        "addCounters": true,
+        "waitForResend": false,
+        "highRate": false,
+        "outputCountField": "topic",
+        "outputMaxField": "max",
+        "name": "",
+        "x": 2210,
+        "y": 100,
+        "wires": [
+            [
+                "4524d574.4bbeac"
+            ]
+        ]
+    },
+    {
+        "id": "9996c6bb.7686d8",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2220,
+        "y": 160,
+        "wires": [
+            [
+                "4524d574.4bbeac"
+            ]
+        ]
+    },
+    {
+        "id": "657a1c61.7ca924",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2220,
+        "y": 200,
+        "wires": [
+            [
+                "4524d574.4bbeac"
+            ]
+        ]
+    },
+    {
+        "id": "4524d574.4bbeac",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Poll rate",
+        "func": "if ( msg.topic == \"control\" ) { \n    rate = msg.payload \n    msg.topic = 0\n}\n\n//msg.rate = rate\n\nif ( rate == false ) {\n    if ( msg.topic > 1 ) {\n        msg.topic = 0\n    }    \n}\n\nreturn msg ;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 2410,
+        "y": 120,
+        "wires": [
+            [
+                "7a7aa8b4.ce6888"
+            ]
+        ]
+    },
+    {
+        "id": "7a7aa8b4.ce6888",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2550,
+        "y": 120,
+        "wires": [
+            [
+                "c99e64b3.2ae638"
+            ]
+        ]
+    },
+    {
+        "id": "6eebeaa3.fc25b4",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Sets Band from TX slice",
+        "info": "",
+        "x": 2130,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "bd1d9d53.5c8c8",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Change Polling rate",
+        "info": "Reduces polling rate during standby. 1 per sec vs 5 per sec.",
+        "x": 2430,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "729f3943.5faf88",
+        "type": "ui_text",
+        "z": "cbaf9eb9.60c0b",
+        "group": "784db929e887af7e",
+        "order": 9,
+        "width": 6,
+        "height": 1,
+        "name": "Title",
+        "label": "<font color = #0094CE size=\"5\">KPA500",
+        "format": "{{msg.text}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1670,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "dadc5f71.f44cd",
+        "type": "link in",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Op Pwr",
+        "links": [
+            "4e619df6.667b04"
+        ],
+        "x": 1615,
+        "y": 1140,
+        "wires": [
+            [
+                "d7415c07.3a511"
+            ]
+        ]
+    },
+    {
+        "id": "c01dbe62.6b0dd",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "PA off drive",
+        "func": "msg.payload = 100\nmsg.topic = null\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1910,
+        "y": 1100,
+        "wires": [
+            [
+                "f70412de.a1903"
+            ]
+        ]
+    },
+    {
+        "id": "178d8a1b.813f26",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "PA on Drive",
+        "func": "band = msg.payload\nswitch ( band ) {\n    case \"160m\" : drive = 20 ; break ;\n    case \"80m\"  : drive = 28 ; break ;\n    case \"60m\"  : drive = 10 ; break ;\n    case \"40m\"  : drive = 33 ; break ;\n    case \"30m\"  : drive = 35 ; break ;\n    case \"20m\"  : drive = 35 ; break ;\n    case \"17m\"  : drive = 35 ; break ;\n    case \"15m\"  : drive = 28 ; break ;\n    case \"12m\"  : drive = 39 ; break ;\n    case \"10m\"  : drive = 35 ; break ;\n    case \"6m\"   : drive = 10 ; break ;\n}\n\nmsg.payload = drive\nmsg.topic = null\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1910,
+        "y": 1220,
+        "wires": [
+            [
+                "9eb23276.557bc"
+            ]
+        ]
+    },
+    {
+        "id": "c8e1f03f.1a7d2",
+        "type": "link out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "PA Power Set",
+        "links": [],
+        "x": 2355,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "48c1fcda.0a6714",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "F>band",
+        "func": "var frequency=parseFloat(msg.payload) ; //* 1000;\nvar band=\"\";\n\nswitch (true) {\n        \n    case (frequency >=  1800 && frequency <=  2000): band=\"160m\" ; break;\n    case (frequency >=  3500 && frequency <=  4000): band=\"80m\" ; break;\n    case (frequency >=  5330 && frequency <=  5405): band=\"60m\" ; break;\n    case (frequency >=  7000 && frequency <=  7300): band=\"40m\" ; break;\n    case (frequency >= 10100 && frequency <= 10150): band=\"30m\" ; break;\n    case (frequency >= 14000 && frequency <= 14350): band=\"20m\" ; break;\n    case (frequency >= 18068 && frequency <= 18168): band=\"17m\" ; break;\n    case (frequency >= 21000 && frequency <= 21450): band=\"15m\" ; break;\n    case (frequency >= 24890 && frequency <= 24990): band=\"12m\" ; break;\n    case (frequency >= 28000 && frequency <= 29700): band=\"10m\" ; break;\n    case (frequency >= 50000 && frequency <= 54000): band=\"6m\" ; break;\n    \n//    default: band=\" GEN\";\n }\n \nmsg.payload=band;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1740,
+        "y": 1220,
+        "wires": [
+            [
+                "178d8a1b.813f26"
+            ]
+        ]
+    },
+    {
+        "id": "9eb23276.557bc",
+        "type": "gate",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "",
+        "persist": false,
+        "x": 2090,
+        "y": 1200,
+        "wires": [
+            [
+                "f70412de.a1903"
+            ]
+        ]
+    },
+    {
+        "id": "4a7bcd38.c65544",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Open",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "open",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1890,
+        "y": 1180,
+        "wires": [
+            [
+                "9eb23276.557bc"
+            ]
+        ]
+    },
+    {
+        "id": "d7415c07.3a511",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1730,
+        "y": 1140,
+        "wires": [
+            [
+                "c01dbe62.6b0dd",
+                "ba7b304e.c9648"
+            ],
+            [
+                "4a7bcd38.c65544"
+            ]
+        ]
+    },
+    {
+        "id": "ba7b304e.c9648",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Close",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "close",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1890,
+        "y": 1140,
+        "wires": [
+            [
+                "9eb23276.557bc"
+            ]
+        ]
+    },
+    {
+        "id": "2233249e.f0c99c",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "RF Set",
+        "info": "Reduces radio RF output level when PA is in Operate mode. Sets full RF output when in bypass of off.\nModify the band-drive level  in 'PA on Drive' node to suit you needs.",
+        "x": 2050,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "f70412de.a1903",
+        "type": "rbe",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 2230,
+        "y": 1140,
+        "wires": [
+            [
+                "c8e1f03f.1a7d2"
+            ]
+        ]
+    },
+    {
+        "id": "74429343.775cac",
+        "type": "link in",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "links": [],
+        "x": 1615,
+        "y": 1220,
+        "wires": [
+            [
+                "48c1fcda.0a6714"
+            ]
+        ]
+    },
+    {
+        "id": "254d9f4c.f1713",
+        "type": "switch",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Valid",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^;.*;$",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "cont",
+                "v": "KPA500",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 380,
+        "wires": [
+            [],
+            [
+                "875d67ad.1d28e8"
+            ]
+        ],
+        "info": "port 1  -- valid strings from KPA500\nport 2  -- KPA500 shows up in corrupted string when the KPA is turned off with its button."
+    },
+    {
+        "id": "875d67ad.1d28e8",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 320,
+        "wires": [
+            [
+                "b485a9b2.8f81d8"
+            ]
+        ]
+    },
+    {
+        "id": "3b346b33.0e5184",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "text",
+                "pt": "msg",
+                "to": "Off",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 400,
+        "wires": [
+            [
+                "729f3943.5faf88",
+                "0c932a0a2028c2ae",
+                "9327131dd9aa168e"
+            ]
+        ]
+    },
+    {
+        "id": "27d07738.4a7aa8",
+        "type": "inject",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 1620,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b8908c16.c504b",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "ON",
+        "info": "Full remote power on requires pulsing pin 8 of KPA500 AUX  to ground. I have inserted a NPN buffer between GPIO 7 and the KPA.\nIf you have local access to the KPA, you may find the Power ON node to be useful and dispense with the GIO remote function.  (i.e. the local onfunction is not 100% reliable and you may have to puch the on button on the KPA)",
+        "x": 2290,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "335138ba.c2bcd8",
+        "type": "debug",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1830,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "7b3d61c6.b8515",
+        "type": "debug",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2750,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "440602a9.04220c",
+        "type": "debug",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2740,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "21fefecf.3f4252",
+        "type": "debug",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "4c2e518e.ef1de",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "to String",
+        "func": "msg.payload = msg.payload.toString('utf8');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 260,
+        "y": 400,
+        "wires": [
+            [
+                "254d9f4c.f1713",
+                "5ae7f34d.2e42fc",
+                "dc325dbc.b3fe4"
+            ]
+        ]
+    },
+    {
+        "id": "480a47d6.360d38",
+        "type": "serial out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "serial": "70c9eb2f.b8fe54",
+        "x": 3030,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d360c832.7c99d8",
+        "type": "serial in",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "serial": "70c9eb2f.b8fe54",
+        "x": 190,
+        "y": 240,
+        "wires": [
+            [
+                "4c2e518e.ef1de",
+                "fbe2e2317819fd95"
+            ]
+        ]
+    },
+    {
+        "id": "43c114a2.b9bc1c",
+        "type": "debug",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "fc7b0e29.8d06d",
+        "type": "debug",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2120,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "8bd5ebef.ce6aa8",
+        "type": "link in",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "links": [],
+        "x": 1935,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dce3f9f5.90b6f8",
+        "type": "change",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2290,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ca8a8bf7.de5c38",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 2110,
+        "y": 280,
+        "wires": [
+            [
+                "dce3f9f5.90b6f8"
+            ]
+        ]
+    },
+    {
+        "id": "13efa47.a5c7d5c",
+        "type": "ui_level",
+        "z": "cbaf9eb9.60c0b",
+        "group": "784db929e887af7e",
+        "order": 16,
+        "width": 6,
+        "height": 1,
+        "name": "KPA500 RF",
+        "label": "RF",
+        "colorHi": "#e60000",
+        "colorWarn": "#ffff00",
+        "colorNormal": "#00ff55",
+        "colorOff": "#575757",
+        "min": 0,
+        "max": "600",
+        "segWarn": "500",
+        "segHigh": "550",
+        "unit": "Watts",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": 0,
+        "animations": "rocket",
+        "shape": "2",
+        "colorschema": "fixed",
+        "textoptions": "custom",
+        "colorText": "#000000",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": ".8",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": true,
+        "peaktime": "3000",
+        "x": 1630,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "d0b5095b.734168",
+        "type": "ui_level",
+        "z": "cbaf9eb9.60c0b",
+        "group": "784db929e887af7e",
+        "order": 20,
+        "width": 6,
+        "height": 1,
+        "name": "Temp",
+        "label": "PA Temp",
+        "colorHi": "#e60000",
+        "colorWarn": "#ffff00",
+        "colorNormal": "#00ff55",
+        "colorOff": "#595959",
+        "min": "20",
+        "max": "70",
+        "segWarn": "55",
+        "segHigh": "65",
+        "unit": "C",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": "0",
+        "animations": "rocket",
+        "shape": "2",
+        "colorschema": "fixed",
+        "textoptions": "custom",
+        "colorText": "#000000",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": ".8",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": true,
+        "peaktime": "3000",
+        "x": 1610,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "be6510eb.11a63",
+        "type": "ui_level",
+        "z": "cbaf9eb9.60c0b",
+        "group": "784db929e887af7e",
+        "order": 18,
+        "width": 6,
+        "height": 1,
+        "name": "SWRkat",
+        "label": "SWR",
+        "colorHi": "#e60000",
+        "colorWarn": "#ffff00",
+        "colorNormal": "#00ff55",
+        "colorOff": "#5c5c5c",
+        "min": "1",
+        "max": "5",
+        "segWarn": "1.5",
+        "segHigh": "2.0",
+        "unit": "",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": "1",
+        "animations": "reactive",
+        "shape": "2",
+        "colorschema": "fixed",
+        "textoptions": "default",
+        "colorText": "#000000",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": true,
+        "peaktime": "3000",
+        "x": 1620,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "749a6052.bfed2",
+        "type": "ui_level",
+        "z": "cbaf9eb9.60c0b",
+        "group": "784db929e887af7e",
+        "order": 24,
+        "width": 7,
+        "height": 1,
+        "name": "Amps",
+        "label": "PA",
+        "colorHi": "#e60000",
+        "colorWarn": "#ffff00",
+        "colorNormal": "#00ff55",
+        "colorOff": "#5c5c5c",
+        "min": 0,
+        "max": "20",
+        "segWarn": "15",
+        "segHigh": "17",
+        "unit": "A",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": "1",
+        "animations": "reactive",
+        "shape": "2",
+        "colorschema": "fixed",
+        "textoptions": "custom",
+        "colorText": "#000000",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": ".8",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": true,
+        "property": "payload",
+        "peaktime": "3000",
+        "x": 1610,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "b2fd175d.442058",
+        "type": "ui_level",
+        "z": "cbaf9eb9.60c0b",
+        "group": "784db929e887af7e",
+        "order": 22,
+        "width": 7,
+        "height": 1,
+        "name": "Volts",
+        "label": "PA",
+        "colorHi": "#00ff55",
+        "colorWarn": "#ffff00",
+        "colorNormal": "#ff0000",
+        "colorOff": "#595959",
+        "min": "40",
+        "max": "80",
+        "segWarn": "50",
+        "segHigh": "55",
+        "unit": "V",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": "1",
+        "animations": "reactive",
+        "shape": "2",
+        "colorschema": "valuedriven",
+        "textoptions": "custom",
+        "colorText": "#000000",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": ".8",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "off",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": "3000",
+        "x": 1610,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "98c164237b80d53d",
+        "type": "ui_template",
+        "z": "cbaf9eb9.60c0b",
+        "d": true,
+        "group": "5b585a57.347904",
+        "name": "HF Amp On",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "format": "<md-button class=\"filled touched bigfont rounded vibrate\" style=\"background-color:#27ae60\" ng-click=\"send({payload: 'HF Amp is On'}  )\"> \n    HF Amp<br/>On\n</md-button> \n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1650,
+        "y": 80,
+        "wires": [
+            [
+                "51c5710f731c71b5"
+            ]
+        ]
+    },
+    {
+        "id": "51c5710f731c71b5",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "HF Amp On message",
+        "func": "msg.payload=true\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 80,
+        "wires": [
+            [
+                "95dc068f.720178",
+                "580b5dac.056354"
+            ]
+        ]
+    },
+    {
+        "id": "9073115502a46ee7",
+        "type": "ui_template",
+        "z": "cbaf9eb9.60c0b",
+        "d": true,
+        "group": "5b585a57.347904",
+        "name": "HF Amp Off command",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "format": "<md-button class=\"vibrate filled touched bigfont rounded\" style=\"background-color:#c0392b\" ng-click=\"send({payload: 'HF Amp is OFF'})\"> \n    HF Amp<br/>Off\n</md-button> ",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1660,
+        "y": 40,
+        "wires": [
+            [
+                "fd7315d20c5f627e"
+            ]
+        ]
+    },
+    {
+        "id": "fd7315d20c5f627e",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "HF Amp Off message",
+        "func": "msg.payload=false\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1880,
+        "y": 40,
+        "wires": [
+            [
+                "95dc068f.720178"
+            ]
+        ]
+    },
+    {
+        "id": "0c932a0a2028c2ae",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "HF Amp Power is OFF",
+        "func": "msg.payload=\"HF Amp Power is OFF\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d8f9e177d4926f27",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Msg HF Amp Power is On",
+        "func": "msg.payload=\"HF Amp Power is ON\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1210,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e7a14d182d13ec19",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Auto Tune Workflow",
+        "info": "",
+        "x": 550,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "04ddbe5710b79b75",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Initial C1|sub client all",
+        "func": "        var msg1,msg2\n        global.set(\"ClientConnected\",0)\n        msg.c1 = \"sub client all\";   \n        msg.c2 = \"sub slice all\";\n        msg.c3 = \"sub meter all\";\n        msg.c4 = \"sub tx all\";\n        msg1 = {payload:msg.c1};\n        msg2 = {payload:msg.c2};\n        msg3 = {payload:msg.c3};\n        msg4 = {payload:msg.c4};\n        node.send(msg1);\n        node.send(msg2);\n        node.send(msg3);\n        node.send(msg4);\n        node.done();\nreturn;",
+        "outputs": 1,
+        "noerr": 4,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 1440,
+        "wires": [
+            [
+                "eb7c2e15f67d10f0",
+                "9315d214985351a3"
+            ]
+        ]
+    },
+    {
+        "id": "a6cd921cda09e49a",
+        "type": "flexradio-request",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "radio": "3135c74a03ff9a14",
+        "x": 1270,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2663ca1e28e456a7",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Tune Power",
+        "func": "\n\n\nmsg.payload = \"transmit s tunepower=15\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 1520,
+        "wires": [
+            [
+                "a6cd921cda09e49a",
+                "98fbd7d4c8d2fd67",
+                "15ac6344f354c660"
+            ]
+        ]
+    },
+    {
+        "id": "9ed915be46c53189",
+        "type": "ui_template",
+        "z": "cbaf9eb9.60c0b",
+        "group": "784db929e887af7e",
+        "name": "HF Amp Autotune Button",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "format": "<md-button class=\"filled touched bigfont rounded vibrate\" style=\"background-color:#27ae60\" ng-click=\"send({payload: ' Tuning'}  )\"> \n    Amp Auto Tune <br>\n</md-button> \n",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 210,
+        "y": 1420,
+        "wires": [
+            [
+                "4f9ac757.37ba88",
+                "110f11f95375e46f",
+                "f4861f3ce8ebbdf7",
+                "b7ea02ec5dda4d99",
+                "b809e28811e36197"
+            ]
+        ]
+    },
+    {
+        "id": "eb7c2e15f67d10f0",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "ATU Off",
+        "func": "\n\n\nmsg.payload = \"atu bypass\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 1520,
+        "wires": [
+            [
+                "cc941ac42ad742c8",
+                "a6cd921cda09e49a"
+            ]
+        ]
+    },
+    {
+        "id": "cc941ac42ad742c8",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 740,
+        "y": 1520,
+        "wires": [
+            [
+                "2663ca1e28e456a7"
+            ]
+        ]
+    },
+    {
+        "id": "867921c9dca60371",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Tune On",
+        "func": "\n\n\nmsg.payload = \"transmit tune 1\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1240,
+        "y": 1520,
+        "wires": [
+            [
+                "a6cd921cda09e49a",
+                "ce1648971733f70a",
+                "2d9e101192092b74",
+                "ec027bda54a8606c"
+            ]
+        ]
+    },
+    {
+        "id": "dc86549fa0a88a21",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Tune Off",
+        "func": "\n\n\nmsg.payload = \"transmit tune 0\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1940,
+        "y": 1640,
+        "wires": [
+            [
+                "a6cd921cda09e49a",
+                "bda717901ea9dbd1"
+            ]
+        ]
+    },
+    {
+        "id": "96feb499c0cdca85",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Toggle Amp Operate",
+        "func": "msg.payload = \"^OS1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2520,
+        "y": 1640,
+        "wires": [
+            [
+                "440602a9.04220c",
+                "650e9662.36a498"
+            ]
+        ]
+    },
+    {
+        "id": "bda717901ea9dbd1",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "RF Power",
+        "func": "\n\n\nmsg.payload = \"transmit s rfpower=15\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2100,
+        "y": 1640,
+        "wires": [
+            [
+                "a6cd921cda09e49a",
+                "2ff37c66acc53032"
+            ]
+        ]
+    },
+    {
+        "id": "ce1648971733f70a",
+        "type": "link out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Standby",
+        "mode": "link",
+        "links": [
+            "b7f144a85c0e60c3"
+        ],
+        "x": 1205,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "2d9e101192092b74",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "6",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1420,
+        "y": 1720,
+        "wires": [
+            [
+                "dc86549fa0a88a21"
+            ]
+        ]
+    },
+    {
+        "id": "2ff37c66acc53032",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2280,
+        "y": 1640,
+        "wires": [
+            [
+                "96feb499c0cdca85"
+            ]
+        ]
+    },
+    {
+        "id": "110f11f95375e46f",
+        "type": "link out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Tuner Bypass",
+        "mode": "link",
+        "links": [],
+        "x": 395,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "f4861f3ce8ebbdf7",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 1440,
+        "wires": [
+            [
+                "04ddbe5710b79b75"
+            ]
+        ]
+    },
+    {
+        "id": "9315d214985351a3",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 840,
+        "y": 1400,
+        "wires": [
+            [
+                "a6cd921cda09e49a"
+            ]
+        ]
+    },
+    {
+        "id": "b7ea02ec5dda4d99",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Toggle Amp Standby",
+        "func": "msg.payload = \"^OS0;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 1700,
+        "wires": [
+            [
+                "68b373a7ffbf99f4"
+            ]
+        ]
+    },
+    {
+        "id": "68b373a7ffbf99f4",
+        "type": "link out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Tuner Bypass",
+        "mode": "link",
+        "links": [
+            "b7f144a85c0e60c3"
+        ],
+        "x": 605,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "b7f144a85c0e60c3",
+        "type": "link in",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Standby Out",
+        "links": [
+            "ce1648971733f70a",
+            "68b373a7ffbf99f4"
+        ],
+        "x": 2865,
+        "y": 1080,
+        "wires": [
+            [
+                "440602a9.04220c",
+                "650e9662.36a498"
+            ]
+        ]
+    },
+    {
+        "id": "17533adc0361f37f",
+        "type": "link out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Standby",
+        "mode": "link",
+        "links": [],
+        "x": 1205,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "ec027bda54a8606c",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1160,
+        "y": 1780,
+        "wires": [
+            [
+                "17533adc0361f37f"
+            ]
+        ]
+    },
+    {
+        "id": "9327131dd9aa168e",
+        "type": "link out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Check HF Amp Status",
+        "mode": "link",
+        "links": [],
+        "x": 1295,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "9ffb267c5eaa6f60",
+        "type": "link out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Tuner Bypass",
+        "mode": "link",
+        "links": [],
+        "x": 665,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "b809e28811e36197",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 520,
+        "y": 1900,
+        "wires": [
+            [
+                "9ffb267c5eaa6f60"
+            ]
+        ]
+    },
+    {
+        "id": "98fbd7d4c8d2fd67",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Tune On",
+        "func": "\n\n\nmsg.payload = \"transmit tune 1\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 2100,
+        "wires": [
+            [
+                "f0e17d485b837e3d"
+            ]
+        ]
+    },
+    {
+        "id": "af0f45a9d13e4dfc",
+        "type": "function",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Tune Off",
+        "func": "\n\n\nmsg.payload = \"transmit tune 0\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 2100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f0e17d485b837e3d",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1080,
+        "y": 2100,
+        "wires": [
+            [
+                "af0f45a9d13e4dfc"
+            ]
+        ]
+    },
+    {
+        "id": "15ac6344f354c660",
+        "type": "delay",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1080,
+        "y": 1520,
+        "wires": [
+            [
+                "867921c9dca60371"
+            ]
+        ]
+    },
+    {
+        "id": "5da4fbb877bbcce1",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Added delay 2s and branch to color ui nodes below 1-22",
+        "info": "",
+        "x": 630,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "3a2e039b9fe91a82",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Added tune on delay tune off 1-22-24",
+        "info": "",
+        "x": 1010,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "79fd7e27324d3c7a",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Added 4s delay  1-22-24",
+        "info": "",
+        "x": 1050,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "de8706d270d5d476",
+        "type": "comment",
+        "z": "cbaf9eb9.60c0b",
+        "name": "Flow for HF Amp",
+        "info": "",
+        "x": 110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "fbe2e2317819fd95",
+        "type": "mqtt out",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "topic": "KPA500 Out",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d800f2d0b3da47bc",
+        "x": 380,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "8fc88c70a48b7b21",
+        "type": "debug",
+        "z": "cbaf9eb9.60c0b",
+        "name": "debug 561",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "38dc178d11f732c9",
+        "type": "mqtt in",
+        "z": "cbaf9eb9.60c0b",
+        "name": "",
+        "topic": "KPA500 In",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "d800f2d0b3da47bc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2970,
+        "y": 180,
+        "wires": [
+            [
+                "480a47d6.360d38"
+            ]
+        ]
+    },
+    {
+        "id": "4201da6dbdb847f1",
+        "type": "ui_spacer",
+        "z": "cbaf9eb9.60c0b",
+        "name": "spacer",
+        "group": "9d854579.249c8",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "9f3bc024c5830eab",
+        "type": "ui_spacer",
+        "z": "cbaf9eb9.60c0b",
+        "name": "spacer",
+        "group": "9d854579.249c8",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "05e3a14ca59a9d2a",
+        "type": "ui_spacer",
+        "z": "cbaf9eb9.60c0b",
+        "name": "spacer",
+        "group": "9d854579.249c8",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "784db929e887af7e",
+        "type": "ui_group",
+        "name": "Rotor",
+        "tab": "294c0afe1dffc13a",
+        "order": 3,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "70c9eb2f.b8fe54",
+        "type": "serial-port",
+        "serialport": "COM6",
+        "serialbaud": "38400",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "20",
+        "bin": "bin",
+        "out": "interbyte",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "5b585a57.347904",
+        "type": "ui_group",
+        "name": "Radio",
+        "tab": "",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "3135c74a03ff9a14",
+        "type": "flexradio-radio",
+        "name": "",
+        "host_mode": "automatic",
+        "nickname": "",
+        "host": "",
+        "port": "",
+        "station_name": "NodeRed",
+        "slice_mode": "headless",
+        "slice_name": "A",
+        "timeout": ""
+    },
+    {
+        "id": "d800f2d0b3da47bc",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.50.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9d854579.249c8",
+        "type": "ui_group",
+        "name": "Status",
+        "tab": "",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "294c0afe1dffc13a",
+        "type": "ui_tab",
+        "name": "Boron HF Station Control",
+        "icon": "radio",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

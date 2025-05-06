@@ -1,0 +1,58 @@
+[
+    {
+        "id": "c736f5cff83fa2f3",
+        "type": "tab",
+        "label": "Env - Grafana",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "be4dacd0cf20c274",
+        "type": "ui_iframe",
+        "z": "c736f5cff83fa2f3",
+        "group": "e91b4d26a1f11b4c",
+        "name": "",
+        "order": 1,
+        "width": "33",
+        "height": "20",
+        "url": "http://127.0.0.1:3000/dashboard info",
+        "origin": "*",
+        "scale": "100",
+        "x": 484,
+        "y": 362,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "97314e90ce5be7b4",
+        "type": "comment",
+        "z": "c736f5cff83fa2f3",
+        "name": "Enter your Grafana Dashboard link info",
+        "info": "",
+        "x": 590,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e91b4d26a1f11b4c",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "f2f4e315ba39237b",
+        "order": 1,
+        "disp": false,
+        "width": "40",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f2f4e315ba39237b",
+        "type": "ui_tab",
+        "name": "Environmental - Grafana",
+        "icon": "show_chart",
+        "order": 7,
+        "disabled": false,
+        "hidden": false
+    }
+]
