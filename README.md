@@ -44,7 +44,7 @@ Digital Loggers Web Power Switch Pro
 
 Elecraft KPA500 Amp
 
-Flex 6700
+Flex 6600
 
 Hygain Rotor (HF)
 
