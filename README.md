@@ -187,3 +187,11 @@ W8BE
 If you find this useful, star ⭐ the repo! It helps others discover it.
 
 ---
+
+## More Info
+
+Blog: https://hamradiohacks.blogspot.com
+
+GitHub: https://github.com/n3bkv
+
+---
