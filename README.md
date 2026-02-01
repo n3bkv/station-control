@@ -3,7 +3,7 @@
 
 Welcome to the N3BKV Station Control Node-RED project.  
 
-These flows are used to monitor and control a remote Amateur Radio station. The station has an 20-15-10 beam, 40 meter 4 Square and 80/40 diplole antennas.
+These flows are used to monitor and control a remote Amateur Radio station. The station has an 20-15-10 beam, 40 meter 4 Square and 80/40 dipole antennas.
 
 Feel free to play with them and provide any feedback you might have. 
 
